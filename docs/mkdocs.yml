@@ -9,7 +9,7 @@ markdown_extensions:
   - extra
   - tables
   - fenced_code
-  - mdx_math # For LaTeX
+#  - mdx_math # For LaTeX
 
 extra_css:
   - assets/Documenter.css
@@ -22,11 +22,3 @@ docs_dir: 'build'
 
 pages:
 - Introduction: index.md
-- Tutorial:
-  - Title 1: tutorials/page1.md
-  - Title 2: tutorials/page2.md
-  - Title 3: tutorials/page3.md
-- Another Section:
-  - Title 1: sec2/page1.md
-  - Title 2: sec2/page2.md
-  - Title 3: sec2/page3.md
