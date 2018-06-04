@@ -43,7 +43,7 @@ Some text describing this section
 ## Subtitle
  
 ```@docs
-PkgName.sphere_vol
-PkgName.quadratic
-PkgName.quadratic2
+AMA.sphere_vol
+AMA.quadratic
+AMA.quadratic2
 ```
