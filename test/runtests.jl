@@ -1,5 +1,6 @@
 using AMA
 using Base.Test
+Pkg.add("MAT")
 using MAT
 file=matopen("./matFiles/hmat.mat")
 originalH=read(file,"h")
