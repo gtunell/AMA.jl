@@ -1,0 +1,57 @@
+\documentclass[12pt]{article}
+
+\usepackage{dirtree}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\title{Notes for Julia Implementation of the Anderson-Moore Algorithm}
+\author{Gary S. Anderson}
+\begin{document}
+\maketitle
+\begin{description}
+\item[Algorithm Resources] \ 
+\begin{itemize}
+\item \href{https://github.com/es335mathwiz/SPSolve.git}{SPSolve -- MATLAB implementation of the algorithm}
+\item \href{https://github.com/es335mathwiz/sparseAMA.git}{sparseAMA -- ``C'' implementation of the algorithm}
+\item \href{https://www.federalreserve.gov/econres/ama-index.htm}{FED's AMA site}
+\item \href{https://www.sciencedirect.com/science/article/pii/S1474667017405064}{``A Reliable and Computationally Efficient Algorithm for Imposing the Saddle Point Property in Dynamic Models''}
+\item \href{https://www.sciencedirect.com/science/article/pii/0165176585902113}{``A linear algebraic procedure for solving linear perfect foresight models''}
+\end{itemize}
+\item[Julia Resources] \
+  \begin{itemize}
+  \item \href{https://docs.julialang.org/en/stable/}{Documentation}
+  \item \href{http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/}{Finalizing a Julia Package}
+  \item \href{https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=4&cad=rja&uact=8&ved=0ahUKEwjh_vH_h-DaAhUExYMKHYb7BWoQFgg5MAM&url=https%3A%2F%2Fgithub.com%2Ftonyhffong%2FLint.jl%2Fblob%2Fmaster%2Fdocs%2Ffeatures.md&usg=AOvVaw1FFQ9J64mhTjDx8QpQ-_zU}{Lint.jl}
+  \end{itemize}
+
+\item[Code] \
+  
+\dirtree{%
+.1 AMAalg.
+.2 exactShift.
+.3 shiftRight.
+.2 numericShift.
+.3 shiftRight.
+.2 buildA.
+.2 eigenSystem.
+.2 augmentQ.
+.2 reducedForm.
+}
+
+\item[AMAalg] 
+
+\item[exactShift]
+\item[shiftRight]
+\item[numericShift]
+\item[shiftRight]
+\item[buildA]
+\item[eigenSystem]
+\item[augmentQ]
+\item[reducedForm]
+
+
+
+\end{description}
+
+
+
+\end{document}

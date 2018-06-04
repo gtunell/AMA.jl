@@ -26,6 +26,6 @@ function quadratic2(a::Float64, b::Float64, c::Float64)
     r1, r2
 end
 
-
+export sphere_vol, quadratic, quadratic2
 
 end # module
