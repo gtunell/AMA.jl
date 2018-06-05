@@ -1,0 +1,5 @@
+genJuliaMatInit[aMat_?MatrixQ]:=
+"["<>StringRiffle[genRow/@aMat,";\n"]<>"]"
+
+genRow[aVec_?VectorQ]:=
+StringReplace[ToString[aVec],{","->" ","{"->"","}"->""}]
