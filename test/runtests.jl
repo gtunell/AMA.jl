@@ -1,15 +1,31 @@
 using AMA
 using Base.Test
-originalH=[0.  0.  0.  0.  -1.1  0.  0.  0.  1.  1.  0.  0.;
+
+#test shiftRight:firmvalue example
+toShift::Array{Float64,2}=[0., -0.4, 0., 0., 0., 1., -1., 0., 0., 0., 0., 0.;
+0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0.;
+0., 0., 0., -1., 0., 0., 0., 1., 0., 0., 0., 0.]
+shifted::Array{Float64,2}=[0., 0., 0., 0., 0., -0.4, 0., 0., 0., 1., -1., 0.;
+0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0.;
+0., 0., 0., 0., 0., 0., 0., -1., 0., 0., 0., 1.]
+neq=4::Int64
+#=
+shiftResult::Array{Float64,2}=shiftRight(toShift,neq)
+@test isapprox(shiftResult,shifted,rtol::Real=0.1e-16,atol::Real=0)
+=#
+
+
+#test exactShift:firmvalue example
+originalH::Array{Float64,2}=[0.  0.  0.  0.  -1.1  0.  0.  0.  1.  1.  0.  0.;
            0.  -0.4  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.;
            0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
            0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.]
-exactShiftH=[
+exactShiftH::Array{Float64,2}=[
 0.  0.  0.  0.  -1.1  0.  0.  0.  1.  1.  0.  0.; 
 0.  0.  0.  0.  0.  -0.4  0.  0.  0.  1.  -1.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.;
 0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.]
-zf=[
+zf::Array{Float64,2}=[
 0.  -0.4  0.  0.  0.  1.  -1.  0.;
 0.  0.  0.  0.  0.  0.  1.  0.;
 0.  0.  0.  -1.  0.  0.  0.  1.;
