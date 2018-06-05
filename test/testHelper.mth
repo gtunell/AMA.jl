@@ -1,3 +1,15 @@
+PrependTo[$Path,"/msu/home/m1gsa00/.Mathematica/Applications/"]
+
+Needs["MATLink`"]
+
+OpenMATLAB[]
+MEvaluate["addpath /msu/scratch2/m1gs00/git/SPSolve"]
+
+
+
+
+
+
 genJuliaMatInit[aMat_?MatrixQ]:=
 "["<>StringRiffle[genRow/@aMat,";\n"]<>"]"
 
