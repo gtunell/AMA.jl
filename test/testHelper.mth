@@ -5,22 +5,54 @@ PrependTo[$Path,"../../mathAMA/SymbolicAMA/"]
 genJuliaMatInit[aMat_?MatrixQ]:=
 "["<>StringRiffle[genRow/@aMat,";\n"]<>"]"
 
+genJuliaMatInit[varName_String,aMat_?MatrixQ]:=
+varName<>"="<>genJuliaMatInit[aMat]
+
+genJuliaMatInit[varName_String,aMat_?MatrixQ,dataType_String]:=
+genJuliaMatInit[varName,aMat]<>"::"<>dataType
+
+
 genRow[aVec_?VectorQ]:=
 StringReplace[ToString[aVec],{","->" ","{"->"","}"->""}]
 
 
 Needs["MATLink`"]
+Needs["NumericAMA`"]
 
 OpenMATLAB[]
 MEvaluate["addpath /msu/scratch2/m1gsa00/git/SPSolve"]
 MEvaluate["cd /msu/scratch2/m1gsa00/git/AMA.jl/test/modelez/firmValue"]
-MEvaluate[" [parserRetCode,param_,np,modname,neq,nlag,nlead,eqname_,eqtype_,endog_,delay_,vtype_]=SPParser('./','firmvalue');"]
-MEvaluate["firmparms"]
-MEvaluate["firmvalue_AMA_matrices"]
-{gg,hh}=MGet[{"cofg","cofh"}]
-gPart=gg+hh[[All,Range[Length[gg[[1]]]]]]
-allH=ArrayFlatten[{{gPart,hh[[All,Range[Length[gg[[1]]]+1,Length[hh[[1]]]]]]}}]
-genJuliaMatInit[allRBZeros=Select[allH,numericRightMostAllZeroQ[4,#]&]]
+
+firmvalue
+genParamsAMAMatrices[aDir_String,aModel_String]:=
+MEvaluate["SPParser('"<>aDir<>"','"<>aModel<>"');"]
+
+genExactShiftTestMatrices[params_String,AMAMatrices_String]:=
+Module[{oldPW=System`PageWidth/.Options["stdout"]},
+MEvaluate[params];
+MEvaluate[AMAMatrices];
+{gg,hh}=MGet[{"cofg","cofh"}];
+gPart=gg+hh[[All,Range[Length[gg[[1]]]]]];
+allH=ArrayFlatten[{{gPart,hh[[All,Range[Length[gg[[1]]]+1,Length[hh[[1]]]]]]}}];
+allRBZeroes=Select[allH,numericRightMostAllZeroQ[4,#]&];
+MSet["allRBZeroes",allRBZeroes];
+MEvaluate["shifted=SPShiftright(allRBZeroes,4)"];
+exactShifted=MGet["shifted"];
+SetOptions["stdout", PageWidth -> Infinity];
+Print[TableForm[
+{genJuliaMatInit["toShift",allRBZeroes,"Array{Float64,2}"],
+genJuliaMatInit["shifted",exactShifted,"Array{Float64,2}"]}]];
+SetOptions["stdout", System`PageWidth -> oldPW]
+]
+
+(*parsemodel*)
+genParamsAMAMatrices["./","firmvalue"]
+(*matrices for exactshifts*)
+genExactShiftTestMatrices["firmparms","firmvalue_AMA_matrices"]
+(*
+implement inputs outputs for tests for each routine success
+implement inputs outputs for tests for each routine error reporting
 
 
 
+*)

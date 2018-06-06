@@ -1,17 +1,19 @@
 using AMA
 using Base.Test
 
+
 #test shiftRight:firmvalue example
 toShift=[0.  -0.4  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
-0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.]
+0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.]::Array{Float64,2}
+
 shifted=[0.  0.  0.  0.  0.  -0.4  0.  0.  0.  1.  -1.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.;
-0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.]
+0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.]::Array{Float64,2}
 neq=4::Int64
 #=
 shiftResult::Array{Float64,2}=shiftRight(toShift,neq)
-@test isapprox(shiftResult,shifted,rtol::Real=0.1e-16,atol::Real=0)
+@test isapprox(shiftResult,shifted,rtol::Float64=0.1e-16,atol::Float64=0)
 =#
 
 
@@ -36,8 +38,8 @@ qCols=8::Int64
 #=
 (newH,qq,iq,nExact)= exactShift(originalH,qq,iq,qRows,qCols,neq)
 @test nExact==2
-@test isapprox(newH,exactShiftH,rtol::Real=0.1e-16,atol::Real=0)
-@test isapprox(qq,zf,rtol::Real=0.1e-16,atol::Real=0)
+@test isapprox(newH,exactShiftH,rtol::Float64=0.1e-16,atol::Float64=0)
+@test isapprox(qq,zf,rtol::Float64=0.1e-16,atol::Float64=0)
 =#
 
 #test buildA:firmvalue example
