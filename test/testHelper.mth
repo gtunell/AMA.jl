@@ -1,17 +1,26 @@
 PrependTo[$Path,"/msu/home/m1gsa00/.Mathematica/Applications/"]
-
-Needs["MATLink`"]
-
-OpenMATLAB[]
-MEvaluate["addpath /msu/scratch2/m1gs00/git/SPSolve"]
-
-
-
-
-
+PrependTo[$Path,"../../mathAMA/NumericAMA/"]
+PrependTo[$Path,"../../mathAMA/SymbolicAMA/"]
 
 genJuliaMatInit[aMat_?MatrixQ]:=
 "["<>StringRiffle[genRow/@aMat,";\n"]<>"]"
 
 genRow[aVec_?VectorQ]:=
 StringReplace[ToString[aVec],{","->" ","{"->"","}"->""}]
+
+
+Needs["MATLink`"]
+
+OpenMATLAB[]
+MEvaluate["addpath /msu/scratch2/m1gsa00/git/SPSolve"]
+MEvaluate["cd /msu/scratch2/m1gsa00/git/AMA.jl/test/modelez/firmValue"]
+MEvaluate[" [parserRetCode,param_,np,modname,neq,nlag,nlead,eqname_,eqtype_,endog_,delay_,vtype_]=SPParser('./','firmvalue');"]
+MEvaluate["firmparms"]
+MEvaluate["firmvalue_AMA_matrices"]
+{gg,hh}=MGet[{"cofg","cofh"}]
+gPart=gg+hh[[All,Range[Length[gg[[1]]]]]]
+allH=ArrayFlatten[{{gPart,hh[[All,Range[Length[gg[[1]]]+1,Length[hh[[1]]]]]]}}]
+genJuliaMatInit[allRBZeros=Select[allH,numericRightMostAllZeroQ[4,#]&]]
+
+
+
