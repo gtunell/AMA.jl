@@ -1,7 +1,7 @@
 module ShiftRightTests
 # test shiftRight firmvalue example
 import ShiftRight.shiftRight
-
+export firmvalue
 function firmvalue()::Bool
 
 
@@ -22,6 +22,7 @@ isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0::Float64)
 end;
 
 # test shiftRight firmvalue3Leads2Lags example
+export firmvalue3Leads2Lags
 function firmvalue3Leads2Lags()::Bool
 
 
@@ -42,6 +43,7 @@ isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0::Float64)
 end;
 
 # test shiftRight example7 example
+export example7
 function example7()::Bool
 
 
@@ -60,6 +62,7 @@ isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0::Float64)
 end;
 
 # test shiftRight oneEquationNoLead example
+export oneEquationNoLead
 function oneEquationNoLead()::Bool
 
 
@@ -76,6 +79,7 @@ isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0::Float64)
 end;
 
 # test shiftRight reliablePaperExmpl example
+export reliablePaperExmpl
 function reliablePaperExmpl()::Bool
 
 
@@ -96,6 +100,7 @@ isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0::Float64)
 end;
 
 # test shiftRight athan example
+export athan
 function athan()::Bool
 
 
@@ -126,6 +131,7 @@ isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0::Float64)
 end;
 
 # test shiftRight habitmod example
+export habitmod
 function habitmod()::Bool
 
 
