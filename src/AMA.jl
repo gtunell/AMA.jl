@@ -2,6 +2,7 @@ module AMA
 #http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
 
 #Import needed packages
+import shiftRight.jl
 
 
 #from https://juliabyexample.helpmanual.io/
