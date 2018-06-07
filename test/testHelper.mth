@@ -18,12 +18,15 @@ StringReplace[ToString[aVec],{","->" ","{"->"","}"->""}]
 
 Needs["MATLink`"]
 Needs["NumericAMA`"]
+$theGitDir=Switch[$OperatingSystem,
+"MacOSX","/Users/garyanderson/git/",
+_,"/msu/scratch2/m1gsa00/git/"]
 
 OpenMATLAB[]
-MEvaluate["addpath /msu/scratch2/m1gsa00/git/SPSolve"]
-MEvaluate["cd /msu/scratch2/m1gsa00/git/AMA.jl/test/modelez/firmValue"]
+MEvaluate["addpath "<>$theGitDir<>"/SPSolve"]
+MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue"]
 
-firmvalue
+
 genParamsAMAMatrices[aDir_String,aModel_String]:=
 MEvaluate["SPParser('"<>aDir<>"','"<>aModel<>"');"]
 
