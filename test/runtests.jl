@@ -1,5 +1,6 @@
 using AMA
 using Base.Test
+importall AMA
 # test shiftRight firmvalue example
 
 neq=4::Int64;nlag=1::Int64;nlead=1::Int64
@@ -15,7 +16,7 @@ shifted=[0.  0.  0.  0.  0.  -0.4  0.  0.  0.  1.  -1.  0.;
 0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.]::Array{Float64,2}
 
 
-shiftResult::Array{Float64,2}=shiftRight(toShift,neq)
+shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
 @test isapprox(shiftResult,shifted,rtol::Float64=0.1e-16,atol::Float64=0)
 
 # test shiftRight example7 example
