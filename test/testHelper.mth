@@ -24,7 +24,7 @@ _,"/msu/scratch2/m1gsa00/git/"]
 
 OpenMATLAB[]
 MEvaluate["addpath "<>$theGitDir<>"/SPSolve"]
-MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue"]
+
 
 
 genParamsAMAMatrices[aDir_String,aModel_String]:=
@@ -48,10 +48,18 @@ genJuliaMatInit["shifted",exactShifted,"Array{Float64,2}"]}]];
 SetOptions["stdout", System`PageWidth -> oldPW]
 ]
 
-(*parsemodel*)
+(*parsemodel firmvalue*)
+MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue"]
 genParamsAMAMatrices["./","firmvalue"]
 (*matrices for exactshifts*)
 genExactShiftTestMatrices["firmparms","firmvalue_AMA_matrices"]
+
+(*parsemodel bobExample*)
+MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/bobExample"]
+genParamsAMAMatrices["./","example7"]
+(*matrices for exactshifts*)
+genExactShiftTestMatrices["setexample","example7_AMA_matrices"]
+
 (*
 implement inputs outputs for tests for each routine success
 implement inputs outputs for tests for each routine error reporting
