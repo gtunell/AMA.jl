@@ -1,5 +1,69 @@
+PrependTo[$Path,"/msu/home/m1gsa00/.Mathematica/Applications/"]
+PrependTo[$Path,"../../mathAMA/NumericAMA/"]
+PrependTo[$Path,"../../mathAMA/SymbolicAMA/"]
+
 genJuliaMatInit[aMat_?MatrixQ]:=
 "["<>StringRiffle[genRow/@aMat,";\n"]<>"]"
 
+genJuliaMatInit[varName_String,aMat_?MatrixQ]:=
+varName<>"="<>genJuliaMatInit[aMat]
+
+genJuliaMatInit[varName_String,aMat_?MatrixQ,dataType_String]:=
+genJuliaMatInit[varName,aMat]<>"::"<>dataType
+
+
 genRow[aVec_?VectorQ]:=
 StringReplace[ToString[aVec],{","->" ","{"->"","}"->""}]
+
+
+Needs["MATLink`"]
+Needs["NumericAMA`"]
+$theGitDir=Switch[$OperatingSystem,
+"MacOSX","/Users/garyanderson/git/",
+_,"/msu/scratch2/m1gsa00/git/"]
+
+OpenMATLAB[]
+MEvaluate["addpath "<>$theGitDir<>"/SPSolve"]
+
+
+
+genParamsAMAMatrices[aDir_String,aModel_String]:=
+MEvaluate["SPParser('"<>aDir<>"','"<>aModel<>"');"]
+
+genExactShiftTestMatrices[params_String,AMAMatrices_String]:=
+Module[{oldPW=System`PageWidth/.Options["stdout"]},
+MEvaluate[params];
+MEvaluate[AMAMatrices];
+{gg,hh}=MGet[{"cofg","cofh"}];
+gPart=gg+hh[[All,Range[Length[gg[[1]]]]]];
+allH=ArrayFlatten[{{gPart,hh[[All,Range[Length[gg[[1]]]+1,Length[hh[[1]]]]]]}}];
+allRBZeroes=Select[allH,numericRightMostAllZeroQ[4,#]&];
+MSet["allRBZeroes",allRBZeroes];
+MEvaluate["shifted=SPShiftright(allRBZeroes,4)"];
+exactShifted=MGet["shifted"];
+SetOptions["stdout", PageWidth -> Infinity];
+Print[TableForm[
+{genJuliaMatInit["toShift",allRBZeroes,"Array{Float64,2}"],
+genJuliaMatInit["shifted",exactShifted,"Array{Float64,2}"]}]];
+SetOptions["stdout", System`PageWidth -> oldPW]
+]
+
+(*parsemodel firmvalue*)
+MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue"]
+genParamsAMAMatrices["./","firmvalue"]
+(*matrices for exactshifts*)
+genExactShiftTestMatrices["firmparms","firmvalue_AMA_matrices"]
+
+(*parsemodel bobExample*)
+MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/bobExample"]
+genParamsAMAMatrices["./","example7"]
+(*matrices for exactshifts*)
+genExactShiftTestMatrices["setexample","example7_AMA_matrices"]
+
+(*
+implement inputs outputs for tests for each routine success
+implement inputs outputs for tests for each routine error reporting
+
+
+
+*)

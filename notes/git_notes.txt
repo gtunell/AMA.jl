@@ -22,4 +22,6 @@ git pull													Update your working files from the remote repository so
 git push													Send changes to the remote repository. Should now see 
 															changes on github.
 
+git log													Prints out all commits made. Used for reverting.
+
 git grep "foo()"										Search your working directory for item in double quotes
