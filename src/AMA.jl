@@ -1,5 +1,5 @@
-module AMA
-#http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
+module AMAFUNCS
+# http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
 
 #Import needed packages
 include("shiftRight.jl")
@@ -27,6 +27,6 @@ function quadratic2(a::Float64, b::Float64, c::Float64)
     r1, r2
 end
 
-export sphere_vol, quadratic, quadratic2, shiftRight
+
 
 end # module
