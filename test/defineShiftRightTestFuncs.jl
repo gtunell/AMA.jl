@@ -1,6 +1,6 @@
 module ShiftRightTests
 # test shiftRight firmvalue example
-import ShiftRight.shiftRight
+include("../src/shiftRight.jl")
 export firmvalue
 function firmvalue()::Bool
 
@@ -159,4 +159,4 @@ shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0::Float64)
 end;
 
-end
+end 
