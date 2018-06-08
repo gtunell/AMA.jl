@@ -3,7 +3,7 @@ module AMA
 
 #Import needed packages
 include("shiftRight.jl")
-
+import ShiftRight.shiftRight
 
 #from https://juliabyexample.helpmanual.io/
 "function to calculate the volume of a sphere"
