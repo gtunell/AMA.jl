@@ -5,12 +5,12 @@ include("defineShiftRightTestFuncs.jl")
 importall ShiftRightTests
 @testset "test shiftRight" begin
 @test firmvalue()
-@test_broken firmvalue3Leads2Lags()
-@test_broken example7()
-@test_broken oneEquationNoLead()
-@test_broken reliablePaperExmpl()
-@test_broken athan()
-@test_broken habitmod()
+@test firmvalue3Leads2Lags()
+@test example7()
+@test oneEquationNoLead()
+@test reliablePaperExmpl()
+@test athan()
+@test habitmod()
 end
 
 

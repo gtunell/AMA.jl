@@ -1,4 +1,4 @@
-module AMA
+module AMAFUNCS
 # http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
 
 export sphere_vol, quadratic, quadratic2

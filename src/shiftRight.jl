@@ -1,3 +1,5 @@
+module AMAFUNCS
+
 """    
     shiftRight(matrixIn,nn)
 
@@ -19,3 +21,5 @@ function shiftRight(matrixIn::Array{Float64,2}, nn::Int64)
 
 	 return result 
 end # shiftRight
+
+end # module
