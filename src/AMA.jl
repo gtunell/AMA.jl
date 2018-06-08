@@ -1,11 +1,9 @@
 module AMA
-#http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
+# http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
 
-#Import needed packages
-include("shiftRight.jl")
+export sphere_vol, quadratic, quadratic2
 
-
-#from https://juliabyexample.helpmanual.io/
+# from https://juliabyexample.helpmanual.io/
 "function to calculate the volume of a sphere"
 function sphere_vol(r)
     return 4/3*pi*r^3
@@ -27,6 +25,6 @@ function quadratic2(a::Float64, b::Float64, c::Float64)
     r1, r2
 end
 
-export sphere_vol, quadratic, quadratic2, shiftRight
+
 
 end # module
