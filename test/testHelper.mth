@@ -103,86 +103,76 @@ end;
 SetOptions["stdout", System`PageWidth -> oldPW]
 ]
 
+genNumericShiftTestMatrices[aDir_String,aModel_String,params_String]:=
+Module[{oldPW=System`PageWidth/.Options["stdout"],
+modDims=parseModel[aDir,aModel],
+AMAMatrices=aModel<>"_AMA_matrices"},
+modDimsString=makeModDimsString[modDims];
+MEvaluate[params];
+MEvaluate[AMAMatrices];
+{gg,hh}=myMGet[{"cofg","cofh"}];
+neq=modDims[[1]];nlag=modDims[[2]];nlead=modDims[[3]];
+qRows=neq*nlead;qCols=neq*(nlag+nlead);
+gPart=gg+hh[[All,Range[Length[gg[[1]]]]]];
+allH=ArrayFlatten[{{gPart,hh[[All,Range[Length[gg[[1]]]+1,Length[hh[[1]]]]]]}}];
+MSet["hh",allH];
+MEvaluate[TemplateApply[StringTemplate["qq=zeros(``,``)"],
+{neq*nlead,neq*(nlag+nlead)}]];
+MEvaluate[TemplateApply[StringTemplate[
+"[hNew,qNew,iqNew,nexact] = SPNumeric_shift(hh,qq,0,``,``,``,1.0e-8)",
+{qRows,qCols,neq}]]];
+hNewMatlab=myMGet["hNew"];
+SetOptions["stdout", PageWidth -> Infinity];
+Print[TableForm[
+{TemplateApply[
+StringTemplate["# test numericShift `1` example\nfunction `1`()::Bool\n"],aModel],
+modDimsString,
+TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
+genJuliaMatInit["hhIn",allH,"Array{Float64,2}"],
+genJuliaMatInit["hNewMatlab",hNewMatlab,"Array{Float64,2}"],
+"hNewJulia=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)
+end;
+"}]];
+SetOptions["stdout", System`PageWidth -> oldPW]
+]
+
 adjustDepth[xx:(_?VectorQ|_?MatrixQ)]:=If[Depth[xx]==2,{xx},xx];
 myMGet[xx_String]:=adjustDepth[MGet[xx]]
 SetAttributes[myMGet,Listable]
-(*
+
 (*parsemodel firmvalue*)
 MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue"]
 (*matrices for exactshifts*)
-genShiftRightTestMatrices["./","firmvalue","firmparms"]
+genNumericShiftTestMatrices["./","firmvalue","firmparms"]
 
-
+(*
 (*parsemodel firmvalue3Leads2Lags*)
 MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue3Leads2Lags"]
 (*matrices for exactshifts*)
-genShiftRightTestMatrices["./","firmvalue3Leads2Lags","firmparms"]
+genNumericShiftTestMatrices["./","firmvalue3Leads2Lags","firmparms"]
 
 
 (*parsemodel bobExample*)
 MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/bobExample"]
 (*matrices for exactshifts*)
-genShiftRightTestMatrices["./","example7","setexample"]
+genNumericShiftTestMatrices["./","example7","setexample"]
 
 MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/oneEquationNoLead"]
 (*matrices for exactshifts*)
-genShiftRightTestMatrices["./","oneEquationNoLead","noParams"]
+genNumericShiftTestMatrices["./","oneEquationNoLead","noParams"]
 
 MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/reliablePaperExmpl"]
 (*matrices for exactshifts*)
-genShiftRightTestMatrices["./","reliablePaperExmpl","reliablePaperExmplParams"]
+genNumericShiftTestMatrices["./","reliablePaperExmpl","reliablePaperExmplParams"]
 
 MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveAthan"]
 (*matrices for exactshifts*)
-genShiftRightTestMatrices["./","athan","athanParams"]
+genNumericShiftTestMatrices["./","athan","athanParams"]
 
 
 MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveHabitmod"]
 (*matrices for exactshifts*)
-genShiftRightTestMatrices["./","habitmod","habitmodParams"]
+genNumericShiftTestMatrices["./","habitmod","habitmodParams"]
 
 *)
-(*
-implement inputs outputs for tests for each routine success
-implement inputs outputs for tests for each routine error reporting
-*)
-
-
-
-(*parsemodel firmvalue*)
-MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue"]
-(*matrices for exactshifts*)
-genExactShiftTestMatrices["./","firmvalue","firmparms"]
-
-
-(*parsemodel firmvalue3Leads2Lags*)
-MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue3Leads2Lags"]
-(*matrices for exactshifts*)
-genExactShiftTestMatrices["./","firmvalue3Leads2Lags","firmparms"]
-
-
-(*parsemodel bobExample*)
-MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/bobExample"]
-(*matrices for exactshifts*)
-genExactShiftTestMatrices["./","example7","setexample"]
-
-MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/oneEquationNoLead"]
-(*matrices for exactshifts*)
-genExactShiftTestMatrices["./","oneEquationNoLead","noParams"]
-
-MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/reliablePaperExmpl"]
-(*matrices for exactshifts*)
-genExactShiftTestMatrices["./","reliablePaperExmpl","reliablePaperExmplParams"]
-
-MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveAthan"]
-(*matrices for exactshifts*)
-genExactShiftTestMatrices["./","athan","athanParams"]
-
-
-MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveHabitmod"]
-(*matrices for exactshifts*)
-genExactShiftTestMatrices["./","habitmod","habitmodParams"]
-
-
-
-
