@@ -6,7 +6,7 @@ module AMAFUNCS
   Shift the rows of matrixIn to the right by nn columns, leaving zeros in the
   first nn columns.
 """
-function shiftRight(matrixIn::Array{Float64,2}, nn::Int64)
+function shiftRight!(matrixIn::Array{Float64,2}, nn::Int64)
 
 	 numColumns = size(matrixIn, 2)	 
 

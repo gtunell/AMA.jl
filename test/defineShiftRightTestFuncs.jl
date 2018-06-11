@@ -3,10 +3,8 @@ using AMA
 include("../src/shiftRight.jl")
 # test exactShift 
 import AMAFUNCS.shiftRight!
-
-
-
 # test shiftRight! firmvalue example
+
 function firmvalue()::Bool
 
 
@@ -61,6 +59,7 @@ shifted=[0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  1.  -1.;
 0.  0.  0.  0.  0.  0.  0.  -0.66  0.  -1.1  0.  1.]::Array{Float64,2}
 
 shiftResult=shiftRight!(toShift,neq)
+
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
