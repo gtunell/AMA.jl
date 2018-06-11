@@ -1,7 +1,7 @@
 module AMAFUNCS
 
 """    
-    shiftRight(matrixIn,nn)
+    shiftRight!(matrixIn,nn)
 
   Shift the rows of matrixIn to the right by nn columns, leaving zeros in the
   first nn columns.
