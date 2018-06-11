@@ -1,11 +1,11 @@
 module ExactShiftTests
-
 # test exactShift 
+include("../src/exactShift.jl")
 import AMAFUNCS.exactShift
 
 # test exactShift firmvalue example
+import AMAFUNCS.exactShift
 function firmvalue()::Bool
-
 
 neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
