@@ -1,11 +1,12 @@
 module ShiftRightTests
 using AMA
+include("../src/shiftRight.jl")
 # test exactShift 
-import AMAFUNCS.shiftShift
+import AMAFUNCS.shiftRight!
 
 
 
-# test shiftRight firmvalue example
+# test shiftRight! firmvalue example
 function firmvalue()::Bool
 
 
@@ -21,11 +22,11 @@ shifted=[0.  0.  0.  0.  0.  -0.4  0.  0.  0.  1.  -1.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.;
 0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)
+shiftResult=shiftRight!(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
-# test shiftRight firmvalue3Leads2Lags example
+# test shiftRight! firmvalue3Leads2Lags example
 function firmvalue3Leads2Lags()::Bool
 
 
@@ -41,11 +42,11 @@ shifted=[0.  0.  0.  0.  0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)
+shiftResult=shiftRight!(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
-# test shiftRight example7 example
+# test shiftRight! example7 example
 function example7()::Bool
 
 
@@ -59,11 +60,11 @@ toShift=[0.  0.  0.  1.  0.  0.  1.  -1.  0.  0.  0.  0.;
 shifted=[0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  1.  -1.;
 0.  0.  0.  0.  0.  0.  0.  -0.66  0.  -1.1  0.  1.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)
+shiftResult=shiftRight!(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
-# test shiftRight oneEquationNoLead example
+# test shiftRight! oneEquationNoLead example
 function oneEquationNoLead()::Bool
 
 
@@ -75,11 +76,11 @@ toShift=[2.  3.  0.]::Array{Float64,2}
 
 shifted=[0.  2.  3.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)
+shiftResult=shiftRight!(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
-# test shiftRight reliablePaperExmpl example
+# test shiftRight! reliablePaperExmpl example
 function reliablePaperExmpl()::Bool
 
 
@@ -95,11 +96,11 @@ shifted=[0.  0.  0.  0.  0.  0.  0.  0.  -0.5  0.  0.  -1.  0.7  -0.5  1.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)
+shiftResult=shiftRight!(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
-# test shiftRight athan example
+# test shiftRight! athan example
 function athan()::Bool
 
 
@@ -125,11 +126,11 @@ shifted=[0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.293  -0.764  0.293  0.  0.  0.  
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)
+shiftResult=shiftRight!(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
-# test shiftRight habitmod example
+# test shiftRight! habitmod example
 function habitmod()::Bool
 
 
@@ -153,7 +154,7 @@ shifted=[0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.99853  0.  0.  0.  0.  0.  -0.00147  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)
+shiftResult=shiftRight!(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 end 
