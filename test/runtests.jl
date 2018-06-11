@@ -3,7 +3,6 @@ using Base.Test
 include("../src/checkSpanning.jl")
 
 include("../src/shiftRight.jl")
-
 include("defineShiftRightTestFuncs.jl")
 
 @testset "test shiftRight" begin
@@ -19,7 +18,7 @@ end
 include("../src/exactShift.jl")
 include("defineExactShiftTestFuncs.jl")
 @testset "test exactShift" begin
-@test_broken ExactShiftTests.firmvalue()
+@test ExactShiftTests.firmvalue()
 @test_broken ExactShiftTests.firmvalue3Leads2Lags()
 @test_broken ExactShiftTests.example7()
 @test_broken ExactShiftTests.oneEquationNoLead()
@@ -40,5 +39,4 @@ include("defineNumericShiftTestFuncs.jl")
 @test_broken NumericShiftTests.athan()
 @test_broken NumericShiftTests.habitmod()
 end
-
 
