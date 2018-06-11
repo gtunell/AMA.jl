@@ -1,5 +1,7 @@
 using AMA
 using Base.Test
+include("../src/checkSpanning.jl")
+
 include("../src/shiftRight.jl")
 
 include("defineShiftRightTestFuncs.jl")
