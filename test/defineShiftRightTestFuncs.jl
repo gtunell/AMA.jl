@@ -1,7 +1,7 @@
 module ShiftRightTests
 # test shiftRight firmvalue example
 include("../src/shiftRight.jl")
-import AMAFUNCS.shiftRight
+import AMAFUNCS.shiftRight!
 export firmvalue
 function firmvalue()::Bool
 
@@ -19,7 +19,7 @@ shifted=[0.  0.  0.  0.  0.  -0.4  0.  0.  0.  1.  -1.  0.;
 0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.]::Array{Float64,2}
 
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight!(toShift,neq)::Array{Float64,2}
 isapprox(shiftResult,shifted,rtol=(0.1e-16)::Float64,atol=0.0::Float64)
 end;
 
@@ -40,7 +40,7 @@ shifted=[0.  0.  0.  0.  0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight!(toShift,neq)::Array{Float64,2}
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
@@ -59,7 +59,7 @@ toShift=[0.  0.  0.  1.  0.  0.  1.  -1.  0.  0.  0.  0.;
 shifted=[0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  1.  -1.;
 0.  0.  0.  0.  0.  0.  0.  -0.66  0.  -1.1  0.  1.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight!(toShift,neq)::Array{Float64,2}
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
@@ -76,7 +76,7 @@ toShift=[2.  3.  0.]::Array{Float64,2}
 
 shifted=[0.  2.  3.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight!(toShift,neq)::Array{Float64,2}
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
@@ -97,7 +97,7 @@ shifted=[0.  0.  0.  0.  0.  0.  0.  0.  -0.5  0.  0.  -1.  0.7  -0.5  1.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight!(toShift,neq)::Array{Float64,2}
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
@@ -128,7 +128,7 @@ shifted=[0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.293  -0.764  0.293  0.  0.  0.  
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight!(toShift,neq)::Array{Float64,2}
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
@@ -157,7 +157,7 @@ shifted=[0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.99853  0.  0.  0.  0.  0.  -0.00147  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight!(toShift,neq)::Array{Float64,2}
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
