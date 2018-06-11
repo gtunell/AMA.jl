@@ -3,7 +3,6 @@ module ExactShiftTests
 # test exactShift 
 import AMAFUNCS.exactShift
 
-
 # test exactShift firmvalue example
 function firmvalue()::Bool
 
@@ -33,7 +32,7 @@ iqNewMatlab=3
 
 nexactMatlab=3
 
-(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 iqNew==iqNewMatlab&&
@@ -77,7 +76,7 @@ iqNewMatlab=9
 
 nexactMatlab=9
 
-(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 iqNew==iqNewMatlab&&
@@ -113,7 +112,7 @@ iqNewMatlab=2
 
 nexactMatlab=2
 
-(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 iqNew==iqNewMatlab&&
@@ -140,7 +139,7 @@ iqNewMatlab=1
 
 nexactMatlab=1
 
-(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 iqNew==iqNewMatlab&&
@@ -179,7 +178,7 @@ iqNewMatlab=3
 
 nexactMatlab=3
 
-(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 iqNew==iqNewMatlab&&
@@ -230,7 +229,7 @@ iqNewMatlab=8
 
 nexactMatlab=8
 
-(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 iqNew==iqNewMatlab&&
@@ -290,12 +289,13 @@ iqNewMatlab=7
 
 nexactMatlab=7
 
-(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 iqNew==iqNewMatlab&&
 nexact==nexactNewMatlab
 end;
+
 
 end
 

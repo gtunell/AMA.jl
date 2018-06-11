@@ -63,7 +63,7 @@ StringTemplate["# test shiftRight `1` example\nfunction `1`()::Bool\n"],aModel],
 modDimsString,
 genJuliaMatInit["toShift",allRBZeroes,"Array{Float64,2}"],
 genJuliaMatInit["shifted",exactShifted,"Array{Float64,2}"],
-"shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+"shiftResult=shiftRight(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 "
@@ -105,7 +105,7 @@ genJuliaMatInit["hNewMatlab",hNewMatlab,"Array{Float64,2}"],
 genJuliaMatInit["qNewMatlab",qNewMatlab,"Array{Float64,2}"],
 TemplateApply[StringTemplate["iqNewMatlab=``"],iqNewMatlab],
 TemplateApply[StringTemplate["nexactMatlab=``"],nexactNewMatlab],
-"(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+"(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 iqNew==iqNewMatlab&&
@@ -154,7 +154,7 @@ genJuliaMatInit["hNewMatlab",hNewMatlab,"Array{Float64,2}"],
 genJuliaMatInit["qNewMatlab",qNewMatlab,"Array{Float64,2}"],
 TemplateApply[StringTemplate["iqNewMatlab=``"],iqNewMatlab],
 TemplateApply[StringTemplate["nnumericMatlab=``"],nnumericNewMatlab],
-"(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+"(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
@@ -199,10 +199,11 @@ Print[TableForm[
 StringTemplate["# test exactShift `1` example\nfunction `1`()::Bool\n"],aModel],
 modDimsString,
 TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
-genJuliaMatInit["hhIn",allH,"Array{Float64,2}"],
-genJuliaMatInit["hNewMatlab",hNewMatlab,"Array{Float64,2}"],
-genJuliaMatInit["qNewMatlab",qNewMatlab,"Array{Float64,2}"],
-"(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+genJuliaMatInit["hForA",hForA,"Array{Float64,2}"],
+genJuliaMatInit["aa",aa,"Array{Float64,2}"],
+genJuliaMatInit["ia",ia,"Array{Float64,2}"],
+genJuliaMatInit["js",js,"Array{Float64,2}"],
+"(aaJulia,iaJulia,jsJulia)=buildA(hForA,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 isapprox(iqNew,iqNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
@@ -246,9 +247,13 @@ MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveHabitmod"];
 generator["./","habitmod","habitmodParams"];
 ]
 (*
+genAllTests[genExactShiftTestMatrices]
 genAllTests[genNumericShiftTestMatrices]
 
 *)
 
-genAllTests[genExactShiftTestMatrices]
+
+genAllTests[genShiftRightTestMatrices]
+
+
 

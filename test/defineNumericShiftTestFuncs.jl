@@ -32,7 +32,7 @@ iqNewMatlab=3
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
@@ -76,7 +76,7 @@ iqNewMatlab=9
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
@@ -112,7 +112,7 @@ iqNewMatlab=2
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
@@ -139,7 +139,7 @@ iqNewMatlab=1
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
@@ -178,7 +178,7 @@ iqNewMatlab=3
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
@@ -229,7 +229,7 @@ iqNewMatlab=8
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
@@ -289,7 +289,7 @@ iqNewMatlab=7
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&

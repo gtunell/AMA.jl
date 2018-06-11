@@ -1,8 +1,11 @@
 module ShiftRightTests
+using AMA
+# test exactShift 
+import AMAFUNCS.shiftShift
+
+
+
 # test shiftRight firmvalue example
-include("../src/shiftRight.jl")
-import AMAFUNCS.shiftRight
-export firmvalue
 function firmvalue()::Bool
 
 
@@ -18,13 +21,11 @@ shifted=[0.  0.  0.  0.  0.  -0.4  0.  0.  0.  1.  -1.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.;
 0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.]::Array{Float64,2}
 
-
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
-isapprox(shiftResult,shifted,rtol=(0.1e-16)::Float64,atol=0.0::Float64)
+shiftResult=shiftRight(toShift,neq)
+isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
 # test shiftRight firmvalue3Leads2Lags example
-export firmvalue3Leads2Lags
 function firmvalue3Leads2Lags()::Bool
 
 
@@ -40,12 +41,11 @@ shifted=[0.  0.  0.  0.  0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
 # test shiftRight example7 example
-export example7
 function example7()::Bool
 
 
@@ -59,12 +59,11 @@ toShift=[0.  0.  0.  1.  0.  0.  1.  -1.  0.  0.  0.  0.;
 shifted=[0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  1.  -1.;
 0.  0.  0.  0.  0.  0.  0.  -0.66  0.  -1.1  0.  1.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
 # test shiftRight oneEquationNoLead example
-export oneEquationNoLead
 function oneEquationNoLead()::Bool
 
 
@@ -76,12 +75,11 @@ toShift=[2.  3.  0.]::Array{Float64,2}
 
 shifted=[0.  2.  3.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
 # test shiftRight reliablePaperExmpl example
-export reliablePaperExmpl
 function reliablePaperExmpl()::Bool
 
 
@@ -97,12 +95,11 @@ shifted=[0.  0.  0.  0.  0.  0.  0.  0.  -0.5  0.  0.  -1.  0.7  -0.5  1.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
 # test shiftRight athan example
-export athan
 function athan()::Bool
 
 
@@ -128,12 +125,11 @@ shifted=[0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.293  -0.764  0.293  0.  0.  0.  
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
 # test shiftRight habitmod example
-export habitmod
 function habitmod()::Bool
 
 
@@ -157,8 +153,7 @@ shifted=[0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.99853  0.  0.  0.  0.  0.  -0.00147  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
 
-shiftResult=shiftRight(toShift,neq)::Array{Float64,2}
+shiftResult=shiftRight(toShift,neq)
 isapprox(shiftResult,shifted,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
-
 end 
