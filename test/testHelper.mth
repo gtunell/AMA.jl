@@ -92,8 +92,8 @@ MEvaluate[TemplateApply[StringTemplate[
 {qRows,qCols,neq}]]];
 hNewMatlab=myMGet["hNew"];
 qNewMatlab=myMGet["qNew"];
-iqNewMatlab=myMGet["iqNew"];
-nexactNewMatlab=myMGet["nexact"];
+iqNewMatlab=Round[myMGet["iqNew"]];
+nexactNewMatlab=Round[myMGet["nexact"]];
 SetOptions["stdout", PageWidth -> Infinity];
 Print[TableForm[
 {TemplateApply[
@@ -103,11 +103,13 @@ TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
 genJuliaMatInit["hhIn",allH,"Array{Float64,2}"],
 genJuliaMatInit["hNewMatlab",hNewMatlab,"Array{Float64,2}"],
 genJuliaMatInit["qNewMatlab",qNewMatlab,"Array{Float64,2}"],
+TemplateApply[StringTemplate["iqNewMatlab=``"],iqNewMatlab],
+TemplateApply[StringTemplate["nexactMatlab=``"],nexactNewMatlab],
 "(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(iqNew,iqNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(nexact,nexactNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)
+isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+iqNew==iqNewMatlab&&
+nexact==nexactNewMatlab
 end;
 "}]];
 SetOptions["stdout", System`PageWidth -> oldPW];
@@ -130,14 +132,17 @@ MSet["hh",allH];
 MEvaluate[TemplateApply[StringTemplate["qq=zeros(``,``)"],
 {neq*nlead,neq*(nlag+nlead)}]];
 MEvaluate[TemplateApply[StringTemplate[
-"[hNew,qNew,iqNew,nexact] = SPNumeric_shift(hh,qq,0,``,``,``,1.0e-8)",
+"[hh,qq,iq,nexact] = SPExact_shift(hh,qq,0,``,``,``)",
+{qRows,qCols,neq}]]];
+MEvaluate[TemplateApply[StringTemplate[
+"[hNew,qNew,iqNew,nnumeric] = SPNumeric_shift(hh,qq,iq,``,``,``,1.0e-8)",
 {qRows,qCols,neq}]]];
 MEvaluate["hNewFull=full(hNew)"];
 MEvaluate["qNewFull=full(qNew)"];
 hNewMatlab=myMGet["hNewFull"];
 qNewMatlab=myMGet["qNewFull"];
-iqNewMatlab=myMGet["iqNew"];
-nexactNewMatlab=myMGet["nexact"];
+iqNewMatlab=Round[myMGet["iqNew"]];
+nnumericNewMatlab=Round[myMGet["nnumeric"]];
 SetOptions["stdout", PageWidth -> Infinity];
 Print[TableForm[
 {TemplateApply[
@@ -147,18 +152,69 @@ TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
 genJuliaMatInit["hhIn",allH,"Array{Float64,2}"],
 genJuliaMatInit["hNewMatlab",hNewMatlab,"Array{Float64,2}"],
 genJuliaMatInit["qNewMatlab",qNewMatlab,"Array{Float64,2}"],
-"(hNewJulia,qNewJulia,iqNew,nexact)=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+TemplateApply[StringTemplate["iqNewMatlab=``"],iqNewMatlab],
+TemplateApply[StringTemplate["nnumericMatlab=``"],nnumericNewMatlab],
+"(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(iqNew,iqNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(nexact,nexactNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)
+sameSpan(qNewJulia,qNewMatlab)&&
+iqNew==iqNewMatlab&&
+nnumeric==nnumericNewMatlab
 end;
 "}]];
 SetOptions["stdout", System`PageWidth -> oldPW];
 {aDir,aModel,params}
 ]
 
+genBuildATestMatrices[aDir_String,aModel_String,params_String]:=
+Module[{oldPW=System`PageWidth/.Options["stdout"],
+modDims=parseModel[aDir,aModel],
+AMAMatrices=aModel<>"_AMA_matrices"},
+modDimsString=makeModDimsString[modDims];
+MEvaluate[params];
+MEvaluate[AMAMatrices];
+{gg,hh}=myMGet[{"cofg","cofh"}];
+neq=modDims[[1]];nlag=modDims[[2]];nlead=modDims[[3]];
+qRows=neq*nlead;qCols=neq*(nlag+nlead);
+hhLeft=hh[[All,Range[neq*(nlag+1)]]];
+gPart=gg+hhLeft;
+allH=ArrayFlatten[{{gPart,hh[[All,Range[neq*(nlag+1)+1,neq*(nlag+nlead+1)]]]}}];
+MSet["hh",allH];
+MEvaluate[TemplateApply[StringTemplate["qq=zeros(``,``)"],
+{neq*nlead,neq*(nlag+nlead)}]];
+MEvaluate[TemplateApply[StringTemplate[
+"[hh,qq,iq,nexact] = SPExact_shift(hh,qq,0,``,``,``)",
+{qRows,qCols,neq}]]];
+MEvaluate[TemplateApply[StringTemplate[
+"[hForA,qNew,iqNew,nnumeric] = SPNumeric_shift(hh,qq,iq,``,``,``,1.0e-8)",
+{qRows,qCols,neq}]]];
+hForA=myMGet["hForA"];
+MEvaluate[TemplateApply[StringTemplate[
+"[aa,ia,js] = SPBuild_a(hForA,``,``)",{qCols,neq}]]];
+aa=myMGet["aa"];
+ia=myMGet["ia"];
+js=myMGet["js"];
+SetOptions["stdout", PageWidth -> Infinity];
+Print[TableForm[
+{TemplateApply[
+StringTemplate["# test exactShift `1` example\nfunction `1`()::Bool\n"],aModel],
+modDimsString,
+TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
+genJuliaMatInit["hhIn",allH,"Array{Float64,2}"],
+genJuliaMatInit["hNewMatlab",hNewMatlab,"Array{Float64,2}"],
+genJuliaMatInit["qNewMatlab",qNewMatlab,"Array{Float64,2}"],
+"(hNewJulia,qNewJulia,iqNew,nexact)=exactShift(hhIn,qq,0,qRows,qCols,neq)::Array{Float64,2}
+isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(iqNew,iqNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(nexact,nexactNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)
+end;
+"}]];
+SetOptions["stdout", System`PageWidth -> oldPW];
+]
+
+
 adjustDepth[xx:(_?VectorQ|_?MatrixQ)]:=If[Depth[xx]==2,{xx},xx];
+adjustDepth[xx_]:=xx
 myMGet[xx_String]:=adjustDepth[MGet[xx]]
 SetAttributes[myMGet,Listable]
 
@@ -190,8 +246,9 @@ MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveHabitmod"];
 generator["./","habitmod","habitmodParams"];
 ]
 (*
-genAllTests[genExactShiftTestMatrices]
+genAllTests[genNumericShiftTestMatrices]
+
 *)
 
+genAllTests[genExactShiftTestMatrices]
 
-genAllTests[genNumericShiftTestMatrices]
