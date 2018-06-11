@@ -3,7 +3,7 @@ module AMAFUNCS
 include("shiftRight.jl")
 
 """
-    exactShift(h, q, iq, qrows, qcols, neq)
+    exactShift!(h, q, iq, qrows, qcols, neq)
 
 Compute the exact shiftrights and store them in q.
 """
