@@ -1,8 +1,8 @@
 using AMA
 using Base.Test
 include("../src/checkSpanning.jl")
-
-include("../src/shiftRight.jl")
+#=
+include("../src/shiftRight!.jl")
 include("defineShiftRightTestFuncs.jl")
 
 @testset "test shiftRight" begin
@@ -14,8 +14,8 @@ include("defineShiftRightTestFuncs.jl")
 @test ShiftRightTests.athan()
 @test ShiftRightTests.habitmod()
 end
-
-include("../src/exactShift.jl")
+=#
+include("../src/exactShift!.jl")
 include("defineExactShiftTestFuncs.jl")
 @testset "test exactShift" begin
 @test ExactShiftTests.firmvalue()
