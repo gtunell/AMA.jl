@@ -97,7 +97,7 @@ nexactNewMatlab=Round[myMGet["nexact"]];
 SetOptions["stdout", PageWidth -> Infinity];
 Print[TableForm[
 {TemplateApply[
-StringTemplate["# test exactShift `1` example\nfunction `1`()::Bool\n"],aModel],
+StringTemplate["# test exactShift! `1` example\nfunction `1`()::Bool\n"],aModel],
 modDimsString,
 TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
 genJuliaMatInit["hhIn",allH,"Array{Float64,2}"],
@@ -146,7 +146,7 @@ nnumericNewMatlab=Round[myMGet["nnumeric"]];
 SetOptions["stdout", PageWidth -> Infinity];
 Print[TableForm[
 {TemplateApply[
-StringTemplate["# test numericShift `1` example\nfunction `1`()::Bool\n"],aModel],
+StringTemplate["# test numericShift! `1` example\nfunction `1`()::Bool\n"],aModel],
 modDimsString,
 TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
 genJuliaMatInit["hhIn",allH,"Array{Float64,2}"],
@@ -154,7 +154,7 @@ genJuliaMatInit["hNewMatlab",hNewMatlab,"Array{Float64,2}"],
 genJuliaMatInit["qNewMatlab",qNewMatlab,"Array{Float64,2}"],
 TemplateApply[StringTemplate["iqNewMatlab=``"],iqNewMatlab],
 TemplateApply[StringTemplate["nnumericMatlab=``"],nnumericNewMatlab],
-"(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
+"(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
@@ -191,23 +191,22 @@ hForA=myMGet["hForA"];
 MEvaluate[TemplateApply[StringTemplate[
 "[aa,ia,js] = SPBuild_a(hForA,``,``)",{qCols,neq}]]];
 aa=myMGet["aa"];
-ia=myMGet["ia"];
+ia=Round[myMGet["ia"]];
 js=myMGet["js"];
 SetOptions["stdout", PageWidth -> Infinity];
 Print[TableForm[
 {TemplateApply[
-StringTemplate["# test exactShift `1` example\nfunction `1`()::Bool\n"],aModel],
+StringTemplate["# test buildA! `1` example\nfunction `1`()::Bool\n"],aModel],
 modDimsString,
 TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
 genJuliaMatInit["hForA",hForA,"Array{Float64,2}"],
 genJuliaMatInit["aa",aa,"Array{Float64,2}"],
-genJuliaMatInit["ia",ia,"Array{Float64,2}"],
+TemplateApply[StringTemplate["ia=``::Int64",ia]],
 genJuliaMatInit["js",js,"Array{Float64,2}"],
-"(aaJulia,iaJulia,jsJulia)=buildA(hForA,qq,0,qRows,qCols,neq)
-isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(iqNew,iqNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(nexact,nexactNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)
+"(aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
+isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 "}]];
 SetOptions["stdout", System`PageWidth -> oldPW];
@@ -248,11 +247,13 @@ generator["./","habitmod","habitmodParams"];
 ]
 (*
 genAllTests[genShiftRightTestMatrices]
-genAllTests[genNumericShiftTestMatrices]
+genAllTests[genExactShiftTestMatrices]
+genAllTests[genBuildATestMatrices]
 
 *)
 
-genAllTests[genExactShiftTestMatrices]
+genAllTests[genNumericShiftTestMatrices]
+
 
 
 

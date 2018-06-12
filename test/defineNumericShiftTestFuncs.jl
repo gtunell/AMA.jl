@@ -1,9 +1,9 @@
 module NumericShiftTests
 
 # test numericShift 
-import AMAFUNCS.numericShift
+import AMAFUNCS.numericShift!
 
-# test numericShift firmvalue example
+# test numericShift! firmvalue example
 function firmvalue()::Bool
 
 
@@ -32,14 +32,15 @@ iqNewMatlab=3
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
-isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-sameSpan(qNewJulia,qNewMatlab)&&
-iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq)
+#isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+#sameSpan(qNewJulia,qNewMatlab)&&
+#iqNew==iqNewMatlab&&
+#nnumeric==nnumericNewMatlab
+2==3
 end;
 
-# test numericShift firmvalue3Leads2Lags example
+# test numericShift! firmvalue3Leads2Lags example
 function firmvalue3Leads2Lags()::Bool
 
 
@@ -76,14 +77,14 @@ iqNewMatlab=9
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericNewMatlab
 end;
 
-# test numericShift example7 example
+# test numericShift! example7 example
 function example7()::Bool
 
 
@@ -112,14 +113,14 @@ iqNewMatlab=2
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericNewMatlab
 end;
 
-# test numericShift oneEquationNoLead example
+# test numericShift! oneEquationNoLead example
 function oneEquationNoLead()::Bool
 
 
@@ -139,14 +140,14 @@ iqNewMatlab=1
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericNewMatlab
 end;
 
-# test numericShift reliablePaperExmpl example
+# test numericShift! reliablePaperExmpl example
 function reliablePaperExmpl()::Bool
 
 
@@ -178,14 +179,14 @@ iqNewMatlab=3
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericNewMatlab
 end;
 
-# test numericShift athan example
+# test numericShift! athan example
 function athan()::Bool
 
 
@@ -229,14 +230,14 @@ iqNewMatlab=8
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericNewMatlab
 end;
 
-# test numericShift habitmod example
+# test numericShift! habitmod example
 function habitmod()::Bool
 
 
@@ -289,11 +290,12 @@ iqNewMatlab=7
 
 nnumericMatlab=0
 
-(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift(hhIn,qq,0,qRows,qCols,neq)
+(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericNewMatlab
 end;
+
 
 end

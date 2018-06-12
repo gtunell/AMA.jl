@@ -38,7 +38,7 @@ nexactMatlab=3
 #isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 #iqNew==iqNewMatlab&&
 #nexact==nexactNewMatlab
-    2==2
+    2==3
 end;
 
 # test exactShift firmvalue3Leads2Lags example
