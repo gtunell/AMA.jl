@@ -4,16 +4,6 @@ module AMA
 #Import needed definitions
 import AMAFUNCS
 
-#=
-import AMA.AMAFUNCS.shiftRight!
-include("exactShift!.jl")
-import AMAFUNCS.exactShift!
-include("numericShift!.jl")
-import AMAFUNCS.numericShift!
-include("buildA!.jl")
-import AMAFUNCS.buildA!
-=#
-
 
 
 end # module

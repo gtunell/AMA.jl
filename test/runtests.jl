@@ -14,8 +14,8 @@ include("defineShiftRightTestFuncs.jl")
 @test ShiftRightTests.athan()
 @test ShiftRightTests.habitmod()
 end
-#=
-include("../src/exactShift!.jl")
+
+
 include("defineExactShiftTestFuncs.jl")
 @testset "test exactShift" begin
 @test ExactShiftTests.firmvalue()
@@ -53,7 +53,7 @@ include("defineBuildATestFuncs.jl")
 @test_broken BuildATests.athan()
 @test_broken BuildATests.habitmod()
 end
-=#
+#==#
 end #outer
 
 
