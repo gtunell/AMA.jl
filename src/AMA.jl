@@ -1,10 +1,11 @@
 module AMA
 # http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
 
-#Import needed packages
-include("shiftRight!.jl")
-import AMAFUNCS.shiftRight!
+#Import needed definitions
+import AMAFUNCS
+
 #=
+import AMA.AMAFUNCS.shiftRight!
 include("exactShift!.jl")
 import AMAFUNCS.exactShift!
 include("numericShift!.jl")

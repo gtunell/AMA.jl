@@ -1,5 +1,3 @@
-module AMAFUNCS
-
 """
     buildA(h, qcols, neq)
 
@@ -11,6 +9,4 @@ function buildA!(h::Array{Float64,2}, qcols::Int64, neq::Int64)
 
 
 end # buildA
-
-end # module
 

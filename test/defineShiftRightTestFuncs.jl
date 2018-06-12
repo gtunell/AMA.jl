@@ -1,6 +1,6 @@
 module ShiftRightTests
-using AMA
-include("../src/shiftRight!.jl")
+import AMA
+#include("../src/shiftRight!.jl")
 # test exactShift 
 import AMAFUNCS.shiftRight!
 

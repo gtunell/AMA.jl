@@ -1,7 +1,3 @@
-module AMAFUNCS
-
-include("shiftRight!.jl")
-
 """
     exactShift!(h, q, iq, qrows, qcols, neq)
 
@@ -22,7 +18,7 @@ function exactShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qRow
         nz = size(zerorows, 1)
         nexact += nz
         qq[(iq + 1):(iq + nz), :] = hh[zerorows, left]
-        hh[zerorows,:] = AMAFUNCS.shiftRight!(hh[zerorows, :], neq)
+        hh[zerorows,:] = shiftRight!(hh[zerorows, :], neq)
         iq = iq + nz
 
         zerorows = hh[:, right]'
@@ -35,4 +31,3 @@ function exactShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qRow
     
 end # exactShift
 
-end # module

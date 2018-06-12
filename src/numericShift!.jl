@@ -1,5 +1,3 @@
-module AMAFUNCS
-
 """
     numericShift(h, q, iq, qrows, qcols, neq)
 
@@ -11,6 +9,4 @@ function numericShift!(h::Array{Float64,2}, q::Array{Float64,2}, iq::Int64, qrow
 
 
 end # numericShift
-
-end # module
 

@@ -1,9 +1,9 @@
-using AMA
+#using AMA
+import AMA
 using Base.Test
-include("../src/checkSpanning.jl")
 
-include("../src/shiftRight!.jl")
 include("defineShiftRightTestFuncs.jl")
+
 @testset "outer"  begin# an outer so that it does't quit on first fail
 @testset "test shiftRight" begin
 @test ShiftRightTests.firmvalue()
@@ -14,7 +14,7 @@ include("defineShiftRightTestFuncs.jl")
 @test ShiftRightTests.athan()
 @test ShiftRightTests.habitmod()
 end
-
+#=
 include("../src/exactShift!.jl")
 include("defineExactShiftTestFuncs.jl")
 @testset "test exactShift" begin
@@ -53,5 +53,7 @@ include("defineBuildATestFuncs.jl")
 @test_broken BuildATests.athan()
 @test_broken BuildATests.habitmod()
 end
-
+=#
 end #outer
+
+
