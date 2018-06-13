@@ -13,7 +13,7 @@ genJuliaMatInit[varName,aMat]<>"::"<>dataType
 
 
 genRow[aVec_?VectorQ]:=
-StringReplace[ToString[DecimalForm[aVec]],{","->" ","{"->"","}"->""}]
+StringReplace[ToString[DecimalForm[aVec]],{","->" ","{"->"","}"->"","I"->"im"}]
 
 
 
@@ -238,23 +238,32 @@ MEvaluate[TemplateApply[StringTemplate[
 hForA=myMGet["hForA"];
 MEvaluate[TemplateApply[StringTemplate[
 "[aa,ia,js] = SPBuild_a(hForA,``,``)",{qCols,neq}]]];
+iqNew=myMGet["iqNew"];
 aa=myMGet["aa"];
 ia=Round[myMGet["ia"]];
-js=myMGet["js"];
+js=Round[myMGet["js"]];
+rowsLeft=Min[Length[Flatten[js]],qRows-iqNew+1];
+uprbnd=1.0+(10.0^-6);
+MEvaluate[TemplateApply[StringTemplate[
+"[ww,rts,lgroots] = SPEigensystem(aa,``,``)",{uprbnd,rowsLeft}]]];
+ww=myMGet["ww"];
+rts=myMGet["rts"];
+lgroots=myMGet["lgroots"];
 SetOptions["stdout", PageWidth -> Infinity];
 Print[TableForm[
 {TemplateApply[
-StringTemplate["# test buildA! `1` example\nfunction `1`()::Bool\n"],aModel],
+StringTemplate["# test eigenSys! `1` example\nfunction `1`()::Bool\n"],aModel],
 modDimsString,
-TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
-genJuliaMatInit["hForA",hForA,"Array{Float64,2}"],
-genJuliaMatInit["aa",aa,"Array{Float64,2}"],
+TemplateApply[StringTemplate["uprbnd=``,
+rowsLeft=``"],{uprbnd,rowsLeft}],
+genJuliaMatInit["ww",ww,"Array{Float64,2}"],
+genJuliaMatInit["rts",rts,"Array{Float64,2}"],
 TemplateApply[StringTemplate["ia=``::Int64",ia]],
 genJuliaMatInit["js",js,"Array{Float64,2}"],
-"(aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+"(wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
+isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+lgrootsJulia==lgroots,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 "}]];
 SetOptions["stdout", System`PageWidth -> oldPW];
@@ -302,7 +311,7 @@ genAllTests[genNumericShiftTestMatrices]
 *)
 
 
-
+genAllTests[genEigenSysTestMatrices]
 
 
 
