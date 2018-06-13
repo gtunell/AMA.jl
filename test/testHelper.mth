@@ -242,7 +242,7 @@ iqNew=myMGet["iqNew"];
 aa=myMGet["aa"];
 ia=Round[myMGet["ia"]];
 js=Round[myMGet["js"]];
-rowsLeft=Min[Length[Flatten[js]],qRows-iqNew+1];
+rowsLeft=Round[Min[Length[Flatten[{js}]],qRows-iqNew+1]];
 uprbnd=1.0+(10.0^-6);
 MEvaluate[TemplateApply[StringTemplate[
 "[ww,rts,lgroots] = SPEigensystem(aa,``,``)",{uprbnd,rowsLeft}]]];
@@ -254,16 +254,17 @@ Print[TableForm[
 {TemplateApply[
 StringTemplate["# test eigenSys! `1` example\nfunction `1`()::Bool\n"],aModel],
 modDimsString,
-TemplateApply[StringTemplate["uprbnd=``,
+TemplateApply[StringTemplate["uprbnd=``
 rowsLeft=``"],{uprbnd,rowsLeft}],
+genJuliaMatInit["aa",aa,"Array{Float64,2}"],
 genJuliaMatInit["ww",ww,"Array{Float64,2}"],
-genJuliaMatInit["rts",rts,"Array{Float64,2}"],
+genJuliaMatInit["rts",rts,"Array{Float64,1}"],
 TemplateApply[StringTemplate["ia=``::Int64",ia]],
-genJuliaMatInit["js",js,"Array{Float64,2}"],
+genJuliaMatInit["js",js,"Array{Int64,2}"],
 "(wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
 isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-lgrootsJulia==lgroots,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+lgrootsJulia==lgroots
 end;
 "}]];
 SetOptions["stdout", System`PageWidth -> oldPW];

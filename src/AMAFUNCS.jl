@@ -4,4 +4,5 @@ include("shiftRight!.jl")
 include("exactShift!.jl")
 include("numericShift!.jl")
 include("buildA!.jl")
+include("eigenSys!.jl")
 end

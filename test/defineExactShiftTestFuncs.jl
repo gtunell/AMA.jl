@@ -1,6 +1,6 @@
 module ExactShiftTests
 # test exactShift
-usin AMA
+import  AMA
 #import AMAFUNCS.exactShift!
 # test exactShift firmvalue example
 function firmvalue()::Bool
