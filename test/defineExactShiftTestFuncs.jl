@@ -31,7 +31,7 @@ qNewMatlab=[0.  -0.4  0.  0.  0.  1.  -1.  0.;
 
 iqNewMatlab=3
 
-nexactMatlab=3
+nexactNewMatlab=3
 
 (hNewJulia,qNewJulia,iqNew,nexact)=exactShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
@@ -75,7 +75,7 @@ qNewMatlab=[0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.  0
 
 iqNewMatlab=9
 
-nexactMatlab=9
+nexactNewMatlab=9
 
 (hNewJulia,qNewJulia,iqNew,nexact)=exactShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
@@ -111,7 +111,7 @@ qNewMatlab=[0.  0.  0.  1.  0.  0.  1.  -1.;
 
 iqNewMatlab=2
 
-nexactMatlab=2
+nexactNewMatlab=2
 
 (hNewJulia,qNewJulia,iqNew,nexact)=exactShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
@@ -138,7 +138,7 @@ qNewMatlab=[2.  3.]::Array{Float64,2}
 
 iqNewMatlab=1
 
-nexactMatlab=1
+nexactNewMatlab=1
 
 (hNewJulia,qNewJulia,iqNew,nexact)=exactShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
@@ -177,7 +177,7 @@ qNewMatlab=[0.  0.  0.  -0.5  0.  0.  -1.  0.7  -0.5  1.;
 
 iqNewMatlab=3
 
-nexactMatlab=3
+nexactNewMatlab=3
 
 (hNewJulia,qNewJulia,iqNew,nexact)=exactShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
@@ -228,7 +228,7 @@ qNewMatlab=[-0.293  -0.764  0.293  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  -
 
 iqNewMatlab=8
 
-nexactMatlab=8
+nexactNewMatlab=8
 
 (hNewJulia,qNewJulia,iqNew,nexact)=exactShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
@@ -288,7 +288,7 @@ qNewMatlab=[0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  
 
 iqNewMatlab=7
 
-nexactMatlab=7
+nexactNewMatlab=7
 
 (hNewJulia,qNewJulia,iqNew,nexact)=exactShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
