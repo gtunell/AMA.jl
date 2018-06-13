@@ -1,7 +1,9 @@
 module ExactShiftTests
 # test exactShift
-import  AMA
-#import AMAFUNCS.exactShift!
+
+
+import AMAFUNCS.exactShift!
+
 # test exactShift firmvalue example
 function firmvalue()::Bool
 
@@ -32,11 +34,10 @@ iqNewMatlab=3
 nexactMatlab=3
 
 (hNewJulia,qNewJulia,iqNew,nexact)=exactShift!(hhIn,qq,0,qRows,qCols,neq)
-#isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-#isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-#iqNew==iqNewMatlab&&
-#nexact==nexactNewMatlab
-    2==3
+isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+isapprox(qNewJulia,qNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+iqNew==iqNewMatlab&&
+nexact==nexactNewMatlab
 end;
 
 # test exactShift firmvalue3Leads2Lags example

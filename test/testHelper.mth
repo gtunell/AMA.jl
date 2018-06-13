@@ -270,6 +270,71 @@ end;
 SetOptions["stdout", System`PageWidth -> oldPW];
 ]
 
+genAugmentQTestMatrices[aDir_String,aModel_String,params_String]:=
+Module[{oldPW=System`PageWidth/.Options["stdout"],
+modDims=parseModel[aDir,aModel],
+AMAMatrices=aModel<>"_AMA_matrices"},
+modDimsString=makeModDimsString[modDims];
+MEvaluate[params];
+MEvaluate[AMAMatrices];
+{gg,hh}=myMGet[{"cofg","cofh"}];
+neq=modDims[[1]];nlag=modDims[[2]];nlead=modDims[[3]];
+qRows=neq*nlead;qCols=neq*(nlag+nlead);
+hhLeft=hh[[All,Range[neq*(nlag+1)]]];
+gPart=gg+hhLeft;
+allH=ArrayFlatten[{{gPart,hh[[All,Range[neq*(nlag+1)+1,neq*(nlag+nlead+1)]]]}}];
+MSet["hh",allH];
+MEvaluate[TemplateApply[StringTemplate["qq=zeros(``,``)"],
+{neq*nlead,neq*(nlag+nlead)}]];
+MEvaluate[TemplateApply[StringTemplate[
+"[hh,qq,iq,nexact] = SPExact_shift(hh,qq,0,``,``,``)",
+{qRows,qCols,neq}]]];
+MEvaluate[TemplateApply[StringTemplate[
+"[hForA,qNew,iqNew,nnumeric] = SPNumeric_shift(hh,qq,iq,``,``,``,1.0e-8)",
+{qRows,qCols,neq}]]];
+hForA=myMGet["hForA"];
+MEvaluate[TemplateApply[StringTemplate[
+"[aa,ia,js] = SPBuild_a(hForA,``,``)",{qCols,neq}]]];
+iqNew=Round[myMGet["iqNew"]];
+aa=myMGet["aa"];
+ia=Round[myMGet["ia"]];
+js=Round[myMGet["js"]];
+rowsLeft=Round[Min[Length[Flatten[{js}]],qRows-iqNew+1]];
+uprbnd=1.0+(10.0^-6);
+MEvaluate[TemplateApply[StringTemplate[
+"[ww,rts,lgroots] = SPEigensystem(aa,``,``)",{uprbnd,rowsLeft}]]];
+ww=myMGet["ww"];
+rts=myMGet["rts"];
+lgroots=myMGet["lgroots"];
+doMatlabFunc["qFinal = SPCopy_w(qNew,ww,js,iqNew,``)",{qRows}];
+qNew=myMGet["qNew"];
+qFinal=myMGet["qFinal"];
+qFinal=myMGet["qFinal"];
+SetOptions["stdout", PageWidth -> Infinity];
+Print[TableForm[
+{TemplateApply[
+StringTemplate["# test augmentQ! `1` example\nfunction `1`()::Bool\n"],aModel],
+modDimsString,
+genJuliaMatInit["qFinal",qFinal,"Array{Float64,2}"],
+genJuliaMatInit["qNew",qNew,"Array{Float64,2}"],
+genJuliaMatInit["ww",ww,"Array{Float64,2}"],
+TemplateApply[StringTemplate["iqNew=``::Int64",iqNew]],
+genJuliaMatInit["js",js,"Array{Int64,2}"],
+"(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
+isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+lgrootsJulia==lgroots
+end;
+"}]];
+SetOptions["stdout", System`PageWidth -> oldPW];
+]
+
+
+
+doMatlabFunc[execTemplateStr_String,theArgs_?VectorQ]:=
+MEvaluate[TemplateApply[StringTemplate[execTemplateStr,theArgs]]]
+
+
 
 adjustDepth[xx:(_?VectorQ|_?MatrixQ)]:=If[Depth[xx]==2,{xx},xx];
 adjustDepth[xx_]:=xx
@@ -308,11 +373,12 @@ genAllTests[genShiftRightTestMatrices]
 genAllTests[genExactShiftTestMatrices]
 genAllTests[genBuildATestMatrices]
 genAllTests[genNumericShiftTestMatrices]
+genAllTests[genEigenSysTestMatrices]
 
 *)
+genAllTests[genAugmentQTestMatrices]
 
 
-genAllTests[genEigenSysTestMatrices]
 
 
 

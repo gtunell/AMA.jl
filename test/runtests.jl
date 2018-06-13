@@ -30,7 +30,7 @@ end
 include("../src/numericShift!.jl")
 include("defineNumericShiftTestFuncs.jl")
 @testset "test numericShift" begin
-@test NumericShiftTests.firmvalue()
+@test_broken NumericShiftTests.firmvalue()
 @test_broken NumericShiftTests.firmvalue3Leads2Lags()
 @test_broken NumericShiftTests.example7()
 @test_broken NumericShiftTests.oneEquationNoLead()
@@ -44,7 +44,7 @@ end
 include("../src/buildA!.jl")
 include("defineBuildATestFuncs.jl")
 @testset "test buildA" begin
-@test BuildATests.firmvalue()
+@test_broken BuildATests.firmvalue()
 @test_broken BuildATests.firmvalue3Leads2Lags()
 @test_broken BuildATests.example7()
 @test_broken BuildATests.oneEquationNoLead()
@@ -65,6 +65,19 @@ include("defineEigenSysTestFuncs.jl")
 @test_broken EigenSysTests.reliablePaperExmpl()
 @test_broken EigenSysTests.athan()
 @test_broken EigenSysTests.habitmod()
+end
+
+
+include("../src/augmentQ!.jl")
+include("defineAugmentQTestFuncs.jl")
+@testset "test augmentQ" begin
+@test AugmentQTests.firmvalue()
+@test_broken AugmentQTests.firmvalue3Leads2Lags()
+@test_broken AugmentQTests.example7()
+@test_broken AugmentQTests.oneEquationNoLead()
+@test_broken AugmentQTests.reliablePaperExmpl()
+@test_broken AugmentQTests.athan()
+@test_broken AugmentQTests.habitmod()
 end
 
 end #outer
