@@ -1,7 +1,7 @@
 println("running AMA.jl/src/_init.jl")
 
 if(isfile("/Users/garyanderson/git/AMA.jl/src/_init.jl"))
-   theFile="/msu/home/m1gmt00/summer_project/AMA.jl/src/"
+	theFile="/Users/garyanderson/git/AMA.jl/src/_init.jl"
 elseif(isfile("/msu/home/m1gmt00/summer_project/AMA.jl/src/_init.jl"))
    theFile="/msu/home/m1gmt00/summer_project/AMA.jl/src/_init.jl"
 end
