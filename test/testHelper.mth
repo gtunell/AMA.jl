@@ -213,6 +213,54 @@ SetOptions["stdout", System`PageWidth -> oldPW];
 ]
 
 
+genEigenSysTestMatrices[aDir_String,aModel_String,params_String]:=
+Module[{oldPW=System`PageWidth/.Options["stdout"],
+modDims=parseModel[aDir,aModel],
+AMAMatrices=aModel<>"_AMA_matrices"},
+modDimsString=makeModDimsString[modDims];
+MEvaluate[params];
+MEvaluate[AMAMatrices];
+{gg,hh}=myMGet[{"cofg","cofh"}];
+neq=modDims[[1]];nlag=modDims[[2]];nlead=modDims[[3]];
+qRows=neq*nlead;qCols=neq*(nlag+nlead);
+hhLeft=hh[[All,Range[neq*(nlag+1)]]];
+gPart=gg+hhLeft;
+allH=ArrayFlatten[{{gPart,hh[[All,Range[neq*(nlag+1)+1,neq*(nlag+nlead+1)]]]}}];
+MSet["hh",allH];
+MEvaluate[TemplateApply[StringTemplate["qq=zeros(``,``)"],
+{neq*nlead,neq*(nlag+nlead)}]];
+MEvaluate[TemplateApply[StringTemplate[
+"[hh,qq,iq,nexact] = SPExact_shift(hh,qq,0,``,``,``)",
+{qRows,qCols,neq}]]];
+MEvaluate[TemplateApply[StringTemplate[
+"[hForA,qNew,iqNew,nnumeric] = SPNumeric_shift(hh,qq,iq,``,``,``,1.0e-8)",
+{qRows,qCols,neq}]]];
+hForA=myMGet["hForA"];
+MEvaluate[TemplateApply[StringTemplate[
+"[aa,ia,js] = SPBuild_a(hForA,``,``)",{qCols,neq}]]];
+aa=myMGet["aa"];
+ia=Round[myMGet["ia"]];
+js=myMGet["js"];
+SetOptions["stdout", PageWidth -> Infinity];
+Print[TableForm[
+{TemplateApply[
+StringTemplate["# test buildA! `1` example\nfunction `1`()::Bool\n"],aModel],
+modDimsString,
+TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
+genJuliaMatInit["hForA",hForA,"Array{Float64,2}"],
+genJuliaMatInit["aa",aa,"Array{Float64,2}"],
+TemplateApply[StringTemplate["ia=``::Int64",ia]],
+genJuliaMatInit["js",js,"Array{Float64,2}"],
+"(aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
+isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+end;
+"}]];
+SetOptions["stdout", System`PageWidth -> oldPW];
+]
+
+
 adjustDepth[xx:(_?VectorQ|_?MatrixQ)]:=If[Depth[xx]==2,{xx},xx];
 adjustDepth[xx_]:=xx
 myMGet[xx_String]:=adjustDepth[MGet[xx]]
@@ -249,10 +297,10 @@ generator["./","habitmod","habitmodParams"];
 genAllTests[genShiftRightTestMatrices]
 genAllTests[genExactShiftTestMatrices]
 genAllTests[genBuildATestMatrices]
+genAllTests[genNumericShiftTestMatrices]
 
 *)
 
-genAllTests[genNumericShiftTestMatrices]
 
 
 

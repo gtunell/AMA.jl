@@ -10,5 +10,3 @@ if length(findin(theFile,LOAD_PATH))==0
     push!(LOAD_PATH,theFile)
     println("pushing ",theFile," onto LOAD_PATH")
 end
-
-  
