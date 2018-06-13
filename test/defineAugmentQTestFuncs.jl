@@ -3,6 +3,7 @@ module AugmentQTests
 # test augmentQ 
 
 import AMAFUNCS.augmentQ!
+import AMAFUNCS.sameSpan
 
 # test augmentQ! firmvalue example
 function firmvalue()::Bool
@@ -30,10 +31,11 @@ iqNew=3::Int64
 
 js=[5  6  8]::Array{Int64,2}
 
-(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-sameSpan(wwJulia,ww) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-lgrootsJulia==lgroots
+#(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
+#sameSpan(wwJulia,ww) &&
+#isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+    #lgrootsJulia==lgroots
+    2==3
 end;
 
 # test augmentQ! firmvalue3Leads2Lags example
