@@ -19,12 +19,12 @@ end
 include("defineExactShiftTestFuncs.jl")
 @testset "test exactShift" begin
 @test ExactShiftTests.firmvalue()
-@test_broken ExactShiftTests.firmvalue3Leads2Lags()
-@test_broken ExactShiftTests.example7()
-@test_broken ExactShiftTests.oneEquationNoLead()
-@test_broken ExactShiftTests.reliablePaperExmpl()
-@test_broken ExactShiftTests.athan()
-@test_broken ExactShiftTests.habitmod()
+@test ExactShiftTests.firmvalue3Leads2Lags()
+@test ExactShiftTests.example7()
+@test ExactShiftTests.oneEquationNoLead()
+@test ExactShiftTests.reliablePaperExmpl()
+@test ExactShiftTests.athan()
+@test ExactShiftTests.habitmod()
 end
 
 
