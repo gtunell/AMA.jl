@@ -31,7 +31,7 @@ end
 include("../src/numericShift!.jl")
 include("defineNumericShiftTestFuncs.jl")
 @testset "test numericShift" begin
-@test NumericShiftTests.firmvalue()
+@test_broken NumericShiftTests.firmvalue()
 @test_broken NumericShiftTests.firmvalue3Leads2Lags()
 @test_broken NumericShiftTests.example7()
 @test_broken NumericShiftTests.oneEquationNoLead()
@@ -45,7 +45,7 @@ end
 include("../src/buildA!.jl")
 include("defineBuildATestFuncs.jl")
 @testset "test buildA" begin
-@test BuildATests.firmvalue()
+@test_broken BuildATests.firmvalue()
 @test_broken BuildATests.firmvalue3Leads2Lags()
 @test_broken BuildATests.example7()
 @test_broken BuildATests.oneEquationNoLead()
