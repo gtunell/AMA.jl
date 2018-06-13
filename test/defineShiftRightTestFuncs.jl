@@ -1,8 +1,11 @@
 module ShiftRightTests
-import AMA
+
+push!(LOAD_PATH, "../src/")
+import AMAFUNCS.shiftRight!
+
 #include("../src/shiftRight!.jl")
 # test exactShift 
-import AMAFUNCS.shiftRight!
+# import AMA.shiftRight!
 
 # test shiftRight! firmvalue example
 function firmvalue()::Bool
