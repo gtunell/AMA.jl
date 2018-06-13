@@ -330,6 +330,77 @@ SetOptions["stdout", System`PageWidth -> oldPW];
 ]
 
 
+genReducedFormTestMatrices[aDir_String,aModel_String,params_String]:=
+Module[{oldPW=System`PageWidth/.Options["stdout"],
+modDims=parseModel[aDir,aModel],
+AMAMatrices=aModel<>"_AMA_matrices"},
+modDimsString=makeModDimsString[modDims];
+MEvaluate[params];
+MEvaluate[AMAMatrices];
+{gg,hh}=myMGet[{"cofg","cofh"}];
+neq=modDims[[1]];nlag=modDims[[2]];nlead=modDims[[3]];
+qRows=neq*nlead;qCols=neq*(nlag+nlead);
+hhLeft=hh[[All,Range[neq*(nlag+1)]]];
+gPart=gg+hhLeft;
+allH=ArrayFlatten[{{gPart,hh[[All,Range[neq*(nlag+1)+1,neq*(nlag+nlead+1)]]]}}];
+MSet["hh",allH];
+MEvaluate[TemplateApply[StringTemplate["qq=zeros(``,``)"],
+{neq*nlead,neq*(nlag+nlead)}]];
+MEvaluate[TemplateApply[StringTemplate[
+"[hh,qq,iq,nexact] = SPExact_shift(hh,qq,0,``,``,``)",
+{qRows,qCols,neq}]]];
+MEvaluate[TemplateApply[StringTemplate[
+"[hForA,qNew,iqNew,nnumeric] = SPNumeric_shift(hh,qq,iq,``,``,``,1.0e-8)",
+{qRows,qCols,neq}]]];
+hForA=myMGet["hForA"];
+MEvaluate[TemplateApply[StringTemplate[
+"[aa,ia,js] = SPBuild_a(hForA,``,``)",{qCols,neq}]]];
+iqNew=Round[myMGet["iqNew"]];
+aa=myMGet["aa"];
+ia=Round[myMGet["ia"]];
+js=Round[myMGet["js"]];
+rowsLeft=Round[Min[Length[Flatten[{js}]],qRows-iqNew+1]];
+uprbnd=1.0+(10.0^-6);
+MEvaluate[TemplateApply[StringTemplate[
+"[ww,rts,lgroots] = SPEigensystem(aa,``,``)",{uprbnd,rowsLeft}]]];
+ww=myMGet["ww"];
+rts=myMGet["rts"];
+lgroots=myMGet["lgroots"];
+doMatlabFunc["qFinal = SPCopy_w(qNew,ww,js,iqNew,``)",{qRows}];
+qNew=myMGet["qNew"];
+qFinal=myMGet["qFinal"];
+qFinal=myMGet["qFinal"];
+doMatlabFunc["[nonsing,bb]=SPReduced_form(qFinal,``,``,``,``,``)",
+{qRows,qCols,neq*nlag,neq,10^(-10)}];
+bb=myMGet["bb"];
+nonsing=myMGet["nonsing"];
+SetOptions["stdout", PageWidth -> Infinity];
+Print[TableForm[
+{TemplateApply[
+StringTemplate["# test reducedForm `1` example\nfunction `1`()::Bool\n"],aModel],
+modDimsString,
+genJuliaMatInit["bb",bb,"Array{Float64,2}"],
+genJuliaMatInit["qNew",qNew,"Array{Float64,2}"],
+doJuliaAssn[nonsing,"nonsing"],
+doJuliaAssn[qRows,"qRows","Int64"],
+doJuliaAssn[qCols,"qCols","Int64"],
+doJuliaAssn[neq*nlag,"bCols","Int64"],
+doJuliaAssn[10^(-10),"anEpsi","Float64"],
+"(nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,anEpsi)
+isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+nonsingJulia==nonsing
+end;
+"}]];
+SetOptions["stdout", System`PageWidth -> oldPW];
+]
+
+
+doJuliaAssn[val_?NumberQ,varName_String,varType_String]:=
+TemplateApply[StringTemplate[varName<>"=``::``"],{val,varType}]
+
+doJuliaAssn[True,varName_String]:=varName<>"=true::Bool"
+doJuliaAssn[False,varName_String]:=varName<>"=false::Bool"
+
 
 doMatlabFunc[execTemplateStr_String,theArgs_?VectorQ]:=
 MEvaluate[TemplateApply[StringTemplate[execTemplateStr,theArgs]]]
@@ -376,7 +447,7 @@ genAllTests[genNumericShiftTestMatrices]
 genAllTests[genEigenSysTestMatrices]
 
 *)
-genAllTests[genAugmentQTestMatrices]
+genAllTests[genReducedFormTestMatrices]
 
 
 

@@ -80,6 +80,20 @@ include("defineAugmentQTestFuncs.jl")
 @test_broken AugmentQTests.habitmod()
 end
 
+    
+
+include("../src/reducedForm.jl")
+include("defineReducedFormTestFuncs.jl")
+@testset "test reducedForm" begin
+@test ReducedFormTests.firmvalue()
+@test_broken ReducedFormTests.firmvalue3Leads2Lags()
+@test_broken ReducedFormTests.example7()
+@test_broken ReducedFormTests.oneEquationNoLead()
+@test_broken ReducedFormTests.reliablePaperExmpl()
+@test_broken ReducedFormTests.athan()
+@test_broken ReducedFormTests.habitmod()
+end
+
 end #outer
 
 
