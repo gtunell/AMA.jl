@@ -26,15 +26,9 @@ function exactShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qRow
 
         zerorows = hh[:, right]'
         zerorows = abs.(zerorows)
-        zerorows = sum(zerorows)
+        zerorows = sum(zerorows, 1)
         zerorows = find(row->(row == 0), zerorows)
     end # while
-
-    display(hh)
-    display(qq)
-    display(iq)
-    display(nexact)
- 
     
     return (hh, qq, iq, nexact)   #qq
     

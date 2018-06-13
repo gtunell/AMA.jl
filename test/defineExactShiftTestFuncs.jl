@@ -75,7 +75,7 @@ qNewMatlab=[0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.  0
 
 iqNewMatlab=9
 
-nexactMatlab=9
+nexactNewMatlab=9
 
 (hNewJulia,qNewJulia,iqNew,nexact)=exactShift!(hhIn,qq,0,qRows,qCols,neq)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
