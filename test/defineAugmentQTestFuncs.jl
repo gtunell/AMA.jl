@@ -31,10 +31,9 @@ iqNew=3::Int64
 js=[5  6  8]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-#isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-#isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    #lgrootsJulia==lgroots
-    2==3
+sameSpan(wwJulia,ww) &&
+isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+lgrootsJulia==lgroots
 end;
 
 # test augmentQ! firmvalue3Leads2Lags example
@@ -83,7 +82,7 @@ iqNew=9::Int64
 js=[9  13  14  17  18  20]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+sameSpan(wwJulia,ww) &&
 isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
@@ -115,7 +114,7 @@ iqNew=2::Int64
 js=[5  6  8]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+sameSpan(wwJulia,ww) &&
 isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
@@ -139,7 +138,7 @@ iqNew=1::Int64
 genJuliaMatInit[js, 2, Array{Int64,2}]
 
 (wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+sameSpan(wwJulia,ww) &&
 isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
@@ -174,7 +173,7 @@ iqNew=3::Int64
 js=[6  8  9  10]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+sameSpan(wwJulia,ww) &&
 isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
@@ -220,7 +219,7 @@ iqNew=8::Int64
 js=[1  10  11  12  13  14  18]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+sameSpan(wwJulia,ww) &&
 isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
@@ -289,7 +288,7 @@ iqNew=7::Int64
 js=[13  15  16  17  25  27  28  29  37  39  40  41  49  50  51  52  53  54  55  56  57  58  59  60]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+sameSpan(wwJulia,ww) &&
 isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;

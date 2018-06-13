@@ -321,7 +321,7 @@ genJuliaMatInit["ww",ww,"Array{Float64,2}"],
 TemplateApply[StringTemplate["iqNew=``::Int64",iqNew]],
 genJuliaMatInit["js",js,"Array{Int64,2}"],
 "(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+sameSpan(wwJulia,ww) &&
 isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
