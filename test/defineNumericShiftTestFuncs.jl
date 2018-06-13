@@ -2,6 +2,7 @@ module NumericShiftTests
 
 # test numericShift 
 import AMAFUNCS.numericShift!
+import AMAFUNCS.sameSpan
 
 # test numericShift! firmvalue example
 function firmvalue()::Bool

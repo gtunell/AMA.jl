@@ -1,4 +1,3 @@
-#using AMA
 import AMA
 using Base.Test
 
@@ -53,7 +52,34 @@ include("defineBuildATestFuncs.jl")
 @test_broken BuildATests.athan()
 @test_broken BuildATests.habitmod()
 end
-#==#
+
+
+
+include("../src/eigenSys!.jl")
+include("defineEigenSysTestFuncs.jl")
+@testset "test eigenSys" begin
+@test EigenSysTests.firmvalue()
+@test_broken EigenSysTests.firmvalue3Leads2Lags()
+@test_broken EigenSysTests.example7()
+@test_broken EigenSysTests.oneEquationNoLead()
+@test_broken EigenSysTests.reliablePaperExmpl()
+@test_broken EigenSysTests.athan()
+@test_broken EigenSysTests.habitmod()
+end
+
+
+include("../src/augmentQ!.jl")
+include("defineAugmentQTestFuncs.jl")
+@testset "test augmentQ" begin
+@test AugmentQTests.firmvalue()
+@test_broken AugmentQTests.firmvalue3Leads2Lags()
+@test_broken AugmentQTests.example7()
+@test_broken AugmentQTests.oneEquationNoLead()
+@test_broken AugmentQTests.reliablePaperExmpl()
+@test_broken AugmentQTests.athan()
+@test_broken AugmentQTests.habitmod()
+end
+
 end #outer
 
 
