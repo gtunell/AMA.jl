@@ -3,7 +3,7 @@
 
 Compute the numeric shiftrights and store them in q.
 """
-function reducedForm(qq::Array{Float64,2},qRows::Int64,qCols::Int64,bCols::Int64,anEpsi::Float64) 
+function reducedForm(aa::Array{Float64,2}, uprbnd::Float64, rowsLeft::Int64) 
 
 (10,20,30)
 
