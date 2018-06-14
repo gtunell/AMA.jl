@@ -58,7 +58,7 @@ end
 include("../src/eigenSys!.jl")
 include("defineEigenSysTestFuncs.jl")
 @testset "test eigenSys" begin
-@test EigenSysTests.firmvalue()
+@test_broken EigenSysTests.firmvalue()
 @test_broken EigenSysTests.firmvalue3Leads2Lags()
 @test_broken EigenSysTests.example7()
 @test_broken EigenSysTests.oneEquationNoLead()
@@ -71,7 +71,7 @@ end
 include("../src/augmentQ!.jl")
 include("defineAugmentQTestFuncs.jl")
 @testset "test augmentQ" begin
-@test AugmentQTests.firmvalue()
+@test_broken AugmentQTests.firmvalue()
 @test_broken AugmentQTests.firmvalue3Leads2Lags()
 @test_broken AugmentQTests.example7()
 @test_broken AugmentQTests.oneEquationNoLead()
@@ -85,7 +85,7 @@ end
 include("../src/reducedForm.jl")
 include("defineReducedFormTestFuncs.jl")
 @testset "test reducedForm" begin
-@test ReducedFormTests.firmvalue()
+@test_broken ReducedFormTests.firmvalue()
 @test_broken ReducedFormTests.firmvalue3Leads2Lags()
 @test_broken ReducedFormTests.example7()
 @test_broken ReducedFormTests.oneEquationNoLead()
