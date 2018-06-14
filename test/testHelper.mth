@@ -401,10 +401,12 @@ SetOptions["stdout", System`PageWidth -> oldPW];
 *)
 
 
-genAMAalgTestMatrices[aDir_String,aModel_String,params_String]:=
+genAMAalgTestMatrices[aDir_String,aModel_String,params_String,
+opts:OptionsPattern[]]:=
 Module[{oldPW=System`PageWidth/.Options["stdout"],
-modDims=parseModel[aDir,aModel],
 AMAMatrices=aModel<>"_AMA_matrices"},
+{modDims,allH}=
+getHDims[aDir,aModel,params,opts];
 modDimsString=makeModDimsString[modDims];
 MEvaluate[params];
 MEvaluate[AMAMatrices];
@@ -460,6 +462,23 @@ doMatlabFunc[execTemplateStr_String,theArgs_?VectorQ]:=
 MEvaluate[TemplateApply[StringTemplate[execTemplateStr,theArgs]]]
 
 
+sumHMats[hmat_?MatrixQ]:=
+With[{neq=Length[hmat]},With[{numh=Length[hmat[[1]]]/neq},
+With[{submats=Map[hmat[[All,Range[neq]+(#1-1)*neq]]&,Range[numh]]},
+Plus @@ submats]]]
+
+Options[getHDims]={"doMult"->True}
+getHDims[aDir_String,aModel_String,params_String,OptionsPattern[]]:=
+Module[{oldPW=System`PageWidth/.Options["stdout"],
+modDims=parseModel[aDir,aModel],
+AMAMatrices=aModel<>"_AMA_matrices"},
+MEvaluate[params];
+MEvaluate[AMAMatrices];
+{gg,hh}=myMGet[{"cofg","cofh"}];
+hhLeft=hh[[All,Range[neq*(nlag+1)]]];
+gPart=gg+hhLeft;
+allH=ArrayFlatten[{{gPart,hh[[All,Range[neq*(nlag+1)+1,neq*(nlag+nlead+1)]]]}}];
+{modDims,If[OptionValue["doMult"],sumHMats[allH].allH,allH]}]
 
 adjustDepth[xx:(_?VectorQ|_?MatrixQ)]:=If[Depth[xx]==2,{xx},xx];
 adjustDepth[xx_]:=xx
@@ -500,11 +519,11 @@ genAllTests[genBuildATestMatrices]
 genAllTests[genEigenSysTestMatrices]
 genAllTests[genReducedFormTestMatrices]
 genAllTests[genNumericShiftTestMatrices]
-
+genAllTests[genAMAalgTestMatrices]
 *)
 
 
-genAllTests[genAMAalgTestMatrices]
+
 
 
 
