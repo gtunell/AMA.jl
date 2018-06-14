@@ -30,7 +30,7 @@ end
 include("../src/numericShift!.jl")
 include("defineNumericShiftTestFuncs.jl")
 @testset "test numericShift" begin
-@test_broken NumericShiftTests.firmvalue()
+@test NumericShiftTests.firmvalue()
 @test_broken NumericShiftTests.firmvalue3Leads2Lags()
 @test_broken NumericShiftTests.example7()
 @test_broken NumericShiftTests.oneEquationNoLead()
