@@ -36,11 +36,10 @@ iqNewMatlab=3
 nnumericMatlab=0
 
 (hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
-#isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-#sameSpan(qNewJulia,qNewMatlab)&&
-#iqNew==iqNewMatlab&&
-#nnumeric==nnumericNewMatlab
-2==3
+isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+sameSpan(qNewJulia,qNewMatlab)&&
+iqNew==iqNewMatlab&&
+nnumeric==nnumericNewMatlab
 end;
 
 # test numericShift! firmvalue3Leads2Lags example

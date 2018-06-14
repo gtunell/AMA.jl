@@ -1,5 +1,5 @@
 """
-    reducedForm(h, qcols, neq)
+    reducedForm(aa, qcols, neq)
 
 Compute the numeric shiftrights and store them in q.
 """

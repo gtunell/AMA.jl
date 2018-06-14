@@ -1,9 +1,9 @@
 module AMAFUNCS
 
 """
-    numericShift(h, q, iq, qrows, qcols, neq)
+    numericShift(hh, qq, iq, qrows, qcols, neq)
 
-Compute the numeric shiftrights and store them in q.
+Compute the numeric shiftrights and store them in qq.
 """
 function numericShift(h::Array{Float64,2}, q::Array{Float64,2}, iq::Int64, qrows::Int64, qcols::Int64, neq::Int64) 
 
