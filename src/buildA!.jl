@@ -1,9 +1,9 @@
 """
-    buildA(h, qcols, neq)
+    buildA(hh, qcols, neq)
 
 Compute the numeric shiftrights and store them in q.
 """
-function buildA!(h::Array{Float64,2}, qcols::Int64, neq::Int64) 
+function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64) 
 
 (10,20,30)
 
