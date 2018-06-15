@@ -10,8 +10,9 @@ function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64)
     left  = 1:qcols
     
     right = (qcols + 1):(qcols + neq)
-    
-    hh[:, left] = /(-hh[:, right], hh[:, left])
+
+    hhTemp = hh
+    hhTemp[:, left] = \(-hhTemp[:, right], hhTemp[:, left])
 
     #  Build the big transition matrix.
 
@@ -23,7 +24,7 @@ function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64)
         aa[eyerows, eyecols] = eye(qcols - neq)
     end
     hrows      = (qcols - neq + 1):qcols
-    aa[hrows, :] = hs[:, left]
+    aa[hrows, :] = hhTemp[:, left]
 
     #  Delete inessential lags and build index array js.  js indexes the
     #  columns in the big transition matrix that correspond to the
@@ -33,11 +34,12 @@ function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64)
     js       = 1:qcols
     zerocols = sum(abs.(aa), 2)
     zerocols = find(col->(col == 0), zerocols)
+    
     while length(zerocols) != 0
         aa[:, zerocols] = []
         aa[zerocols, :] = []
         js(zerocols)  = []
-        zerocols = sum(abs(a), 2)  
+        zerocols = sum(abs.(aa), 2)  
         zerocols = find(col->(col == 0), zerocols)
 
     end
