@@ -51,7 +51,7 @@ end
 include("../src/buildA!.jl")
 include("defineBuildATestFuncs.jl")
 @testset "test buildA" begin
-@test_broken BuildATests.firmvalue()
+@test BuildATests.firmvalue()
 @test_broken BuildATests.firmvalue3Leads2Lags()
 @test_broken BuildATests.example7()
 @test_broken BuildATests.oneEquationNoLead()
