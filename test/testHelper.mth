@@ -462,10 +462,13 @@ doMatlabFunc[execTemplateStr_String,theArgs_?VectorQ]:=
 MEvaluate[TemplateApply[StringTemplate[execTemplateStr,theArgs]]]
 
 
-sumHMats[hmat_?MatrixQ]:=
+tweakHMats[hmat_?MatrixQ]:=
 With[{neq=Length[hmat]},With[{numh=Length[hmat[[1]]]/neq},
-With[{submats=Map[hmat[[All,Range[neq]+(#1-1)*neq]]&,Range[numh]]},
-Plus @@ submats]]]
+With[{submats=Map[hmat[[All,Range[neq]+(#1-1)*neq]]&,Range[numh]],
+colOnes=ConstantArray[1,neq],zMat=ConstantArray[0,{neq,neq}]},
+With[{nzRows=Flatten[Position[(Norm[#]==0)&/@submats[[-1]],False]]},
+Print["nzRows=",{nzRows,colOnes,zMat,zMat[[All,nzRows]]=colOnes}];
+Plus @@ submats]]]]
 
 Options[getHDims]={"doMult"->True}
 getHDims[aDir_String,aModel_String,params_String,OptionsPattern[]]:=
@@ -478,7 +481,7 @@ MEvaluate[AMAMatrices];
 hhLeft=hh[[All,Range[neq*(nlag+1)]]];
 gPart=gg+hhLeft;
 allH=ArrayFlatten[{{gPart,hh[[All,Range[neq*(nlag+1)+1,neq*(nlag+nlead+1)]]]}}];
-{modDims,If[OptionValue["doMult"],sumHMats[allH].allH,allH]}]
+{modDims,If[OptionValue["doMult"],tweakHMats[allH].allH,allH]}]
 
 adjustDepth[xx:(_?VectorQ|_?MatrixQ)]:=If[Depth[xx]==2,{xx},xx];
 adjustDepth[xx_]:=xx
