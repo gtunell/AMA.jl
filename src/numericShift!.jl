@@ -17,7 +17,7 @@ function numericShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qR
 
     # filter R only keeping rows that are zero
     zerorows = abs.(diag(F[:R]))
-    zerorows = find(x->(x::Float64 <= condn), zerorows)
+    zerorows = find(x->(float(x) <= condn), zerorows)
 
     while (length(zerorows) != 0) && (iq <= qRows)
         # update hh with matrix multiplication of Q and hh
@@ -39,7 +39,7 @@ function numericShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qR
         # redo QR factorization and filter R as before
         F = qrfact(hh[:, right])
         zerorows = abs.(diag(F[:R]))
-        zerorows = find(x->(x::Float64 <= condn), zerorows)
+        zerorows = find(x->(float(x) <= condn), zerorows)
 
     end # while
   

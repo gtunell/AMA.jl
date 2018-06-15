@@ -27,10 +27,9 @@ ia=3::Int64
 js=[5.  6.  8.]::Array{Float64,2}
 
 (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-#isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-#isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-#isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
-2==3
+isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
 # test buildA! firmvalue3Leads2Lags example
