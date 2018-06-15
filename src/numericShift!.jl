@@ -10,18 +10,13 @@ function numericShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qR
     right = qCols + 1:qCols + neq
 
     F = qrfact(hh[:, right])
-
-    display(F[:Q])
-
     zerorows = abs.(diag(F[:R]))
-
-    
     zerorows = find(x->(x::Float64 <= condn), zerorows)
 
-    while length(zerorows) > 0 && iq <= qRows
+    while (length(zerorows) != 0) && (iq <= qRows)
         hh = *(F[:Q]', hh)
 
-        nz = length(zerorows)
+        nz = size(zerorows, 1)
 
         qq[(iq + 1):(iq + nz), :] = hh[zerorows, left]
 
@@ -30,6 +25,7 @@ function numericShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qR
         iq = iq + nz
         nnumeric = nnumeric + nz
 
+        F = qrfact(hh[:, right])
         zerorows = abs.(diag(F[:R]))
         zerorows = find(x->(x::Float64 <= condn), zerorows)
 
