@@ -30,13 +30,20 @@ end
 include("../src/numericShift!.jl")
 include("defineNumericShiftTestFuncs.jl")
 @testset "test numericShift" begin
-@test NumericShiftTests.firmvalue()
-@test NumericShiftTests.firmvalue3Leads2Lags()
-@test NumericShiftTests.example7()
-@test NumericShiftTests.oneEquationNoLead()
-@test NumericShiftTests.reliablePaperExmpl()
-@test NumericShiftTests.athan()
-@test NumericShiftTests.habitmod()
+@test NumericShiftTests.firmvalueTrue()
+@test_broken NumericShiftTests.firmvalue3Leads2LagsTrue()
+@test_broken NumericShiftTests.example7True()
+@test_broken NumericShiftTests.oneEquationNoLeadTrue()
+@test_broken NumericShiftTests.reliablePaperExmplTrue()
+@test_broken NumericShiftTests.athanTrue()
+@test_broken NumericShiftTests.habitmodTrue()
+@test NumericShiftTests.firmvalueFalse()
+@test_broken NumericShiftTests.firmvalue3Leads2LagsFalse()
+@test_broken NumericShiftTests.example7False()
+@test_broken NumericShiftTests.oneEquationNoLeadFalse()
+@test_broken NumericShiftTests.reliablePaperExmplFalse()
+@test_broken NumericShiftTests.athanFalse()
+@test_broken NumericShiftTests.habitmodFalse()
 end
 
 
