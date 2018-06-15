@@ -158,7 +158,7 @@ TemplateApply[StringTemplate["nnumericMatlab=``"],nnumericNewMatlab],
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 "}]];
 SetOptions["stdout", System`PageWidth -> oldPW];

@@ -1,10 +1,8 @@
 module NumericShiftTests
 
-# test numericShift 
 import AMAFUNCS.numericShift!
 import AMAFUNCS.sameSpan
 
-#tweaked= False
 # test numericShift! firmvalue example
 function firmvalueFalse()::Bool
 
@@ -40,7 +38,7 @@ nnumericMatlab=3
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= False
@@ -87,7 +85,7 @@ nnumericMatlab=9
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= False
@@ -126,7 +124,7 @@ nnumericMatlab=2
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= False
@@ -156,7 +154,7 @@ nnumericMatlab=1
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= False
@@ -198,7 +196,7 @@ nnumericMatlab=3
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= False
@@ -248,12 +246,11 @@ iqNewMatlab=8
 
 nnumericMatlab=8
 
-
 (hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= False
@@ -316,8 +313,9 @@ nnumericMatlab=7
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
+
 
 #tweaked= True
 # test numericShift! firmvalue example
@@ -355,7 +353,7 @@ nnumericMatlab=3
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= True
@@ -402,7 +400,7 @@ nnumericMatlab=9
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= True
@@ -441,7 +439,7 @@ nnumericMatlab=2
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= True
@@ -471,7 +469,7 @@ nnumericMatlab=1
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= True
@@ -513,7 +511,7 @@ nnumericMatlab=3
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= True
@@ -567,7 +565,7 @@ nnumericMatlab=8
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
 
 #tweaked= True
@@ -630,7 +628,8 @@ nnumericMatlab=7
 isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
-nnumeric==nnumericNewMatlab
+nnumeric==nnumericMatlab
 end;
+
 
 end
