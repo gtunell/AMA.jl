@@ -92,7 +92,7 @@ end
 include("../src/reducedForm.jl")
 include("defineReducedFormTestFuncs.jl")
 @testset "test reducedForm" begin
-@test_broken ReducedFormTests.firmvalue()
+@test ReducedFormTests.firmvalue()
 @test_broken ReducedFormTests.firmvalue3Leads2Lags()
 @test_broken ReducedFormTests.example7()
 @test_broken ReducedFormTests.oneEquationNoLead()

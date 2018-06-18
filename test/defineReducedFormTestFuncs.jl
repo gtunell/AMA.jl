@@ -33,9 +33,8 @@ bCols=4::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,anEpsi)
-#isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    #nonsingJulia==nonsing
-    2==3
+isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+nonsingJulia==nonsing
 end;
 
 # test reducedForm firmvalue3Leads2Lags example
