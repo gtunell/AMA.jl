@@ -32,10 +32,9 @@ ia=3::Int64
 js=[5  6  8]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-#isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-#isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-#lgrootsJulia==lgroots
-2==3
+isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+lgrootsJulia==lgroots
 end;
 
 # test eigenSys! firmvalue3Leads2Lags example
@@ -68,7 +67,7 @@ rts=[-0.55 + 0.952628 im;
 1.1 + 0. im;
 1. + 0. im;
 0.632456 + 0. im;
--0.632456 + 0. im]::Array{Float64,1}
+-0.632456 + 0. im]::Array{Complex{Float64},2}
 
 ia=6::Int64
 
@@ -101,7 +100,7 @@ ww=[-0.0975567  -0.665933  0.136197;
 
 rts=[1.31855 + 0.49536 im;
 1.31855 - 0.49536 im;
-0.336028 + 0. im]::Array{Float64,1}
+0.336028 + 0. im]::Array{Complex{Float64},2}
 
 ia=3::Int64
 
@@ -164,7 +163,7 @@ ww=[-0.548572  -0.548572  -0.604781  1.;
 rts=[1.06383 + 1.39432 im;
 1.06383 - 1.39432 im;
 0.361236 + 0. im;
-0. + 0. im]::Array{Float64,1}
+0. + 0. im]::Array{Complex{Float64},2}
 
 ia=4::Int64
 
@@ -209,7 +208,7 @@ rts=[1.39878 + 0. im;
 0.536108 + 0.222056 im;
 0.536108 - 0.222056 im;
 0.000000000000000166533 + 0. im;
-0. + 0. im]::Array{Float64,1}
+0. + 0. im]::Array{Complex{Float64},2}
 
 ia=7::Int64
 
@@ -305,7 +304,7 @@ rts=[679.579 + 0. im;
 -0.000096719 + 0.0000998847 im;
 -0.000096719 - 0.0000998847 im;
 0.000096719 + 0.0000934444 im;
-0.000096719 - 0.0000934444 im]::Array{Float64,1}
+0.000096719 - 0.0000934444 im]::Array{Complex{Float64},2}
 
 ia=24::Int64
 

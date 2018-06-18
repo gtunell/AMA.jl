@@ -65,13 +65,13 @@ end
 include("../src/eigenSys!.jl")
 include("defineEigenSysTestFuncs.jl")
 @testset "test eigenSys" begin
-@test_broken EigenSysTests.firmvalue()
-@test_broken EigenSysTests.firmvalue3Leads2Lags()
-@test_broken EigenSysTests.example7()
-@test_broken EigenSysTests.oneEquationNoLead()
-@test_broken EigenSysTests.reliablePaperExmpl()
-@test_broken EigenSysTests.athan()
-@test_broken EigenSysTests.habitmod()
+@test EigenSysTests.firmvalue()
+@test EigenSysTests.firmvalue3Leads2Lags()
+@test EigenSysTests.example7()
+@test EigenSysTests.oneEquationNoLead()
+@test EigenSysTests.reliablePaperExmpl()
+@test EigenSysTests.athan()
+@test EigenSysTests.habitmod()
 end
 
 

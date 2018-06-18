@@ -39,13 +39,15 @@ function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64)
     zerocols = sum(abs.(aa), 1)
     zerocols = find(col->(col == 0), zerocols)
 
+
     while length(zerocols) != 0
         # aa = filter!(x->(x !in zerocols), aa)
         
         aa = deleteCols(aa, zerocols)        
         aa = deleteRows(aa, zerocols)
         js = deleteCols(js, zerocols)
-        zerocols = sum(abs.(aa), 2)  
+        
+        zerocols = sum(abs.(aa), 1)  
         zerocols = find(col->(col == 0), zerocols)
 
     end
