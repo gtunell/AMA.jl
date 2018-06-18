@@ -5,6 +5,8 @@ Compute reduced-form coefficient matrix, b.
 """
 function reducedForm(qq::Array{Float64,2}, qrows::Int64, qcols::Int64, bcols::Int64, condn::Float64) 
 
+    bb = zeros(qrows, bcols)
+    
     left = 1 : (qcols - qrows)
     right = (qcols - qrows + 1) : qcols
     qtemp = qq
@@ -18,10 +20,9 @@ function reducedForm(qq::Array{Float64,2}, qrows::Int64, qcols::Int64, bcols::In
         themax = maximum(abs.(qtemp[:, right]), 2)
         oneover = diagm(1 ./ themax[:, 1])
         
-        
-        nonsing = ( 1 ./ cond(oneover * qtemp[:, right]) ) > condn
+        nonsing = ( 1 / cond( oneover*qtemp[:, right], 1) ) > condn
         if nonsing
-            qtemp[:, left] = -(oneover * qtemp[:, right]) \ (oneover * (qtemp[:, left]))  
+            qtemp[:, left] = -(oneover*qtemp[:, right]) \ (oneover*(qtemp[:, left]))  
             bb = qtemp[1:neq, 1:bcols]
         end
     end

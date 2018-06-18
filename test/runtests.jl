@@ -93,12 +93,12 @@ include("../src/reducedForm.jl")
 include("defineReducedFormTestFuncs.jl")
 @testset "test reducedForm" begin
 @test ReducedFormTests.firmvalue()
-@test_broken ReducedFormTests.firmvalue3Leads2Lags()
-@test_broken ReducedFormTests.example7()
-@test_broken ReducedFormTests.oneEquationNoLead()
-@test_broken ReducedFormTests.reliablePaperExmpl()
-@test_broken ReducedFormTests.athan()
-@test_broken ReducedFormTests.habitmod()
+@test ReducedFormTests.firmvalue3Leads2Lags()
+@test ReducedFormTests.example7()
+@test ReducedFormTests.oneEquationNoLead()
+@test ReducedFormTests.reliablePaperExmpl()
+@test ReducedFormTests.athan()
+@test ReducedFormTests.habitmod()
 end
 
     
