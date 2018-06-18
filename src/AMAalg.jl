@@ -32,7 +32,7 @@ eigenvectors associated with the big roots.
 function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi::Float64,upper::Float64) 
 
     if(nlag < 1 || nlead < 1) 
-        error('AMA_eig: model must have at least one lag and one lead.')
+        error("AMA_eig: model must have at least one lag and one lead.")
     end
 
     # Initialization.
@@ -69,7 +69,7 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
 
     if (ia != 0)
         if any(any(isnan(a))) || any(any(isinf(a))) 
-            display('A is NAN or INF')
+            display("A is NAN or INF")
             AMAcode = 63 
             return 
         end 
@@ -89,7 +89,7 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
     # If the right-hand block of q is invertible, compute the reduced form.
 
     if(AMAcode==0)
-        [nonsing,b] = reducedForm(q,qrows,qcols,bcols,neq,condn)
+        (nonsing,b) = reducedForm(q,qrows,qcols,bcols,neq,condn)
         if ( nonsing && AMAcode==0)
             AMAcode =  1
         elseif (!nonsing && AMAcode==0)
