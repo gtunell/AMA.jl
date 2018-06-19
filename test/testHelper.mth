@@ -5,11 +5,16 @@ PrependTo[$Path,"../../mathAMA/SymbolicAMA/"]
 genJuliaMatInit[aMat_?MatrixQ]:=
 "["<>StringRiffle[genRow/@aMat,";\n"]<>"]"
 
-genJuliaMatInit[varName_String,aMat_?MatrixQ]:=
+genJuliaMatInit[aNum_?NumberQ]:=
+"["<>ToString[DecimalForm[aNum]]<>"]"
+
+
+genJuliaMatInit[varName_String,aMat:(_?MatrixQ|_?NumberQ)]:=
 varName<>"="<>genJuliaMatInit[aMat]
 
-genJuliaMatInit[varName_String,aMat_?MatrixQ,dataType_String]:=
+genJuliaMatInit[varName_String,aMat:(_?MatrixQ|_?NumberQ),dataType_String]:=
 genJuliaMatInit[varName,aMat]<>"::"<>dataType
+
 
 
 genRow[aVec_?VectorQ]:=
@@ -188,7 +193,7 @@ MEvaluate[TemplateApply[StringTemplate[
 "[aa,ia,js] = SPBuild_a(hForA,``,``)",{qCols,neq}]]];
 aa=myMGet["aa"];
 ia=Round[myMGet["ia"]];
-js=myMGet["js"];
+js=Round[myMGet["js"]];
 SetOptions["stdout", PageWidth -> Infinity];
 Print[TableForm[
 {TemplateApply[
@@ -198,7 +203,7 @@ TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
 genJuliaMatInit["hForA",hForA,"Array{Float64,2}"],
 genJuliaMatInit["aa",aa,"Array{Float64,2}"],
 TemplateApply[StringTemplate["ia=``::Int64",ia]],
-genJuliaMatInit["js",js,"Array{Float64,2}"],
+genJuliaMatInit["js",js,"Array{Int64,2}"],
 "(aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
 isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
@@ -520,6 +525,8 @@ genAllTests[genAMAalgTestMatrices,"doMult"->False]
 *)
 
 
+
+genAllTests[genBuildATestMatrices]
 
 
 
