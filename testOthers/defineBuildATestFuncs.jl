@@ -23,10 +23,10 @@ function firmvalueFalse()::Bool
     js=[5  6  8]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
+    isapprox(aaJulia,aa,rtol=0.1e-5::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
     
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
 end;
 
 #tweaked= False
@@ -54,9 +54,10 @@ function firmvalue3Leads2LagsFalse()::Bool
     js=[9  13  14  17  18  20]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-5::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
+
 end;
 
 #tweaked= False
@@ -84,9 +85,9 @@ function example7False()::Bool
     js=[5  6  8]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-5::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
 end;
 
 #tweaked= False
@@ -109,9 +110,10 @@ function oneEquationNoLeadFalse()::Bool
     js=hcat([2])::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-5::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
+
 end;
 
 #tweaked= False
@@ -141,9 +143,10 @@ function reliablePaperExmplFalse()::Bool
     js=[6  8  9  10]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-4::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
+
 end;
 
 #tweaked= False
@@ -180,9 +183,10 @@ function athanFalse()::Bool
     js=[1  10  11  12  13  14  18]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-5::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
+
 end;
 
 #tweaked= False
@@ -239,10 +243,11 @@ function habitmodFalse()::Bool
     js=[13  15  16  17  25  27  28  29  37  39  40  41  49  50  51  52  53  54  55  56  57  58  59  60]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-4::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
 end;
+
 #tweaked= True
 # test buildA! firmvalue example
 function firmvalueTrue()::Bool
@@ -270,9 +275,9 @@ function firmvalueTrue()::Bool
     js=[2  4  5  6  8]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-5::Float64) &&
+    isapprox(iaJulia,ia,rtol=0.1e-5::Float64)&&
+    isapprox(jsJulia,js,rtol=0.1e-5::Float64)
 end;
 
 #tweaked= True
@@ -309,9 +314,10 @@ function firmvalue3Leads2LagsTrue()::Bool
     js=[2  6  8  9  10  12  13  14  16  17  18  20]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-5::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
+
 end;
 
 #tweaked= True
@@ -341,9 +347,10 @@ function example7True()::Bool
     js=[4  5  6  7  8]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-4::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
+
 end;
 
 #tweaked= True
@@ -366,9 +373,10 @@ function oneEquationNoLeadTrue()::Bool
     js=hcat([2])::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-5::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
+
 end;
 
 #tweaked= True
@@ -400,9 +408,9 @@ function reliablePaperExmplTrue()::Bool
     js=[4  6  7  8  9  10]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-4::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
 end;
 
 #tweaked= True
@@ -444,9 +452,9 @@ function athanTrue()::Bool
     js=[1  2  3  4  9  10  11  12  13  14  16  18]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-4::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
 end;
 
 #tweaked= True
@@ -510,9 +518,9 @@ function habitmodTrue()::Bool
     js=[1  3  4  5  13  15  16  17  25  27  28  29  37  38  39  40  41  43  48  49  50  51  52  53  54  55  56  57  58  59  60]::Array{Int64,2}
 
     (aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-    isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-    isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+    isapprox(aaJulia,aa,rtol=0.1e-4::Float64) &&
+    isapprox(iaJulia,ia)&&
+    isapprox(jsJulia,js)
 end;
 
 
