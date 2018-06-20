@@ -51,13 +51,21 @@ end
 include("../src/buildA!.jl")
 include("defineBuildATestFuncs.jl")
 @testset "test buildA" begin
-@test BuildATests.firmvalue()
-@test BuildATests.firmvalue3Leads2Lags()
-@test BuildATests.example7()
-@test BuildATests.oneEquationNoLead()
-@test BuildATests.reliablePaperExmpl()
-@test BuildATests.athan()
-@test BuildATests.habitmod()
+@test BuildATests.firmvalueFalse()
+@test BuildATests.firmvalue3Leads2LagsFalse()
+@test BuildATests.example7False()
+@test BuildATests.oneEquationNoLeadFalse()
+@test BuildATests.reliablePaperExmplFalse()
+@test BuildATests.athanFalse()
+@test BuildATests.habitmodFalse()
+        
+@test BuildATests.firmvalueTrue()
+@test BuildATests.firmvalue3Leads2LagsTrue()
+@test BuildATests.example7True()
+@test BuildATests.oneEquationNoLeadTrue()
+@test BuildATests.reliablePaperExmplTrue()
+@test BuildATests.athanTrue()
+@test BuildATests.habitmodTrue()
 end
 
 
