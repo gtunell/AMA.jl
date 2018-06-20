@@ -14,6 +14,7 @@ function eigenSys!(aa::Array{Float64,2}, upperbound::Float64, rowsLeft::Int64)
     rts        = rts[indices]
     ww         = ww[:, indices]
 
+
     #  Given a complex conjugate pair of vectors W = [w1,w2], there is a
     #  nonsingular matrix D such that W*D = real(W) + imag(W).  That is to
     #  say, W and real(W)+imag(W) span the same subspace, which is all
@@ -21,6 +22,7 @@ function eigenSys!(aa::Array{Float64,2}, upperbound::Float64, rowsLeft::Int64)
 
     ww = real(ww) + imag(ww)
     lgroots = find(x->(x > upperbound), sum(abs.(rts)))
+
     return (ww, rts, lgroots)
 
 end # eigenSys!

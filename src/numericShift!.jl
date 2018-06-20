@@ -10,11 +10,12 @@ function numericShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qR
 
     # functions to seperate hh
     left = 1:qCols
-    right = qCols + 1:qCols + neq
+    right = (qCols + 1):(qCols + neq)
 
-    # preform QR factorization on right side of hh 
+    # preform QR factorization on right side of hh
     F = qrfact(hh[:, right])
 
+    
     # filter R only keeping rows that are zero
     zerorows = abs.(diag(F[:R]))
     zerorows = find(x->(float(x) <= condn), zerorows)
@@ -42,7 +43,7 @@ function numericShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qR
         zerorows = find(x->(float(x) <= condn), zerorows)
 
     end # while
-  
+    
     return(hh, qq, iq, nnumeric)
 
 end # numericShift

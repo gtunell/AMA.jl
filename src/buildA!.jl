@@ -11,7 +11,7 @@ function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64)
     
     right = (qcols + 1):(qcols + neq)
 
-    hhTemp = deepcopy(hh)
+    hhTemp = hh
     hhTemp[:, left] = \(-hhTemp[:, right], hhTemp[:, left])
 
     #  Build the big transition matrix.
@@ -31,7 +31,7 @@ function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64)
     #  essential lags in the model.  They are the columns of q that will
     #  get the unstable left eigenvectors. 
 
-    js       = Array{Float64}(1,qcols)
+    js       = Array{Int64}(1,qcols)
     for ii in 1 : qcols
         js[1, ii] = ii
     end

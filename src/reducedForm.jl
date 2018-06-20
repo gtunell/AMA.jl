@@ -3,7 +3,7 @@
 
 Compute reduced-form coefficient matrix, b.
 """
-function reducedForm(qq::Array{Float64,2}, qrows::Int64, qcols::Int64, bcols::Int64, condn::Float64) 
+function reducedForm(qq::Array{Float64,2}, qrows::Int64, qcols::Int64, bcols::Int64, neq::Int64, condn::Float64) 
 
     bb = zeros(qrows, bcols)
     

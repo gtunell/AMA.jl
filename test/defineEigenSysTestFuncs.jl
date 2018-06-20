@@ -32,6 +32,12 @@ ia=3::Int64
 js=[5  6  8]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
+
+
+
+
+
+    
 isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
@@ -74,6 +80,16 @@ ia=6::Int64
 js=[9  13  14  17  18  20]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
+
+    open("./outputs/eigenOutput.txt", "w") do file
+        writedlm(file, wwJulia)
+        write(file, "\n")
+        writedlm(file, rtsJulia)
+        write(file, "\n")
+        write(file, "$lgrootsJulia")
+        write(file, "\n")
+    end
+    
 isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
 isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
