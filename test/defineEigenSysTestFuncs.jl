@@ -35,8 +35,8 @@ ia=3::Int64
 js=[5 6 8]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(wwJulia,ww,rtol=0.1e-5::Float64,atol=0.0::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -80,8 +80,8 @@ ia=6::Int64
 js=[9 13 14 17 18 20]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(wwJulia,ww,rtol=0.1e-5::Float64,atol=0.0::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -116,8 +116,8 @@ ia=3::Int64
 js=[5 6 8]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(wwJulia,ww,rtol=0.1e-5::Float64,atol=0.0::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -146,8 +146,8 @@ ia=1::Int64
 js=hcat([2])::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(wwJulia,ww,rtol=0.1e-5::Float64,atol=0.0::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -185,8 +185,8 @@ ia=4::Int64
 js=[6 8 9 10]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(wwJulia,ww,rtol=0.1e-5::Float64,atol=0.0::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -233,8 +233,8 @@ ia=7::Int64
 js=[1 10 11 12 13 14 18]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(wwJulia,ww,rtol=0.1e-5::Float64,atol=0.0::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -332,8 +332,8 @@ ia=24::Int64
 js=[13 15 16 17 25 27 28 29 37 39 40 41 49 50 51 52 53 54 55 56 57 58 59 60]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-isapprox(wwJulia,ww,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(wwJulia,ww,rtol=0.1e-5::Float64,atol=0.0::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
 lgrootsJulia==lgroots
 end;
 
