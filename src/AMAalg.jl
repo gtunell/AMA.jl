@@ -41,22 +41,22 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
     lgroots  = 0
     iq       = 0
     AMAcode    = 0
-    b=0
+    bb=0
     qrows = neq * nlead
     qcols = neq * (nlag + nlead)
     bcols = neq * nlag
-    q        = zeros(qrows, qcols)
+    qq        = zeros(qrows, qcols)
     rts      = zeros(qcols, 1)
 
     # Compute the auxiliary initial conditions and store them in q.
 
-    (h,q,iq,nexact) = exactShift!(h,q,iq,qrows,qcols,neq)
+    (hh,qq,iq,nexact) = exactShift!(hh,qq,iq,qrows,qcols,neq)
     if (iq > qrows) 
         AMAcode = 61
         return
     end
 
-    (h,q,iq,nnumeric) = numericShift!(h,q,iq,qrows,qcols,neq,condn)
+    (hh,qq,iq,nnumeric) = numericShift!(hh,qq,iq,qrows,qcols,neq,condn)
     if (iq > qrows) 
         AMAcode = 62
         return
@@ -65,18 +65,18 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
     #  Build the companion matrix.  Compute the stability conditions, and
     #  combine them with the auxiliary initial conditions in q.  
 
-    (a,ia,js) = buildA!(h,qcols,neq)
+    (aa,ia,js) = buildA!(hh,qcols,neq)
 
     if (ia != 0)
-        if any(any(isnan(a))) || any(any(isinf(a))) 
+        if any(any(isnan(aa))) || any(any(isinf(aa))) 
             display("A is NAN or INF")
             AMAcode = 63 
             return 
         end 
-        (w,rts,lgroots)=eigenSys!(a,uprbnd,min(length(js),qrows-iq+1))
+        (ww,rts,lgroots)=eigenSys!(aa,uprbnd,min(length(js),qrows-iq+1))
 
 
-        q = SPCopy_w(q,w,js,iq,qrows)
+        qq = SPCopy_w(qq,ww,js,iq,qrows)
     end
 
     test = nexact + nnumeric + lgroots
@@ -89,7 +89,7 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
     # If the right-hand block of q is invertible, compute the reduced form.
 
     if(AMAcode==0)
-        (nonsing,b) = reducedForm(q,qrows,qcols,bcols,neq,condn)
+        (nonsing,bb) = reducedForm(qq,qrows,qcols,bcols,neq,condn)
         if ( nonsing && AMAcode==0)
             AMAcode =  1
         elseif (!nonsing && AMAcode==0)

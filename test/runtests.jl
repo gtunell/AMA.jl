@@ -122,7 +122,7 @@ end
 include("../src/AMAalg.jl")
 include("defineAMAalgTestFuncs.jl")
 @testset "test AMAalg" begin
-@test_broken AMAalgTests.firmvalue()
+@test AMAalgTests.firmvalue()
 @test_broken AMAalgTests.firmvalue3Leads2Lags()
 @test_broken AMAalgTests.example7()
 @test_broken AMAalgTests.oneEquationNoLead()

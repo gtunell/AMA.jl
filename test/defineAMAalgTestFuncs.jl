@@ -2,7 +2,7 @@ module AMAalgTests
 
 # test AMAalg
 
-import AMAFUNCS.reducedForm
+import AMAFUNCS.AMAalg
 
 # test AMAalg firmvalue example
 function firmvalue()::Bool
