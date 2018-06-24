@@ -195,7 +195,7 @@ MEvaluate[TemplateApply[StringTemplate[
 "[aa,ia,js] = SPBuild_a(hForADense,``,``)",{qCols,neq}]]];
 uFileName=ToString[Unique["fc"]]<>ToString[DecimalForm[Round[2000*AbsoluteTime[]]]]<>".mat";
 MEvaluate[TemplateApply[StringTemplate[
-"save('``','hForADense','aa')",uFileName]]];
+"save('../../matDir/``','hForADense','aa')",uFileName]]];
 ia=Round[myMGet["ia"]];
 js=Round[myMGet["js"]];
 SetOptions["stdout", PageWidth -> Infinity];
@@ -207,7 +207,7 @@ TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
 TemplateApply[StringTemplate["ia=``::Int64",ia]],
 genJuliaMatInit["js",js,"Array{Int64,2}"],
 TemplateApply[StringTemplate[
-"file = matopen(pwd()*\"/\"*\"``\")
+"file = matopen(\"./matDir/\"*\"``\")
 hForADense=read(file,\"hForADense\")
 aa=read(file,\"aa\")
 close(file)",
