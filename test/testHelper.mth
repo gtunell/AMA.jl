@@ -189,10 +189,13 @@ MEvaluate[TemplateApply[StringTemplate[
 MEvaluate[TemplateApply[StringTemplate[
 "[hForA,qNew,iqNew,nnumeric] = SPNumeric_shift(hh,qq,iq,``,``,``,1.0e-8)",
 {qRows,qCols,neq}]]];
+MEvaluate["hForADense=full(hForA)"];
 hForA=Normal[myMGet["hForA"]];
 MEvaluate[TemplateApply[StringTemplate[
-"[aa,ia,js] = SPBuild_a(hForA,``,``)",{qCols,neq}]]];
-aa=myMGet["aa"];
+"[aa,ia,js] = SPBuild_a(hForADense,``,``)",{qCols,neq}]]];
+uFileName=ToString[Unique["fc"]]<>ToString[DecimalForm[Round[2000*AbsoluteTime[]]]]<>".mat";
+MEvaluate[TemplateApply[StringTemplate[
+"save('``','hForADense','aa')",uFileName]]];
 ia=Round[myMGet["ia"]];
 js=Round[myMGet["js"]];
 SetOptions["stdout", PageWidth -> Infinity];
@@ -201,20 +204,31 @@ Print[TableForm[
 StringTemplate["# test buildA! `1` example\nfunction `1``2`()::Bool\n"],{aModel,ToString[OptionValue["doMult"]]}],
 modDimsString,
 TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
-genJuliaMatInit["hForA",hForA,"Array{Float64,2}"],
-genJuliaMatInit["aa",aa,"Array{Float64,2}"],
 TemplateApply[StringTemplate["ia=``::Int64",ia]],
 genJuliaMatInit["js",js,"Array{Int64,2}"],
-"(aaJulia,iaJulia,jsJulia)=buildA!(hForA,qCols,neq)
-isapprox(aaJulia,aa,rtol=0.1e-16::Float64,atol=0.0::Float64) &&
-isapprox(iaJulia,ia,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(jsJulia,js,rtol=0.1e-16::Float64,atol=0.0::Float64)
+TemplateApply[StringTemplate[
+"file = matopen(pwd()*\"/\"*\"``\")
+hForADense=read(file,\"hForADense\")
+aa=read(file,\"aa\")
+close(file)",
+uFileName]],
+"(aaJulia,iaJulia,jsJulia)=buildA!(hForADense,qCols,neq)
+isapprox(aaJulia,aa,rtol=0.1e-10::Float64,atol=0.0::Float64) &&
+isequal(iaJulia,ia)&&
+isequal(jsJulia,js)
 end;
 "}]];
 SetOptions["stdout", System`PageWidth -> oldPW];
 ]
+(*
 
+wfile = matopen("checkMat.mat")
++duh=read(file, "aaMath") # note that this does NOT introduce a variable ``varname`` into scope
++    close(file)
++    print("duh=",duh);
+ 
 
+*)
 genEigenSysTestMatrices[aDir_String,aModel_String,params_String,
 opts:OptionsPattern[]]:=
 Module[{oldPW=System`PageWidth/.Options["stdout"],
@@ -529,10 +543,12 @@ genAllTests[genReducedFormTestMatrices,"doMult"->True]
 
 
 *)
+genAllTests[genBuildATestMatrices,"doMult"->False]
+
 
 (*
 MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue"];
-genEigenSysTestMatrices["./","firmvalue","firmparms",opts];
+genBuildATestMatrices["./","firmvalue","firmparms"];
 
 MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue3Leads2Lags"];
 @test EigenSysTests.firmvalue3Leads2Lags()
