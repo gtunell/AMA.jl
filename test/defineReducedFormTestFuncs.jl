@@ -9,9 +9,20 @@ import AMAFUNCS.reducedForm
 # test reducedForm firmvalue example
 function firmvalueFalse()::Bool
 
-
 neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
+
+#=====================================
+ bb=[0.  0.228571  0.  0.;
+ 0.  0.4  0.  0.;
+ 0.  0.  0.  0.;
+ 0.  0.  0.  1.]::Array{Float64,2}
+ 
+ qNew=[0.  -0.4  0.  0.  0.  1.  -1.  0.;
+ 0.  0.  0.  0.  0.  0.  1.  0.;
+ 0.  0.  0.  -1.  0.  0.  0.  1.;
+0. 0. 0. 0. 0. 0. 0. 0.]::Array{Float64,2}
+============================#
 
 qRows=4::Int64
 
