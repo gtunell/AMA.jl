@@ -345,7 +345,7 @@ qNewMatlab=[0.  0.174574  0.  0.436436  0.000000000000000222045  -0.436436  0.00
 0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
 =#
   
-file = matopen("./matDir/numericShift_examples/"*"file1.mat")
+file = matopen("./matDir/numericShift_examples/"*"firmvalueTrue.mat")
 hhIn = read(file, "hhIn")
 hNewMatlab = read(file, "hNewMatlab")
 qNewMatlab = read(file, "qNewMatlab")
@@ -400,7 +400,7 @@ qNewMatlab=[0.  -0.367457  0.  0.  0.  0.  0.  0.081357  0.  0.918643  -1.  -0.0
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
 =======================================#
     
-file = matopen("./matDir/numericShift_examples/"*"file2.mat")
+file = matopen("./matDir/numericShift_examples/"*"firmvalue3Leads2LagsTrue.mat")
 hhIn = read(file, "hhIn")
 hNewMatlab = read(file, "hNewMatlab")
 qNewMatlab = read(file, "qNewMatlab")

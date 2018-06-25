@@ -1,4 +1,5 @@
 module EigenSysTests
+using MAT
 
 # test eigenSys 
 
@@ -30,7 +31,7 @@ rts=[1.1+0.0im;
 0.4+0.0im]::Array{Complex{Float64},1}
     ==========================================#
 
-file = matopen("./matDir/eigen_examples/"*"fc107477800097413.mat")
+file = matopen("./matDir/eigen_examples/"*"firmvalue.mat")
 aa=read(file,"aa")
 ww=read(file,"ww")
 close(file)
