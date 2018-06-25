@@ -1,4 +1,5 @@
 module ReducedFormTests
+using MAT
 
 # test reducedForm
 
@@ -12,19 +13,6 @@ function firmvalueFalse()::Bool
 neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
-
-bb=[0.  0.228571  0.  0.;
-0.  0.4  0.  0.;
-0.  0.  0.  0.;
-0.  0.  0.  1.]::Array{Float64,2}
-
-qNew=[0.  -0.4  0.  0.  0.  1.  -1.  0.;
-0.  0.  0.  0.  0.  0.  1.  0.;
-0.  0.  0.  -1.  0.  0.  0.  1.;
-0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
-
-nonsing=true::Bool
-
 qRows=4::Int64
 
 qCols=8::Int64
@@ -33,9 +21,14 @@ bCols=4::Int64
 
 anEpsi=0.0000000001::Float64
 
+file = matopen("./matDir/reducedForm_examples/"*"file1.mat")
+bb=read(file,"bb")
+qNew=read(file,"qNew")
+close(file)
+
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
-nonsingJulia==nonsing
+isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)#&&
+#nonsingJulia==true
 end;
 
 #tweaked= False
