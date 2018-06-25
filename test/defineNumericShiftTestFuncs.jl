@@ -326,7 +326,8 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
 qq=zeros(Float64,4,8)
-
+  
+#=
 hhIn=[0.  0.  0.  0.  -2.2  0.  0.  0.  2.  2.  0.  0.;
 0.  -0.4  0.  0.  -1.1  1.  -1.  0.  1.  1.  0.  0.;
 0.  0.  0.  0.  -1.1  0.  1.  0.  1.  1.  0.  0.;
@@ -341,6 +342,13 @@ qNewMatlab=[0.  0.174574  0.  0.436436  0.000000000000000222045  -0.436436  0.00
 0.  0.23094  0.  0.211325  -0.000000000000000166533  -0.57735  1.36603  -0.211325;
 0.  0.23094  0.  -0.788675  -0.000000000000000111022  -0.57735  0.366025  0.788675;
 0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
+=#
+  
+file = matopen("./matDir/numericShift_examples"*"file1.mat")
+hhIn = read(file, "hhIn")
+hNewMatlab = read(file, "hNewMatlab")
+qNewMatlab = read(file, "qNewMatlab")
+close(file)
 
 condn=0.0000000001::Float64
 
@@ -349,7 +357,7 @@ iqNewMatlab=3
 nnumericMatlab=3
 
 (hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
-isapprox(hNewJulia,hNewMatlab,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(hNewJulia,hNewMatlab,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericMatlab
