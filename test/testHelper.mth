@@ -6,7 +6,11 @@ genJuliaMatInit[aMat_?MatrixQ]:=
 "["<>StringRiffle[genRow/@aMat,";\n"]<>"]"
 
 genJuliaMatInit[aNum_?NumberQ]:=
-"["<>ToString[DecimalForm[aNum]]<>"+0.0im"<>"]"
+Module[{},
+"hcat(["<>ToString[DecimalForm[aNum]]<>"+0.0im"<>"])"]/;Head[aNum]=!=Integer
+
+genJuliaMatInit[aNum_Integer]:=
+"hcat(["<>ToString[DecimalForm[aNum]]<>"])"
 
 
 genJuliaMatInit[varName_String,aMat:(_?MatrixQ|_?NumberQ)]:=
@@ -209,7 +213,8 @@ genJuliaMatInit["js",js,"Array{Int64,2}"],
 TemplateApply[StringTemplate[
 "file = matopen(\"./matDir/\"*\"``\")
 hForADense=read(file,\"hForADense\")
-aa=read(file,\"aa\")
+chkA=read(file,\"aa\")
+aa=if(typeof(chkA)==(Array{Float64,2})) chkA else hcat(chkA) end
 close(file)",
 uFileName]],
 "(aaJulia,iaJulia,jsJulia)=buildA!(hForADense,qCols,neq)
@@ -541,9 +546,9 @@ genAllTests[genBuildATestMatrices,"doMult"->False]
 genAllTests[genAMAalgTestMatrices,"doMult"->False]
 genAllTests[genReducedFormTestMatrices,"doMult"->True]
 
+genAllTests[genBuildATestMatrices,"doMult"->False]
 
 *)
-genAllTests[genBuildATestMatrices,"doMult"->False]
 
 
 (*
