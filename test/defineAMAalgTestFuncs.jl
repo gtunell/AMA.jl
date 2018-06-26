@@ -11,6 +11,10 @@ function firmvalue()::Bool
 neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
+hh=[0.  0.  0.  0.  -1.1  0.  0.  0.  1.  1.  0.  0.;
+0.  -0.4  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.;
+0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
+0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.]::Array{Float64,2}
 
 bb=[0.  0.228571  0.  0.;
  0.  0.4  0.  0.;
@@ -35,8 +39,8 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&

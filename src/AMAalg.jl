@@ -15,7 +15,7 @@ eigenvectors associated with the big roots.
     nlead     Number of leads.
     condn     Zero tolerance used as a condition number test
               by numeric_shift and reduced_form.
-    uprbnd    Inclusive upper bound for the modulus of roots
+    upper    Inclusive upper bound for the modulus of roots
               allowed in the reduced form.
  
   Output arguments:
@@ -26,7 +26,7 @@ eigenvectors associated with the big roots.
               elements in rts).
     nexact    Number of exact shiftrights.
     nnumeric  Number of numeric shiftrights.
-    lgroots   Number of roots greater in modulus than uprbnd.
+    lgroots   Number of roots greater in modulus than upper.
     AMAcode     Return code: see function AMAerr.
 """
 function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi::Float64,upper::Float64) 
@@ -56,7 +56,7 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
         return
     end
 
-    (hh,qq,iq,nnumeric) = numericShift!(hh,qq,iq,qrows,qcols,neq,condn)
+    (hh,qq,iq,nnumeric) = numericShift!(hh,qq,iq,qrows,qcols,neq,anEpsi)
     if (iq > qrows) 
         AMAcode = 62
         return
@@ -68,15 +68,17 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
     (aa,ia,js) = buildA!(hh,qcols,neq)
 
     if (ia != 0)
-        if any(any(isnan(aa))) || any(any(isinf(aa))) 
-            display("A is NAN or INF")
-            AMAcode = 63 
-            return 
-        end 
-        (ww,rts,lgroots)=eigenSys!(aa,uprbnd,min(length(js),qrows-iq+1))
+        for element in aa
+            if isnan(element) || isinf(element)
+                display("A is NAN or INF")
+                AMAcode = 63
+                return
+            end
+        end
+        (ww,rts,lgroots)=eigenSys!(aa,upper,min(length(js),qrows - iq + 1))
 
 
-        qq = SPCopy_w(qq,ww,js,iq,qrows)
+        qq = augmentQ!(qq,ww,js,iq,qrows)
     end
 
     test = nexact + nnumeric + lgroots
@@ -89,7 +91,7 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
     # If the right-hand block of q is invertible, compute the reduced form.
 
     if(AMAcode==0)
-        (nonsing,bb) = reducedForm(qq,qrows,qcols,bcols,neq,condn)
+        (nonsing,bb) = reducedForm(qq,qrows,qcols,bcols,neq,anEpsi)
         if ( nonsing && AMAcode==0)
             AMAcode =  1
         elseif (!nonsing && AMAcode==0)

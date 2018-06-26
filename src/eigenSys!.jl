@@ -21,7 +21,8 @@ function eigenSys!(aa::Array{Float64,2}, upperbound::Float64, rowsLeft::Int64)
     #  that AMA cares about. 
 
     ww = real(ww) + imag(ww)
-    lgroots = find(x->(x > upperbound), sum(abs.(rts)))
+    lgroots = find(x -> (x > upperbound), (abs.(rts)))
+    lgroots = sum(lgroots)
 
     return (ww, rts, lgroots)
 
