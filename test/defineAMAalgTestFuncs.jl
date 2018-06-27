@@ -39,8 +39,8 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-8::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-8::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -86,8 +86,8 @@ anEpsi=0.0000000001::Float64
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
     display(bbJulia)
-isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -111,9 +111,9 @@ bb=[0.  0.  0.  -0.655141;
 0.  0.  0.  -0.663972;
 0.  0.  0.  0.336028]::Array{Float64,2}
 
-rts=[1.31855 + 0.49536 im;
-1.31855 - 0.49536 im;
-0.336028 + 0. im]::Array{Float64,1}
+rts=[1.31855 + 0.49536im;
+1.31855 - 0.49536im;
+0.336028 + 0.0im]::Array{Complex{Float64},1}
 
 ia=3::Int64
 
@@ -129,8 +129,8 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -164,8 +164,8 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -191,10 +191,10 @@ bb=[0.  0.  0.  0.  0.;
 0.  0.  0.  0.361236  0.;
 0.  0.  0.  0.530747  0.]::Array{Float64,2}
 
-rts=[1.06383 + 1.39432 im;
-1.06383 - 1.39432 im;
-0.361236 + 0. im;
-0. + 0. im]::Array{Float64,1}
+rts=[1.06383 + 1.39432im;
+1.06383 - 1.39432im;
+0.361236 + 0.0im;
+0. + 0.0im]::Array{Complex{Float64},1}
 
 ia=4::Int64
 
@@ -210,8 +210,8 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -245,13 +245,13 @@ bb=[0.828597  0.296449  -0.11369  0.212332  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
 
-rts=[1.39878 + 0. im;
-1. + 0. im;
-0.911 + 0. im;
-0.536108 + 0.222056 im;
-0.536108 - 0.222056 im;
-0.000000000000000166533 + 0. im;
-0. + 0. im]::Array{Float64,1}
+rts=[1.39878 + 0.0im;
+1. + 0.0im;
+0.911 + 0.0im;
+0.536108 + 0.222056im;
+0.536108 - 0.222056im;
+0.000000000000000166533 + 0.0im;
+0. + 0.0im]::Array{Complex{Float64},1}
 
 ia=7::Int64
 
@@ -267,8 +267,8 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -282,7 +282,7 @@ function habitmod()::Bool
 neq=12::Int64;nlag=4::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
-hhIn=[0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  -1.  -1.  0.  0.  3.45419  0.  0.  -0.74118  0.00208517  0.494116  -0.1149  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
+hh=[0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  -1.  -1.  0.  0.  3.45419  0.  0.  -0.74118  0.00208517  0.494116  -0.1149  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.88879  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.52802  0.  0.11279  0.031833  0.024734  0.  0.  0.  0.  0.  0.  0.  -0.71526  0.  0.042076  -0.22829  -0.012267  0.  0.  0.  0.  0.  0.  0.  0.22215  0.  -0.14172  0.26679  -0.11959  0.  0.  0.  0.  0.  0.  0.  -0.42308  0.  -0.61076  -0.10946  0.17172  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  -0.00011277  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.46436  0.  0.16131  0.02744  0.17087  0.  0.  0.  0.  0.  0.  0.  -1.3425  0.  0.16794  -0.35818  -0.09837  0.  0.  0.  0.  0.  0.  0.  1.06382  0.  -0.02255  0.51594  0.08949  0.  0.  0.  0.  0.  0.  0.  -0.46672  0.  -0.11369  -1.10657  -0.26021  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  -0.00141  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
@@ -308,30 +308,30 @@ bb=[0.0275299  0.  0.0204675  0.00384168  0.0510466  0.  0.  0.  0.  0.  0.  0. 
 -0.00201156  0.  0.00248092  -0.000581449  0.00412511  0.  0.  0.  0.  0.  0.  0.  -0.0116365  0.  0.00675309  -0.00288513  -0.00242817  0.  0.  0.  0.  0.  0.  0.  0.00965336  0.  0.00373112  0.00447091  -0.00157814  0.  0.  0.  0.  0.  0.  0.  -0.998996  0.0173377  0.00574045  -0.0102517  -0.0165428  0.  -0.00146776  0.  0.  0.  0.  0.00513261;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
 
-rts=[679.579 + 0. im;
-1.11741 + 0. im;
-1.00424 + 0. im;
-1.00424 + 0. im;
-1.00403 + 0. im;
-1. + 0. im;
-0.918128 + 0.0887657 im;
-0.918128 - 0.0887657 im;
-0.88879 + 0. im;
-0.714747 + 0. im;
-0.587349 + 0.26613 im;
-0.587349 - 0.26613 im;
--0.129115 + 0.619993 im;
--0.129115 - 0.619993 im;
--0.294489 + 0.507462 im;
--0.294489 - 0.507462 im;
--0.230764 + 0.281568 im;
--0.230764 - 0.281568 im;
-0.198899 + 0.16454 im;
-0.198899 - 0.16454 im;
--0.000096719 + 0.0000998847 im;
--0.000096719 - 0.0000998847 im;
-0.000096719 + 0.0000934444 im;
-0.000096719 - 0.0000934444 im]::Array{Float64,1}
+rts=[679.579 + 0.0im;
+1.11741 + 0.0im;
+1.00424 + 0.0im;
+1.00424 + 0.0im;
+1.00403 + 0.0im;
+1. + 0.0im;
+0.918128 + 0.0887657im;
+0.918128 - 0.0887657im;
+0.88879 + 0.0im;
+0.714747 + 0.0im;
+0.587349 + 0.26613im;
+0.587349 - 0.26613im;
+-0.129115 + 0.619993im;
+-0.129115 - 0.619993im;
+-0.294489 + 0.507462im;
+-0.294489 - 0.507462im;
+-0.230764 + 0.281568im;
+-0.230764 - 0.281568im;
+0.198899 + 0.16454im;
+0.198899 - 0.16454im;
+-0.000096719 + 0.0000998847im;
+-0.000096719 - 0.0000998847im;
+0.000096719 + 0.0000934444im;
+0.000096719 - 0.0000934444im]::Array{Complex{Float64},1}
 
 ia=24::Int64
 
@@ -347,8 +347,8 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
