@@ -1,5 +1,5 @@
 """
-    numericShift(hh, qq, iq, qrows, qcols, neq, condn)
+    numericShift!(hh, qq, iq, qrows, qcols, neq, condn)
 
 Compute the numeric shiftrights and store them in q.
 """
@@ -46,4 +46,3 @@ function numericShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qR
     return(hh, qq, iq, nnumeric)
 
 end # numericShift
-

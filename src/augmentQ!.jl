@@ -15,4 +15,3 @@ function augmentQ!(qq::Array{Float64,2},ww::Array{Float64,2},js::Array{Int64,2},
     return qq
 
 end # augmentQ
-

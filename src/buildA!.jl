@@ -56,4 +56,3 @@ function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64)
     return (aa::Array{Float64,2}, ia::Int64, js::Array{Int64,2})
     
 end # buildA
-
