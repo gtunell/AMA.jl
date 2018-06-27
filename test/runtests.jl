@@ -123,12 +123,12 @@ include("../src/AMAalg.jl")
 include("defineAMAalgTestFuncs.jl")
 @testset "test AMAalg" begin
 @test AMAalgTests.firmvalue()
-@test_broken AMAalgTests.firmvalue3Leads2Lags()
-@test_broken AMAalgTests.example7()
-@test_broken AMAalgTests.oneEquationNoLead()
-@test_broken AMAalgTests.reliablePaperExmpl()
-@test_broken AMAalgTests.athan()
-@test_broken AMAalgTests.habitmod()
+@test AMAalgTests.firmvalue3Leads2Lags()
+@test AMAalgTests.example7()
+@test AMAalgTests.oneEquationNoLead()
+@test AMAalgTests.reliablePaperExmpl()
+@test AMAalgTests.athan()
+@test AMAalgTests.habitmod()
 end
 
 end #outer

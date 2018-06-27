@@ -38,7 +38,7 @@ qNew=read(file,"qNew")
 close(file)
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)#&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)#&&
 #nonsingJulia==true
 end;
 
@@ -86,7 +86,7 @@ bCols=8::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -126,7 +126,7 @@ bCols=4::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -154,7 +154,7 @@ bCols=1::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -196,7 +196,7 @@ bCols=5::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -246,7 +246,7 @@ bCols=9::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -302,7 +302,7 @@ bCols=48::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -342,7 +342,7 @@ bCols=4::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -390,7 +390,7 @@ bCols=8::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -430,7 +430,7 @@ bCols=4::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -458,7 +458,7 @@ bCols=1::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -500,7 +500,7 @@ bCols=5::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -550,7 +550,7 @@ bCols=9::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -606,7 +606,7 @@ bCols=48::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-5::Float64,atol=0.0::Float64)&&
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
 
