@@ -1,8 +1,7 @@
 module NumericShiftTests
 using MAT
 
-import AMAFUNCS.numericShift!
-import AMAFUNCS.sameSpan
+using ..AMA
 
 # test numericShift! firmvalue example
 function firmvalueFalse()::Bool

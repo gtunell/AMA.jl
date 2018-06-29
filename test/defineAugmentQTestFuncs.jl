@@ -1,9 +1,7 @@
 module AugmentQTests
 
 # test augmentQ 
-
-import AMAFUNCS.augmentQ!
-import AMAFUNCS.sameSpan
+using ..AMA
 
 # test augmentQ! firmvalue example
 function firmvalue()::Bool

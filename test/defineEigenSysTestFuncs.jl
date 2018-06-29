@@ -2,8 +2,7 @@ module EigenSysTests
 using MAT
 
 # test eigenSys 
-
-import AMAFUNCS.eigenSys!
+using ..AMA
 
 #tweaked= False
 # test eigenSys! firmvalue example
