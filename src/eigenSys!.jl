@@ -22,7 +22,7 @@ function eigenSys!(aa::Array{Float64,2}, upperbound::Float64, rowsLeft::Int64)
 
     ww = real(ww) + imag(ww)
     lgroots = abs.(rts)
-    lgroots = find(x->(x > upperbound), lgroots)
+    lgroots = find(lroot->(lroot > upperbound), lgroots)
     lgroots = length(lgroots)
 
     return (ww, rts, lgroots)
