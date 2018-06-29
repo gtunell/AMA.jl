@@ -38,19 +38,17 @@ close(file)
     
 lgroots=1
 
-ia=3::Int64
-
-js=[5 6 8]::Array{Int64,2}
-
-(wwJulia,rtsJulia,lgrootsJulia)=  eigenSys!(aa,uprbnd,rowsLeft)
-                                
-    display(isapprox(wwJulia,ww,rtol=0.::Float64,atol=1e-16))
-
-    display(ww)
-    display(wwJulia)
-isapprox(wwJulia,ww)# &&
-#isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=0.1e-10::Float64)&&
-#lgrootsJulia==lgroots
+(wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
+    
+    # rounding to 16 digit places
+wwJulia = round.(wwJulia, 16)
+ww = round.(wwJulia, 16)
+rtsJulia = round.(rtsJulia)
+rts = round.(rtsJulia)
+    
+isapprox(round.(wwJulia,16),round.(ww,16),rtol=0.::Float64,atol=1e-15::Float64) &&
+isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=0.1e-10::Float64)&&
+lgrootsJulia==lgroots
 end;
 
 #tweaked= False
@@ -88,13 +86,16 @@ rts=[1.1+0.0im;
 
 lgroots=3
 
-ia=6::Int64
-
-js=[9 13 14 17 18 20]::Array{Int64,2}
-
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-#isapprox(wwJulia,ww,atol=0.1e-4::Float64)&&
-#isapprox(rtsJulia,rts,atol=0.1e-4::Float64)&&
+
+    # rounding to 16 digit places
+wwJulia = round.(wwJulia, 16)
+ww = round.(wwJulia, 16)
+rtsJulia = round.(rtsJulia)
+rts = round.(rtsJulia)
+    
+isapprox(wwJulia,ww,rtol=0.::Float64,atol=0.1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.::Float64,atol=0.1e-16::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -124,13 +125,17 @@ rts=[1.31855+0.49536im;
 
 lgroots=2
 
-ia=3::Int64
-
-js=[5 6 8]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-#isapprox(wwJulia,ww,atol=0.1e-4::Float64) &&
-#isapprox(rtsJulia,rts,atol=0.1e-4::Float64)&&
+    
+    # rounding to 16 digit places
+wwJulia = round.(wwJulia, 16)
+ww = round.(wwJulia, 16)
+rtsJulia = round.(rtsJulia)
+rts = round.(rtsJulia)
+    
+isapprox(wwJulia,ww,rtol=0.::Float64,atol=0.1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.::Float64,atol=0.1e-16::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -154,13 +159,17 @@ rts=[-0.666667+0.0im]::Array{Complex{Float64},1}
 
 lgroots=0
 
-ia=1::Int64
-
-js=hcat([2])::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-#isapprox(wwJulia,ww,atol=0.1e-4::Float64) &&
-#isapprox(rtsJulia,rts,atol=0.1e-4::Float64)&&
+    
+    # rounding to 16 digit places
+wwJulia = round.(wwJulia, 16)
+ww = round.(wwJulia, 16)
+rtsJulia = round.(rtsJulia)
+rts = round.(rtsJulia)
+    
+isapprox(wwJulia,ww,rtol=0.::Float64,atol=0.1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.::Float64,atol=0.1e-16::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -193,13 +202,17 @@ rts=[1.06383+1.39432im;
 
 lgroots=2
 
-ia=4::Int64
-
-js=[6 8 9 10]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-#isapprox(wwJulia,ww,atol=0.1e-4::Float64) &&
-#isapprox(rtsJulia,rts,atol=0.1e-4::Float64)&&
+    
+    # rounding to 16 digit places
+wwJulia = round.(wwJulia, 16)
+ww = round.(wwJulia, 16)
+rtsJulia = round.(rtsJulia)
+rts = round.(rtsJulia)
+    
+isapprox(wwJulia,ww,rtol=0.::Float64,atol=0.1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.::Float64,atol=0.1e-16::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -241,13 +254,17 @@ rts=[1.39878+0.0im;
 
 lgroots=1
 
-ia=7::Int64
-
-js=[1 10 11 12 13 14 18]::Array{Int64,2}
 
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-#isapprox(wwJulia,ww,atol=0.1e-4::Float64) &&
-#isapprox(rtsJulia,rts,atol=0.1e-4::Float64)&&
+    
+    # rounding to 16 digit places
+wwJulia = round.(wwJulia, 16)
+ww = round.(wwJulia, 16)
+rtsJulia = round.(rtsJulia)
+rts = round.(rtsJulia)
+    
+isapprox(wwJulia,ww,rtol=0.::Float64,atol=0.1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.::Float64,atol=0.1e-16::Float64)&&
 lgrootsJulia==lgroots
 end;
 
@@ -340,13 +357,16 @@ rts=[679.579+0.0im;
 
 lgroots=5
 
-ia=24::Int64
-
-js=[13 15 16 17 25 27 28 29 37 39 40 41 49 50 51 52 53 54 55 56 57 58 59 60]::Array{Int64,2}
-
 (wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-#isapprox(wwJulia,ww,atol=0.1e-4::Float64) &&
-#isapprox(rtsJulia,rts,atol=0.1e-4::Float64)&&
+    
+    # rounding to 16 digit places
+wwJulia = round.(wwJulia, 16)
+ww = round.(wwJulia, 16)
+rtsJulia = round.(rtsJulia)
+rts = round.(rtsJulia)
+    
+isapprox(wwJulia,ww,rtol=0.::Float64,atol=0.1e-16::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.::Float64,atol=0.1e-16::Float64)&&
 lgrootsJulia==lgroots
 end;
 
