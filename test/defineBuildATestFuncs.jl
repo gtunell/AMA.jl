@@ -1,6 +1,9 @@
 module BuildATests
-import AMAFUNCS.buildA!
+
 using MAT
+
+# test buildA!
+using ..AMA
 
 #tweaked= False
 # test buildA! firmvalue example

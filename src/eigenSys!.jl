@@ -28,4 +28,3 @@ function eigenSys!(aa::Array{Float64,2}, upperbound::Float64, rowsLeft::Int64)
     return (ww, rts, lgroots)
 
 end # eigenSys!
-

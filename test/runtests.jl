@@ -1,8 +1,7 @@
-import AMA
 using Base.Test
+include("../src/AMA.jl")
 
 include("defineShiftRightTestFuncs.jl")
-
 @testset "outer"  begin# an outer so that it does't quit on first fail
 @testset "test shiftRight" begin
 @test ShiftRightTests.firmvalue()
@@ -13,7 +12,6 @@ include("defineShiftRightTestFuncs.jl")
 @test ShiftRightTests.athan()
 @test ShiftRightTests.habitmod()
 end
-
 
 include("defineExactShiftTestFuncs.jl")
 @testset "test exactShift" begin
@@ -26,8 +24,6 @@ include("defineExactShiftTestFuncs.jl")
 @test ExactShiftTests.habitmod()
 end
 
-
-include("../src/numericShift!.jl")
 include("defineNumericShiftTestFuncs.jl")
 @testset "test numericShift" begin
 @test NumericShiftTests.firmvalueTrue()
@@ -37,6 +33,7 @@ include("defineNumericShiftTestFuncs.jl")
 @test NumericShiftTests.reliablePaperExmplTrue()
 @test NumericShiftTests.athanTrue()
 @test NumericShiftTests.habitmodTrue()
+    
 @test NumericShiftTests.firmvalueFalse()
 @test NumericShiftTests.firmvalue3Leads2LagsFalse()
 @test NumericShiftTests.example7False()
@@ -46,9 +43,6 @@ include("defineNumericShiftTestFuncs.jl")
 @test NumericShiftTests.habitmodFalse()
 end
 
-
-
-include("../src/buildA!.jl")
 include("defineBuildATestFuncs.jl")
 @testset "test buildA" begin
 @test BuildATests.firmvalueFalse()
@@ -68,9 +62,6 @@ include("defineBuildATestFuncs.jl")
 @test BuildATests.habitmodTrue()
 end
 
-
-
-include("../src/eigenSys!.jl")
 include("defineEigenSysTestFuncs.jl")
 @testset "test eigenSys" begin
 @test EigenSysTests.firmvalue()
@@ -83,7 +74,6 @@ include("defineEigenSysTestFuncs.jl")
 end
 
 
-include("../src/augmentQ!.jl")
 include("defineAugmentQTestFuncs.jl")
 @testset "test augmentQ" begin
 @test_broken AugmentQTests.firmvalue()
@@ -95,9 +85,6 @@ include("defineAugmentQTestFuncs.jl")
 @test_broken AugmentQTests.habitmod()
 end
 
-    
-
-include("../src/reducedForm.jl")
 include("defineReducedFormTestFuncs.jl")
 @testset "test reducedForm" begin
 @test ReducedFormTests.firmvalueFalse()
@@ -117,9 +104,6 @@ include("defineReducedFormTestFuncs.jl")
 @test ReducedFormTests.habitmodTrue()
 end
 
-    
-
-include("../src/AMAalg.jl")
 include("defineAMAalgTestFuncs.jl")
 @testset "test AMAalg" begin
 @test AMAalgTests.firmvalue()

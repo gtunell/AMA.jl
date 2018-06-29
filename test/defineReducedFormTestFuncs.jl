@@ -2,8 +2,7 @@ module ReducedFormTests
 using MAT
 
 # test reducedForm
-
-import AMAFUNCS.reducedForm
+using ..AMA
 
 #tweaked= False
 # test reducedForm firmvalue example

@@ -1,12 +1,10 @@
 module AMAalgTests
 
 # test AMAalg
-
-import AMAFUNCS.AMAalg
+using ..AMA
 
 # test AMAalg firmvalue example
 function firmvalue()::Bool
-
 
 neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64

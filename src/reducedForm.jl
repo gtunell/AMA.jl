@@ -30,4 +30,3 @@ function reducedForm(qq::Array{Float64,2}, qrows::Int64, qcols::Int64, bcols::In
     return (nonsing, bb)
 
 end # reducedForm
-
