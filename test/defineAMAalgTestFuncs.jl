@@ -1,5 +1,7 @@
 module AMAalgTests
 
+using MAT
+
 # test AMAalg
 using ..AMA
 

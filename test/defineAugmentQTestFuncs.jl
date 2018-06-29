@@ -1,5 +1,7 @@
 module AugmentQTests
 
+using MAT
+
 # test augmentQ 
 using ..AMA
 
@@ -29,11 +31,8 @@ iqNew=3::Int64
 
 js=[5  6  8]::Array{Int64,2}
 
-#(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-#sameSpan(wwJulia,ww) &&
-#isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-    #lgrootsJulia==lgroots
-    2==3
+(qqJulia)=augmentQ!(qNew,ww,js,iqNew,qRows)
+isapprox(qqJulia,qFinal,rtol=0.::Float64,atol=1e-16::Float64)
 end;
 
 # test augmentQ! firmvalue3Leads2Lags example
@@ -81,10 +80,8 @@ iqNew=9::Int64
 
 js=[9  13  14  17  18  20]::Array{Int64,2}
 
-(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-sameSpan(wwJulia,ww) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-lgrootsJulia==lgroots
+(qJulia)=augmentQ!(qNew,ww,js,iqNew, qRows)
+isapprox(qJulia,qFinal,rtol=0.::Float64,atol=1e-16::Float64)
 end;
 
 # test augmentQ! example7 example
@@ -113,10 +110,8 @@ iqNew=2::Int64
 
 js=[5  6  8]::Array{Int64,2}
 
-(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-sameSpan(wwJulia,ww) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-lgrootsJulia==lgroots
+(qJulia)=augmentQ!(qNew,ww,js,iqNew,qRows)
+isapprox(qJulia,qFinal,rtol=0.::Float64,atol=1e-16::Float64)
 end;
 
 # test augmentQ! oneEquationNoLead example
@@ -131,16 +126,14 @@ qFinal=[2.  3.]::Array{Float64,2}
 
 qNew=[2.  3.]::Array{Float64,2}
 
-genJuliaMatInit[ww, 1., Array{Float64,2}]
+ww = hcat([1.])::Array{Float64,2}
 
 iqNew=1::Int64
 
-genJuliaMatInit[js, 2, Array{Int64,2}]
+js = hcat([2])::Array{Int64,2}
 
-(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-sameSpan(wwJulia,ww) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-lgrootsJulia==lgroots
+(qJulia)=augmentQ!(qNew,ww,js,iqNew,qRows)
+isapprox(qJulia,qFinal,rtol=0.::Float64,atol=1e-16::Float64)
 end;
 
 # test augmentQ! reliablePaperExmpl example
@@ -172,10 +165,8 @@ iqNew=3::Int64
 
 js=[6  8  9  10]::Array{Int64,2}
 
-(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-sameSpan(wwJulia,ww) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-lgrootsJulia==lgroots
+(qJulia)=augmentQ!(qNew,ww,js,iqNew,qRows)
+isapprox(qJulia,qFinal,rtol=0.::Float64,atol=1e-16::Float64)
 end;
 
 # test augmentQ! athan example
@@ -218,10 +209,8 @@ iqNew=8::Int64
 
 js=[1  10  11  12  13  14  18]::Array{Int64,2}
 
-(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-sameSpan(wwJulia,ww) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-lgrootsJulia==lgroots
+(qJulia)=augmentQ!(qNew,ww,js,iqNew,qRows)
+isapprox(qJulia,qFinal,rtol=0.::Float64,atol=1e-16::Float64)
 end;
 
 # test augmentQ! habitmod example
@@ -287,10 +276,8 @@ iqNew=7::Int64
 
 js=[13  15  16  17  25  27  28  29  37  39  40  41  49  50  51  52  53  54  55  56  57  58  59  60]::Array{Int64,2}
 
-(wwJulia,rtsJulia,lgrootsJulia)=augmentQ!(qNew,ww,js,iqNew)
-sameSpan(wwJulia,ww) &&
-isapprox(rtsJulia,rts,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
-lgrootsJulia==lgroots
+(qJulia)=augmentQ!(qNew,ww,js,iqNew,qRows)
+isapprox(qJulia,qFinal,rtol=0.::Float64,atol=1e-16::Float64) 
 end;
 
 

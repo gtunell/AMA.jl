@@ -42,8 +42,10 @@ ia=3::Int64
 
 js=[5 6 8]::Array{Int64,2}
 
-(wwJulia,rtsJulia,lgrootsJulia)=eigenSys!(aa,uprbnd,rowsLeft)
-    display(isapprox(wwJulia,ww,rtol=0.0::Float64,atol=1e-16))
+(wwJulia,rtsJulia,lgrootsJulia)=  eigenSys!(aa,uprbnd,rowsLeft)
+                                
+    display(isapprox(wwJulia,ww,rtol=0.::Float64,atol=1e-16))
+
     display(ww)
     display(wwJulia)
 isapprox(wwJulia,ww)# &&

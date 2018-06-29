@@ -76,13 +76,13 @@ end
 
 include("defineAugmentQTestFuncs.jl")
 @testset "test augmentQ" begin
-@test_broken AugmentQTests.firmvalue()
-@test_broken AugmentQTests.firmvalue3Leads2Lags()
-@test_broken AugmentQTests.example7()
-@test_broken AugmentQTests.oneEquationNoLead()
-@test_broken AugmentQTests.reliablePaperExmpl()
-@test_broken AugmentQTests.athan()
-@test_broken AugmentQTests.habitmod()
+@test AugmentQTests.firmvalue()
+@test AugmentQTests.firmvalue3Leads2Lags()
+@test AugmentQTests.example7()
+@test AugmentQTests.oneEquationNoLead()
+@test AugmentQTests.reliablePaperExmpl()
+@test AugmentQTests.athan()
+@test AugmentQTests.habitmod()
 end
 
 include("defineReducedFormTestFuncs.jl")
