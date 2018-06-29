@@ -30,11 +30,12 @@ rts=[1.1+0.0im;
 1.+0.0im;
 0.4+0.0im]::Array{Complex{Float64},1}
 
-    
+    #=
 file = matopen("./matDir/eigen_examples/"*"firmvalue.mat")
 aa=read(file,"aa")
 ww=read(file,"ww")
 close(file)
+    =#
     
 lgroots=1
 
