@@ -37,6 +37,9 @@ qNew=read(file,"qNew")
 close(file)
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
+display(bbJulia)
+    display(nonsingJulia)
+    
 isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)#&&
 #nonsingJulia==true
 end;

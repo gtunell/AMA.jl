@@ -39,8 +39,15 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-8::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-8::Float64)&&
+
+    # rounding matrices
+bbJulia = round.(bbJulia, 6)
+bb = round.(bb, 6)
+rtsJulia = round.(rtsJulia, 6)
+rts = round.(rts, 6)
+
+isapprox(bbJulia,bb,rtol=0.::Float64,atol=1e-6::Float64)&&
+isapprox(rtsJulia,rts,rtol=0.::Float64,atol=1e-6::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -57,7 +64,7 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 hh=[0.  0.  0.  0.  0.  0.  0.  0.  -1.331  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.;
 0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0. 0. 0. 0. 0. 0. 0. -1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+0. 0. 0. 0. 0. 0. 0. -1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]::Array{Float64,2}
     
 bb=[0.  0.0374804  0.  0.  0.  0.31179  0.  0.;
 0.  0.4  0.  0.  0.  0.  0.  0.;
@@ -85,7 +92,13 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-    display(bbJulia)
+
+  # rounding matrices
+bbJulia = round.(bbJulia, 7)
+bb = round.(bb, 7)
+rtsJulia = round.(rtsJulia, 6)
+rts = round.(rts, 6)
+   
 isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
 isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
 iaJulia==ia&&

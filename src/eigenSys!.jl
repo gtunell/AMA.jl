@@ -13,7 +13,7 @@ function eigenSys!(aa::Array{Float64,2}, upperbound::Float64, rowsLeft::Int64)
 
     # sort eigenvalues in descending order of magnitude
     magnitudes = abs.(roots)
-    highestToLowestMag = sortperm(magnitudes, rev = true)
+    highestToLowestMag = sortperm(magnitudes, rev = true) # reverse order
     roots = roots[highestToLowestMag]
 
     # sort eigenvecs in order found above
