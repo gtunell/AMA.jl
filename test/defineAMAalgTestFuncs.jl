@@ -1,21 +1,23 @@
 module AMAalgTests
 
-using MAT
-#include("../src/AMA.jl")
+# include("../src/AMA.jl")
 # test AMAalg
-using ..AMA
+using ..AMA, MAT
 
 # test AMAalg firmvalue example
 function firmvalue()::Bool
 
+# inputs    
 neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
+# input matrix
 hh=[0.  0.  0.  0.  -1.1  0.  0.  0.  1.  1.  0.  0.;
     0.  -0.4  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.;
     0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
     0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.]::Array{Float64,2}
 
+#=============================EXPECTED OUTPUT=======================================
 bb = [0.   0.228571428571429   0.   0.;
      0.   0.400000000000000   0.   0.;
      0.   0.                  0.   0.;
@@ -24,7 +26,14 @@ bb = [0.   0.228571428571429   0.   0.;
 rts=[1.1;
      1.;
      0.4]::Array{Float64,1}
+==============================END EXPECTED OUTPUT==================================#
 
+# get the expected output from matlab file
+file = matopen("./matDir/AMAalg_examples/"*"firmvalue.mat")
+    bb=read(file,"b")
+    rts=read(file,"rts")
+close(file)
+    
 ia=3::Int64
 
 nex=3::Int64
@@ -39,12 +48,14 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-    
+
+######## uncomment to display the output in terminal ########
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
 
+# test the actual output against expected
 isapprox(bbJulia, bb, atol=1e-16::Float64) &&
 isapprox(rtsJulia, rts, atol=1e-16::Float64) &&
 iaJulia==ia&&
@@ -56,15 +67,18 @@ end;
 # test AMAalg firmvalue3Leads2Lags example
 function firmvalue3Leads2Lags()::Bool
 
-
+# inputs
 neq=4::Int64;nlag=2::Int64;nlead=3::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
+anEpsi=0.0000000001::Float64
 
+# input matrix
 hh=[0.  0.  0.  0.  0.  0.  0.  0.  -1.331  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.;
     0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
     0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
     0. 0. 0. 0. 0. 0. 0. -1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]::Array{Float64,2}
 
+#=============================EXPECTED OUTPUT=======================================
 bb=[0.  0.037480359413222  0.  0.  0.   0.311789739868737  0.  0.;
     0.  0.400000000000000  0.  0.  0.   0.                 0.  0.;
     0.  0.                 0.  0.  0.   0.                 0.  0.;
@@ -75,28 +89,32 @@ rts = [1.100000000000000 + 0.000000000000000im;
        -0.550000000000000 - 0.952627944162882im;
        1.000000000000000 + 0.000000000000000im;
        -0.632455532033676 + 0.000000000000000im;
-       0.632455532033676 + 0.000000000000000im]
+       0.632455532033676 + 0.000000000000000im]::Array{Complex{Float64},1}
+==============================END EXPECTED OUTPUT==================================#
 
+# get the expected output of bb/rts from matlab file
+file = matopen("./matDir/AMAalg_examples/"*"firmvalue3Leads2Lags.mat")
+    bb=read(file,"b")
+    rts=read(file,"rts")
+close(file)
+
+# expected outputs    
 ia=6::Int64
-
 nex=9::Int64
-
 nnum=0::Int64
-
 lgrts=3::Int64
-
 AMAcode=1::Int64
-
-anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 
+######## uncomment to display the output in terminal ########
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
      
+# test the actual output against expected
 isapprox(bbJulia, bb, atol=1e-16::Float64) &&
 isapprox(rtsJulia, rts, atol=1e-16::Float64)&&
 iaJulia==ia&&
@@ -108,15 +126,18 @@ end;
 # test AMAalg example7 example
 function example7()::Bool
 
-
+# inputs
 neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
+anEpsi=0.0000000001::Float64
 
+# input matrix
 hh=[0.  0.  0.  0.  1.  0.  0.  1.  -1.  -1.  0.  0.;
     0.  0.  0.  0.  -0.3  1.  0.  0.  0.  -0.99  0.  0.;
     0.  0.  0.  1.  0.  0.  1.  -1.  0.  0.  0.  0.;
     0. 0. 0. -0.66 0. -1.1 0. 1. 0. 0. 0. 0.]
     
+#=============================EXPECTED OUTPUT=======================================
 bb = [0.  0.  0.  -0.655141349822179;
      0.  0.  0.  -0.294519698239307;
      0.  0.  0.  -0.663971668063238;
@@ -125,27 +146,31 @@ bb = [0.  0.  0.  -0.655141349822179;
 rts = [1.318551490597276 + 0.495360132457635im;
        1.318551490597276 - 0.495360132457635im;
        0.336028331936762 + 0.000000000000000im]::Array{Complex{Float64},1}
+==============================END EXPECTED OUTPUT==================================#
 
+# get the expected output from matlab file
+file = matopen("./matDir/AMAalg_examples/"*"example7.mat")
+    bb=read(file,"b")
+    rts=read(file,"rts")
+close(file)
+
+# expected outputs
 ia=3::Int64
-
 nex=2::Int64
-
 nnum=0::Int64
-
 lgrts=2::Int64
-
 AMAcode=1::Int64
 
-anEpsi=0.0000000001::Float64
-
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
-AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-    
+    AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
+
+######## uncomment to display the output in terminal ########
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
     
+# test the actual output against expected
 isapprox(bbJulia,bb,atol=1e-16::Float64) &&
 isapprox(rtsJulia,rts,atol=1e-16::Float64) &&
 iaJulia==ia&&
@@ -157,10 +182,12 @@ end;
 # test AMAalg oneEquationNoLead example
 function oneEquationNoLead()::Bool
 
-
+# inputs
 neq=1::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
+anEpsi=0.0000000001::Float64
 
+# input matrix
 hh=[2. 3. 0.]
     
 # genJuliaMatInit[bb, -0.666667, Array{Float64,2}]
@@ -169,20 +196,21 @@ bb = hcat([-0.666666666666667])::Array{Float64,2}
 # genJuliaMatInit[rts, -0.666667, Array{Float64,1}]
 rts = [-0.666666666666667]::Array{Float64,1}
 
+# expected output   
 ia=1::Int64
-
 nex=1::Int64
-
 nnum=0::Int64
-
-lgrts=0::Int64
-
 AMAcode=1::Int64
 
-anEpsi=0.0000000001::Float64
-
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
-AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
+    AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
+    
 isapprox(bbJulia,bb,atol=1e-16::Float64)&&
 isapprox(rtsJulia,rts,atol=1e-16::Float64)&&
 iaJulia==ia&&
@@ -194,16 +222,19 @@ end;
 # test AMAalg reliablePaperExmpl example
 function reliablePaperExmpl()::Bool
 
-
+# inputs
 neq=5::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
+anEpsi=0.0000000001::Float64
 
+# input matrix    
 hh=[0.  0.  0.  -0.5  0.  0.  -1.  0.7  -0.5  1.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  1.  -0.5  0.  0.  0.  0.  -0.5;
 0.  0.  0.  0.  0.  -1.  0.  1.  -0.4  0.  0.  0.  -0.9  0.  0.;
 0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
 
+#=============================EXPECTED OUTPUT=======================================
 bb =  [0.  0.  0.   0.                 0.;
       0.  0.  0.  -0.000000000000000  0.;
       0.  0.  0.   0.214101387641064  0.;
@@ -215,28 +246,31 @@ rts = [1.063826468350866 + 1.394321682814736im;
        1.063826468350866 - 1.394321682814736im;
        0.361235952187158 + 0.000000000000000im;
        0.000000000000000 + 0.000000000000000im]::Array{Complex{Float64},1}
-   
+==============================END EXPECTED OUTPUT==================================#
 
+# get the expected output from matlab file
+file = matopen("./matDir/AMAalg_examples/"*"reliablePaperExmpl.mat")
+    bb=read(file,"b")
+    rts=read(file,"rts")
+close(file)
+
+# expected outputs    
 ia=4::Int64
-
 nex=3::Int64
-
 nnum=0::Int64
-
 lgrts=2::Int64
-
 AMAcode=1::Int64
-
-anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 
+######## uncomment to display the output in terminal ########
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
         
+# test the actual output against expected
 isapprox(bbJulia,bb,atol=1e-16::Float64)&&
 isapprox(rtsJulia,rts,atol=1e-16::Float64)&&
 iaJulia==ia&&
@@ -248,9 +282,12 @@ end;
 # test AMAalg athan example
 function athan()::Bool
 
+# inputs
 neq=9::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
+anEpsi=0.0000000001::Float64
 
+# input matrix
 hh=[-0.5  0.  0.  0.  0.  0.  0.  0.  0.  1.  -0.18  0.  0.  -1.  0.  0.  0.  0.  -0.5  0.  0.  0.  0.  0.  0.  0.  0.;
 -0.293  -0.764  0.293  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  -2.  -1.  1.  1.  0.  0.  2.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
@@ -260,7 +297,8 @@ hh=[-0.5  0.  0.  0.  0.  0.  0.  0.  0.  1.  -0.18  0.  0.  -1.  0.  0.  0.  0.
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0. 0. 0. 0. 0. 0. 0. 0. -1. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
-
+    
+#=============================EXPECTED OUTPUT=======================================
 bb = [0.828597338313033  0.296448523562084  -0.113690336915825   0.212331765742260  0.  0.  0.  0.  0.;
       0.293000000000000  0.764000000000000  -0.293000000000000   0.                 0.  0.  0.  0.  0.;
       1.950194676626066  1.356897047124168  -0.520380673831651  -0.486336468515480  0.  0.  0.  0.  0.;
@@ -279,27 +317,31 @@ rts = [1.398783335518616 + 0.000000000000000im;
        0.536108332240691 - 0.222056420218352im;
        0.000000000000001 + 0.000000000000000im;
        0.000000000000000 + 0.000000000000000im]::Array{Complex{Float64},1}
+==============================END EXPECTED OUTPUT==================================#
 
+# get the expected output from matlab file
+file = matopen("./matDir/AMAalg_examples/"*"athan.mat")
+    bb=read(file,"b")
+    rts=read(file,"rts")
+close(file)
+
+# expected outputs
 ia=7::Int64
-
 nex=8::Int64
-
 nnum=0::Int64
-
 lgrts=1::Int64
-
 AMAcode=1::Int64
 
-anEpsi=0.0000000001::Float64
-
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
-AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
+    AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 
+######## uncomment to display the output in terminal ########
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
-  
+
+# test the actual output against expected
 isapprox(bbJulia,bb,atol=1e-16::Float64)&&
 isapprox(rtsJulia,rts,atol=1e-16::Float64)&&
 iaJulia==ia&&
@@ -311,10 +353,12 @@ end;
 # test AMAalg habitmod example
 function habitmod()::Bool
 
-
+# inputs
 neq=12::Int64;nlag=4::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
+anEpsi=0.0000000001::Float64
 
+#input matrix
 hh=[0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  -1.  -1.  0.  0.  3.45419  0.  0.  -0.74118  0.00208517  0.494116  -0.1149  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.88879  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.52802  0.  0.11279  0.031833  0.024734  0.  0.  0.  0.  0.  0.  0.  -0.71526  0.  0.042076  -0.22829  -0.012267  0.  0.  0.  0.  0.  0.  0.  0.22215  0.  -0.14172  0.26679  -0.11959  0.  0.  0.  0.  0.  0.  0.  -0.42308  0.  -0.61076  -0.10946  0.17172  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  -0.00011277  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
@@ -327,7 +371,9 @@ hh=[0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  -0.99578  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  -0.99578  0.;
 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. -1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
-    
+
+
+#================================== EXPECTED OUTPUT ======================================    
 bb=[0.0275299  0.  0.0204675  0.00384168  0.0510466  0.  0.  0.  0.  0.  0.  0.  -0.150125  0.  0.0802913  -0.0569634  0.0332227  0.  0.  0.  0.  0.  0.  0.  0.00762739  0.  0.132004  -0.000975575  0.140907  0.  0.  0.  0.  0.  0.  0.  0.409592  0.531564  0.281743  -0.370309  -0.00715738  0.  0.000594579  0.  0.  0.  0.  0.0247319;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.88879  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 -0.52802  0.  -0.11279  -0.031833  -0.024734  0.  0.  0.  0.  0.  0.  0.  0.71526  0.  -0.042076  0.22829  0.012267  0.  0.  0.  0.  0.  0.  0.  -0.22215  0.  0.14172  -0.26679  0.11959  0.  0.  0.  0.  0.  0.  0.  0.42308  0.  0.61076  0.10946  -0.17172  0.  0.  0.  0.  0.  0.  0.00011277;
@@ -340,7 +386,7 @@ bb=[0.0275299  0.  0.0204675  0.00384168  0.0510466  0.  0.  0.  0.  0.  0.  0. 
 0.0235796  0.  -0.0818094  0.0108053  -0.152502  0.  0.  0.  0.  0.  0.  0.  0.436271  0.  -0.246456  0.127264  0.0284865  0.  0.  0.  0.  0.  0.  0.  -0.248762  0.  -0.221058  -0.110815  -0.0970434  0.  0.  0.  0.  0.  0.  0.  25.5232  -0.947988  -0.416326  0.61486  0.420138  0.  0.0375093  0.  0.  0.  0.  -0.152162;
 -0.00201156  0.  0.00248092  -0.000581449  0.00412511  0.  0.  0.  0.  0.  0.  0.  -0.0116365  0.  0.00675309  -0.00288513  -0.00242817  0.  0.  0.  0.  0.  0.  0.  0.00965336  0.  0.00373112  0.00447091  -0.00157814  0.  0.  0.  0.  0.  0.  0.  -0.998996  0.0173377  0.00574045  -0.0102517  -0.0165428  0.  -0.00146776  0.  0.  0.  0.  0.00513261;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
-
+   
 rts=[679.579 + 0.0im;
 1.11741 + 0.0im;
 1.00424 + 0.0im;
@@ -365,7 +411,7 @@ rts=[679.579 + 0.0im;
 -0.000096719 - 0.0000998847im;
 0.000096719 + 0.0000934444im;
 0.000096719 - 0.0000934444im]::Array{Complex{Float64},1}
-#=
+
     rts =
 
    1.0e+02 *
@@ -393,33 +439,32 @@ rts=[679.579 + 0.0im;
  -0.000000850833188 + 0.000000000000000i
   0.000000014229547 + 0.000000836846336i
   0.000000014229547 - 0.000000836846336i
-  0.000000822374090 + 0.000000000000000i]::Array{Complex{Float64},1}=#
+  0.000000822374090 + 0.000000000000000i]::Array{Complex{Float64},1}
+==============================END EXPECTED OUTPUT==================================#
 
+# get the expected output from matlab file
 file = matopen("./matDir/AMAalg_examples/"*"habitmod.mat")
-bb=read(file,"b")
-rts=read(file,"rts")
+    bb=read(file,"b")
+    rts=read(file,"rts")
 close(file)
- 
+
+#expected output
 ia=24::Int64
-
 nex=7::Int64
-
 nnum=0::Int64
-
 lgrts=5::Int64
-
 AMAcode=1::Int64
-
-anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 
+######## uncomment to display the output in terminal ########
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
     
+    # test the actual output against expected
 isapprox(bbJulia,bb,atol=1e-16::Float64)&&
 isapprox(rtsJulia,rts,atol=1e-12::Float64)&&
 iaJulia==ia&&

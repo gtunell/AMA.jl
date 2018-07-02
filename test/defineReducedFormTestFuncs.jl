@@ -1,94 +1,76 @@
 module ReducedFormTests
-using MAT
 
+# include("../src/AMA.jl")
 # test reducedForm
-using ..AMA
+using ..AMA, MAT
 
 #tweaked= False
 # test reducedForm firmvalue example
 function firmvalueFalse()::Bool
 
-neq=4::Int64;nlag=1::Int64;nlead=1::Int64
-qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
+# inputs
+neq    = 4::Int64
+qRows  = 4::Int64
+qCols  = 8::Int64
+bCols  = 4::Int64
+anEpsi = 0.0000000001::Float64
 
-#=====================================
- bb=[0.  0.228571  0.  0.;
- 0.  0.4  0.  0.;
- 0.  0.  0.  0.;
- 0.  0.  0.  1.]::Array{Float64,2}
- 
- qNew=[0.  -0.4  0.  0.  0.  1.  -1.  0.;
- 0.  0.  0.  0.  0.  0.  1.  0.;
- 0.  0.  0.  -1.  0.  0.  0.  1.;
-0. 0. 0. 0. 0. 0. 0. 0.]::Array{Float64,2}
-============================#
+# input matrix
+qq = [0.  -0.400000000000000  0.  0.                  0.                 1.000000000000000  -1.000000000000000  0.;
+      0.   0.                 0.  0.                  0.                 0.                  1.000000000000000  0.;
+      0.   0.                 0.  -1.000000000000000  0.                 0.                  0.                 1.000000000000000;
+      0.   0.                 0.  0.                  0.868243142124459  -0.496138938356834  0.                 0.]::Array{Float64,2}
 
-qRows=4::Int64
-
-qCols=8::Int64
-
-bCols=4::Int64
-
-anEpsi=0.0000000001::Float64
-
+#=============================EXPECTED OUTPUT=======================================
+bb = [0.  0.228571428571429  0.  0.;
+      0.  0.400000000000000  0.  0.;
+      0.  0.                 0.  0.;
+      0.  0.                 0.  1.000000000000000]::Array{Float64,2}
+==============================END EXPECTED OUTPUT==================================#
+    
+# get expected output from matlab file
 file = matopen("./matDir/reducedForm_examples/"*"firmvalueFalse.mat")
-bb=read(file,"bb")
-qNew=read(file,"qNew")
+    bb=read(file,"b")
+    nonsing=read(file,"nonsing")
 close(file)
 
-(nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-display(bbJulia)
-    display(nonsingJulia)
+(nonsingJulia,bbJulia) = reducedForm(qq,qRows,qCols,bCols,neq,anEpsi)
     
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)#&&
-#nonsingJulia==true
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
+# test the actual output against expected
+isapprox(bbJulia,bb,atol=1e-16::Float64) &&
+nonsingJulia==nonsing
 end;
 
 #tweaked= False
 # test reducedForm firmvalue3Leads2Lags example
 function firmvalue3Leads2LagsFalse()::Bool
 
+# inputs
+neq    =  4::Int64
+qRows  = 12::Int64
+qCols  = 20::Int64
+bCols  =  8::Int64
+anEpsi = 0.0000000001::Float64
 
-neq=4::Int64;nlag=2::Int64;nlead=3::Int64
-qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
-
-#==================================================
-bb=[0.  0.0374804  0.  0.  0.  0.31179  0.  0.;
-0.  0.4  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
-
-qNew=[0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  1.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
-=================================================#
-
+# get input matrix q and expected output from matlab file
 file = matopen("./matDir/reducedForm_examples/"*"firmvalue3Leads2LagsFalse.mat")
-bb=read(file,"bb")
-qNew=read(file,"qNew")
+    qq = read(file,"q")
+    bb = read(file,"b")
+    nonsing = read(file,"nonsing")
 close(file)
+
+(nonsingJulia,bbJulia)=reducedForm(qq,qRows,qCols,bCols,neq,anEpsi)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
     
-nonsing=true::Bool
-
-qRows=12::Int64
-
-qCols=20::Int64
-
-bCols=8::Int64
-
-anEpsi=0.0000000001::Float64
-
-(nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
+# test the actual output against expected
+isapprox(bbJulia,bb,atol=1e-16::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -96,39 +78,28 @@ end;
 # test reducedForm example7 example
 function example7False()::Bool
 
+# inputs
+neq    = 4::Int64
+qRows  = 4::Int64
+qCols  = 8::Int64
+bCols  = 4::Int64
+anEpsi = 0.0000000001::Float64
 
-neq=4::Int64;nlag=1::Int64;nlead=1::Int64
-qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
-
-#=================================================
-bb=[0.  0.  0.  -0.655141;
-0.  0.  0.  -0.29452;
-0.  0.  0.  -0.663972;
-0.  0.  0.  0.336028]::Array{Float64,2}
-
-qNew=[0.  0.  0.  1.  0.  0.  1.  -1.;
-0.  0.  0.  -0.66  0.  -1.1  0.  1.;
-0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
-=================================================#
-
+# get expected output from matlab file
 file = matopen("./matDir/reducedForm_examples/"*"example7False.mat")
-bb=read(file,"bb")
-qNew=read(file,"qNew")
+    qq = read(file,"q")
+    bb = read(file,"b")
+    nonsing = read(file,"nonsing")
 close(file)
     
-nonsing=true::Bool
+(nonsingJulia,bbJulia)=reducedForm(qq,qRows,qCols,bCols,neq,anEpsi)
 
-qRows=4::Int64
-
-qCols=8::Int64
-
-bCols=4::Int64
-
-anEpsi=0.0000000001::Float64
-
-(nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+ 
+# test the actual output against expected
+isapprox(bbJulia,bb,atol=1e-16::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -136,27 +107,28 @@ end;
 # test reducedForm oneEquationNoLead example
 function oneEquationNoLeadFalse()::Bool
 
-
-neq=1::Int64;nlag=1::Int64;nlead=1::Int64
-qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
-
-
-bb=hcat([-0.666667])::Array{Float64,2}
-
-qNew=[2.  3.]::Array{Float64,2}
-
+# inputs
 nonsing=true::Bool
-
+neq = 1::Int64
 qRows=1::Int64
-
 qCols=2::Int64
-
 bCols=1::Int64
-
 anEpsi=0.0000000001::Float64
 
-(nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
+# input matrix
+qq=[2.  3.]::Array{Float64,2}
+
+# expected output
+bb=hcat([-0.6666666666666666])::Array{Float64,2}
+
+(nonsingJulia,bbJulia)=reducedForm(qq,qRows,qCols,bCols,neq,anEpsi)
+    
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
+# test the actual output against expected
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -164,41 +136,28 @@ end;
 # test reducedForm reliablePaperExmpl example
 function reliablePaperExmplFalse()::Bool
 
-
-neq=5::Int64;nlag=1::Int64;nlead=1::Int64
-qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
-
-#=====================================
-bb=[0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.;
-0.  0.  0.  0.214101  0.;
-0.  0.  0.  0.361236  0.;
-0.  0.  0.  0.530747  0.]::Array{Float64,2}
-
-qNew=[0.  0.  0.  -0.5  0.  0.  -1.  0.7  -0.5  1.;
-0.  0.  0.  0.  0.  1.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  1.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
-======================================#
-
-file = matopen("./matDir/reducedForm_examples/"*"reliablePaperExmplFalse.mat")
-bb=read(file,"bb")
-qNew=read(file,"qNew")
-close(file)
-    
-nonsing=true::Bool
-
+# inputs
+neq=5::Int64     
 qRows=5::Int64
-
 qCols=10::Int64
-
 bCols=5::Int64
-
 anEpsi=0.0000000001::Float64
+ 
+# get expected output from matlab file
+file = matopen("./matDir/reducedForm_examples/"*"reliablePaperExmplFalse.mat")
+    qq = read(file,"q")
+    bb = read(file,"b")
+    nonsing = read(file,"nonsing")
+close(file)
 
-(nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
+(nonsingJulia,bbJulia)=reducedForm(qq,qRows,qCols,bCols,neq,anEpsi)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)    
+    
+# test the actual output against expected
+isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -206,49 +165,28 @@ end;
 # test reducedForm athan example
 function athanFalse()::Bool
 
-
-neq=9::Int64;nlag=1::Int64;nlead=1::Int64
-qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
-
-#=============================================
-bb=[0.828597  0.296449  -0.11369  0.212332  0.  0.  0.  0.  0.;
-0.293  0.764  -0.293  0.  0.  0.  0.  0.  0.;
-1.95019  1.3569  -0.520381  -0.486336  0.  0.  0.  0.  0.;
-0.  0.  0.  0.911  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
-
-qNew=[-0.293  -0.764  0.293  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  -1.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  -2.  -1.  1.  1.  0.  0.  2.  0.  0.;
-0.  0.  0.  -0.911  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  -1.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  1.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
-==============================================#
-
-file = matopen("./matDir/reducedForm_examples/"*"athanFalse.mat")
-bb=read(file,"bb")
-qNew=read(file,"qNew")
-close(file)
-    
-nonsing=true::Bool
-
+# inputs
+neq=9::Int64
 qRows=9::Int64
-
 qCols=18::Int64
-
 bCols=9::Int64
-
 anEpsi=0.0000000001::Float64
+    
+# get expected output from matlab file
+file = matopen("./matDir/reducedForm_examples/"*"athanFalse.mat")
+    qq = read(file,"q")
+    bb = read(file,"b")
+    nonsing = read(file,"nonsing")
+close(file)
+ 
+(nonsingJulia,bbJulia)=reducedForm(qq,qRows,qCols,bCols,neq,anEpsi)
 
-(nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
+# test the actual output against expected
+isapprox(bbJulia,bb,atol=1e-16::Float64)&&
 nonsingJulia==nonsing
 end;
 
@@ -256,54 +194,27 @@ end;
 # test reducedForm habitmod example
 function habitmodFalse()::Bool
 
-
-neq=12::Int64;nlag=4::Int64;nlead=1::Int64
-qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
-
-#==================================
-bb=[0.0275299  0.  0.0204675  0.00384168  0.0510466  0.  0.  0.  0.  0.  0.  0.  -0.150125  0.  0.0802913  -0.0569634  0.0332227  0.  0.  0.  0.  0.  0.  0.  0.00762739  0.  0.132004  -0.000975575  0.140907  0.  0.  0.  0.  0.  0.  0.  0.409592  0.531564  0.281743  -0.370309  -0.00715738  0.  0.000594579  0.  0.  0.  0.  0.0247319;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.88879  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
--0.52802  0.  -0.11279  -0.031833  -0.024734  0.  0.  0.  0.  0.  0.  0.  0.71526  0.  -0.042076  0.22829  0.012267  0.  0.  0.  0.  0.  0.  0.  -0.22215  0.  0.14172  -0.26679  0.11959  0.  0.  0.  0.  0.  0.  0.  0.42308  0.  0.61076  0.10946  -0.17172  0.  0.  0.  0.  0.  0.  0.00011277;
--0.46436  0.  -0.16131  -0.02744  -0.17087  0.  0.  0.  0.  0.  0.  0.  1.3425  0.  -0.16794  0.35818  0.09837  0.  0.  0.  0.  0.  0.  0.  -1.06382  0.  0.02255  -0.51594  -0.08949  0.  0.  0.  0.  0.  0.  0.  0.46672  0.  0.11369  1.10657  0.26021  0.  0.  0.  0.  0.  0.  0.00141;
-0.23292  0.  -0.08512  0.04213  -0.14149  0.  0.  0.  0.  0.  0.  0.  -0.03313  0.  -0.15223  -0.01572  0.34762  0.  0.  0.  0.  0.  0.  0.  -0.70552  0.  0.24697  -0.21888  0.07805  0.  0.  0.  0.  0.  0.  0.  0.56316  0.  0.08268  0.16054  0.68637  0.  0.  0.  0.  0.  0.  0.00348;
--0.0486562  0.  -0.0143582  -0.00361503  -0.0163681  0.  0.  0.  0.  0.  0.  0.  0.0963933  0.  -0.0262052  0.0337474  -0.00907889  0.  0.  0.  0.  0.  0.  0.  -0.0178323  0.  -0.0276432  -0.0192967  -0.0320882  0.  0.  0.  0.  0.  0.  0.  0.0410416  0.105222  -0.0348985  0.115168  -0.012502  0.  0.0000156628  0.  0.  0.  0.  0.0265769;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.99853  0.  0.  0.  0.  0.  0.00147  0.  0.  0.  0.  0.;
-0.0265517  0.  0.019758  0.00370218  0.0492574  0.  0.  0.  0.  0.  0.  0.  -0.145004  0.  0.0774512  -0.0549674  0.0320274  0.  0.  0.  0.  0.  0.  0.  0.00761162  0.  0.127323  -0.000854112  0.135885  0.  0.  0.  0.  0.  0.  0.  -25.5133  0.512756  0.27179  -0.35728  -0.00690759  0.  -0.0375677  0.  0.  0.  0.  0.02386;
-0.521517  0.  0.1143  0.0309276  0.0282826  0.  0.  0.  0.  0.  0.  0.  -0.724878  0.  0.0467801  -0.229153  -0.0155764  0.  0.  0.  0.  0.  0.  0.  0.232646  0.  -0.140072  0.271375  -0.122108  0.  0.  0.  0.  0.  0.  0.  -0.421116  0.0172992  -0.603894  -0.115681  0.153917  0.  0.00000222775  0.  0.  0.  0.  0.00504552;
-0.0235796  0.  -0.0818094  0.0108053  -0.152502  0.  0.  0.  0.  0.  0.  0.  0.436271  0.  -0.246456  0.127264  0.0284865  0.  0.  0.  0.  0.  0.  0.  -0.248762  0.  -0.221058  -0.110815  -0.0970434  0.  0.  0.  0.  0.  0.  0.  25.5232  -0.947988  -0.416326  0.61486  0.420138  0.  0.0375093  0.  0.  0.  0.  -0.152162;
--0.00201156  0.  0.00248092  -0.000581449  0.00412511  0.  0.  0.  0.  0.  0.  0.  -0.0116365  0.  0.00675309  -0.00288513  -0.00242817  0.  0.  0.  0.  0.  0.  0.  0.00965336  0.  0.00373112  0.00447091  -0.00157814  0.  0.  0.  0.  0.  0.  0.  -0.998996  0.0173377  0.00574045  -0.0102517  -0.0165428  0.  -0.00146776  0.  0.  0.  0.  0.00513261;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
-
-qNew=[0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  -1.  -1.  0.  0.  3.45419  0.  0.  -0.74118  0.00208517  0.494116  -0.1149;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.88879  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.52802  0.  0.11279  0.031833  0.024734  0.  0.  0.  0.  0.  0.  0.  -0.71526  0.  0.042076  -0.22829  -0.012267  0.  0.  0.  0.  0.  0.  0.  0.22215  0.  -0.14172  0.26679  -0.11959  0.  0.  0.  0.  0.  0.  0.  -0.42308  0.  -0.61076  -0.10946  0.17172  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  -0.00011277;
-0.46436  0.  0.16131  0.02744  0.17087  0.  0.  0.  0.  0.  0.  0.  -1.3425  0.  0.16794  -0.35818  -0.09837  0.  0.  0.  0.  0.  0.  0.  1.06382  0.  -0.02255  0.51594  0.08949  0.  0.  0.  0.  0.  0.  0.  -0.46672  0.  -0.11369  -1.10657  -0.26021  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  -0.00141;
--0.23292  0.  0.08512  -0.04213  0.14149  0.  0.  0.  0.  0.  0.  0.  0.03313  0.  0.15223  0.01572  -0.34762  0.  0.  0.  0.  0.  0.  0.  0.70552  0.  -0.24697  0.21888  -0.07805  0.  0.  0.  0.  0.  0.  0.  -0.56316  0.  -0.08268  -0.16054  -0.68637  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  -0.00348;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -0.99853  0.  0.  0.  0.  0.  -0.00147  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
-======================================#
-
-file = matopen("./matDir/reducedForm_examples/"*"habitmodFalse.mat")
-bb=read(file,"bb")
-qNew=read(file,"qNew")
-close(file)
-    
-nonsing=true::Bool
-
+# inputs
+neq=12::Int64
 qRows=12::Int64
-
 qCols=60::Int64
-
 bCols=48::Int64
-
 anEpsi=0.0000000001::Float64
+    
+# get expected output from matlab file
+file = matopen("./matDir/reducedForm_examples/"*"habitmodFalse.mat")
+    qq = read(file,"q")
+    bb = read(file,"b")
+    nonsing = read(file,"nonsing")
+close(file)
 
-(nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
+(nonsingJulia,bbJulia)=reducedForm(qq,qRows,qCols,bCols,neq,anEpsi)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
+# test the actual output against expected
 isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
@@ -344,6 +255,12 @@ bCols=4::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
+# test the actual output against expected
 isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
@@ -392,6 +309,11 @@ bCols=8::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
 isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
@@ -417,6 +339,11 @@ qNew=[0.  0.  0.  0.971449  0.000000000000000111022  0.0923723  0.916025  -1.;
 =========================================#
 
 file = matopen("./matDir/reducedForm_examples/"*"example7True.mat")
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
 bb=read(file,"bb")
 qNew=read(file,"qNew")
 close(file)
@@ -460,6 +387,11 @@ bCols=1::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
 isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
@@ -502,6 +434,11 @@ bCols=5::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
 isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
@@ -552,6 +489,11 @@ bCols=9::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
 isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
@@ -608,6 +550,11 @@ bCols=48::Int64
 anEpsi=0.0000000001::Float64
 
 (nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+    
 isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-4::Float64)&&
 nonsingJulia==nonsing
 end;
