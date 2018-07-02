@@ -466,7 +466,7 @@ AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
     
     # test the actual output against expected
 isapprox(bbJulia,bb,atol=1e-16::Float64)&&
-isapprox(rtsJulia,rts,atol=1e-12::Float64)&&
+isapprox(rtsJulia,rts,atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&

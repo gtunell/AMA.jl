@@ -1,7 +1,7 @@
 module NumericShiftTests
-using MAT
 
-using ..AMA
+#include("../src/AMA.jl")
+using ..AMA, MAT
 
 # test numericShift! firmvalue example
 function firmvalueFalse()::Bool
@@ -87,22 +87,26 @@ sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericMatlab
 end;
+
 #tweaked= False
 # test numericShift! example7 example
 function example7False()::Bool
 
+# inputs
+neq=4::Int64
+qRows = 4::Int64
+qCols = 8::Int64
+condn=0.0000000001::Float64
 
-neq=4::Int64;nlag=1::Int64;nlead=1::Int64
-qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
-
-
+# input matrices
 qq=zeros(Float64,4,8)
-
+    
 hhIn=[0.  0.  0.  0.  1.  0.  0.  1.  -1.  -1.  0.  0.;
 0.  0.  0.  0.  -0.3  1.  0.  0.  0.  -0.99  0.  0.;
 0.  0.  0.  1.  0.  0.  1.  -1.  0.  0.  0.  0.;
 0.  0.  0.  -0.66  0.  -1.1  0.  1.  0.  0.  0.  0.]::Array{Float64,2}
 
+#=============================EXPECTED OUTPUT=======================================    
 hNewMatlab=[0.  0.  0.  0.  -0.499588  -0.703545  0.  -0.710651  0.710651  1.40716  0.  0.;
 0.  0.  0.  0.  -0.91674  0.710651  0.  -0.703545  0.703545  0.000000000000000111022  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  1.  -1.;
@@ -112,15 +116,28 @@ qNewMatlab=[0.  0.  0.  1.  0.  0.  1.  -1.;
 0.  0.  0.  -0.66  0.  -1.1  0.  1.;
 0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
+==============================END EXPECTED OUTPUT==================================#
 
-condn=0.0000000001::Float64
-
+# get expected output from matlab file
+file = matopen("./matDir/numericShift_examples/"*"example7False.mat")
+    hNewMatlab=read(file,"h")
+    qNewMatlab=read(file,"q")
+close(file)
+    
+# outputs
 iqNewMatlab=2
-
 nnumericMatlab=2
 
 (hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
-isapprox(hNewJulia,hNewMatlab,rtol=0.0::Float64,atol=1e-16::Float64)&&
+
+######## uncomment to display the output in terminal ########
+ show(IOContext(STDOUT, :compact=>false), "text/plain", hNewJulia)
+ show(IOContext(STDOUT, :compact=>false), "text/plain", hNewMatlab)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewJulia
+# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewMatlab)
+    
+# test the actual output against expected    
+isapprox(hNewJulia,hNewMatlab,atol=1e-16::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericMatlab
