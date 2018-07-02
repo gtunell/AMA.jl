@@ -1,7 +1,7 @@
 module AMAalgTests
 
 using MAT
-
+#include("../src/AMA.jl")
 # test AMAalg
 using ..AMA
 
@@ -12,18 +12,18 @@ neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 hh=[0.  0.  0.  0.  -1.1  0.  0.  0.  1.  1.  0.  0.;
-0.  -0.4  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
-0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.]::Array{Float64,2}
+    0.  -0.4  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.;
+    0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
+    0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.]::Array{Float64,2}
 
-bb=[0.  0.228571  0.  0.;
- 0.  0.4  0.  0.;
- 0.  0.  0.  0.;
- 0.  0.  0.  1.]::Array{Float64,2}
+bb = [0.   0.228571428571429   0.   0.;
+     0.   0.400000000000000   0.   0.;
+     0.   0.                  0.   0.;
+     0.   0.                  0.   1.000000000000000]::Array{Float64,2}
 
 rts=[1.1;
-1.;
-0.4]::Array{Float64,1}
+     1.;
+     0.4]::Array{Float64,1}
 
 ia=3::Int64
 
@@ -39,15 +39,14 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
+    
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
 
-    # rounding matrices
-bbJulia = round.(bbJulia, 6)
-bb = round.(bb, 6)
-rtsJulia = round.(rtsJulia, 6)
-rts = round.(rts, 6)
-
-isapprox(bbJulia,bb,rtol=0.::Float64,atol=1e-6::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.::Float64,atol=1e-6::Float64)&&
+isapprox(bbJulia, bb, atol=1e-16::Float64) &&
+isapprox(rtsJulia, rts, atol=1e-16::Float64) &&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -62,21 +61,21 @@ neq=4::Int64;nlag=2::Int64;nlead=3::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 hh=[0.  0.  0.  0.  0.  0.  0.  0.  -1.331  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.;
-0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0. 0. 0. 0. 0. 0. 0. -1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]::Array{Float64,2}
-    
-bb=[0.  0.0374804  0.  0.  0.  0.31179  0.  0.;
-0.  0.4  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
+    0.  -0.4  0.  0.  0.  0.  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
+    0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
+    0. 0. 0. 0. 0. 0. 0. -1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]::Array{Float64,2}
 
-rts=[-0.55 + 0.952628im;
--0.55 - 0.952628im;
-1.1 + 0.0im;
-1. + 0.0im;
-0.632456 + 0.0im;
--0.632456 + 0.0im]::Array{Complex{Float64},1}
+bb=[0.  0.037480359413222  0.  0.  0.   0.311789739868737  0.  0.;
+    0.  0.400000000000000  0.  0.  0.   0.                 0.  0.;
+    0.  0.                 0.  0.  0.   0.                 0.  0.;
+    0.  0.                 0.  0.  0.   0.                 0.  1.000000000000000]::Array{Float64,2}
+
+rts = [1.100000000000000 + 0.000000000000000im;
+       -0.550000000000000 + 0.952627944162882im;
+       -0.550000000000000 - 0.952627944162882im;
+       1.000000000000000 + 0.000000000000000im;
+       -0.632455532033676 + 0.000000000000000im;
+       0.632455532033676 + 0.000000000000000im]
 
 ia=6::Int64
 
@@ -93,14 +92,13 @@ anEpsi=0.0000000001::Float64
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 
-  # rounding matrices
-bbJulia = round.(bbJulia, 7)
-bb = round.(bb, 7)
-rtsJulia = round.(rtsJulia, 6)
-rts = round.(rts, 6)
-   
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
+     
+isapprox(bbJulia, bb, atol=1e-16::Float64) &&
+isapprox(rtsJulia, rts, atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -115,18 +113,18 @@ neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 hh=[0.  0.  0.  0.  1.  0.  0.  1.  -1.  -1.  0.  0.;
-0.  0.  0.  0.  -0.3  1.  0.  0.  0.  -0.99  0.  0.;
-0.  0.  0.  1.  0.  0.  1.  -1.  0.  0.  0.  0.;
-0. 0. 0. -0.66 0. -1.1 0. 1. 0. 0. 0. 0.]
+    0.  0.  0.  0.  -0.3  1.  0.  0.  0.  -0.99  0.  0.;
+    0.  0.  0.  1.  0.  0.  1.  -1.  0.  0.  0.  0.;
+    0. 0. 0. -0.66 0. -1.1 0. 1. 0. 0. 0. 0.]
     
-bb=[0.  0.  0.  -0.655141;
-0.  0.  0.  -0.29452;
-0.  0.  0.  -0.663972;
-0.  0.  0.  0.336028]::Array{Float64,2}
+bb = [0.  0.  0.  -0.655141349822179;
+     0.  0.  0.  -0.294519698239307;
+     0.  0.  0.  -0.663971668063238;
+     0.  0.  0.   0.336028331936762]::Array{Float64,2}
 
-rts=[1.31855 + 0.49536im;
-1.31855 - 0.49536im;
-0.336028 + 0.0im]::Array{Complex{Float64},1}
+rts = [1.318551490597276 + 0.495360132457635im;
+       1.318551490597276 - 0.495360132457635im;
+       0.336028331936762 + 0.000000000000000im]::Array{Complex{Float64},1}
 
 ia=3::Int64
 
@@ -142,8 +140,14 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
+    
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
+    
+isapprox(bbJulia,bb,atol=1e-16::Float64) &&
+isapprox(rtsJulia,rts,atol=1e-16::Float64) &&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -159,9 +163,11 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 hh=[2. 3. 0.]
     
-genJuliaMatInit[bb, -0.666667, Array{Float64,2}]
+# genJuliaMatInit[bb, -0.666667, Array{Float64,2}]
+bb = hcat([-0.666666666666667])::Array{Float64,2}
 
-genJuliaMatInit[rts, -0.666667, Array{Float64,1}]
+# genJuliaMatInit[rts, -0.666667, Array{Float64,1}]
+rts = [-0.666666666666667]::Array{Float64,1}
 
 ia=1::Int64
 
@@ -177,8 +183,8 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
+isapprox(bbJulia,bb,atol=1e-16::Float64)&&
+isapprox(rtsJulia,rts,atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -197,17 +203,19 @@ hh=[0.  0.  0.  -0.5  0.  0.  -1.  0.7  -0.5  1.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  -1.  0.  1.  -0.4  0.  0.  0.  -0.9  0.  0.;
 0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
-    
-bb=[0.  0.  0.  0.  0.;
-0.  0.  0.  0.00000000000000000159422  0.;
-0.  0.  0.  0.214101  0.;
-0.  0.  0.  0.361236  0.;
-0.  0.  0.  0.530747  0.]::Array{Float64,2}
 
-rts=[1.06383 + 1.39432im;
-1.06383 - 1.39432im;
-0.361236 + 0.0im;
-0. + 0.0im]::Array{Complex{Float64},1}
+bb =  [0.  0.  0.   0.                 0.;
+      0.  0.  0.  -0.000000000000000  0.;
+      0.  0.  0.   0.214101387641064  0.;
+      0.  0.  0.   0.361235952187158  0.;
+      0.  0.  0.   0.530747004744834  0]::Array{Float64,2}
+
+
+rts = [1.063826468350866 + 1.394321682814736im;
+       1.063826468350866 - 1.394321682814736im;
+       0.361235952187158 + 0.000000000000000im;
+       0.000000000000000 + 0.000000000000000im]::Array{Complex{Float64},1}
+   
 
 ia=4::Int64
 
@@ -223,8 +231,14 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
+
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
+        
+isapprox(bbJulia,bb,atol=1e-16::Float64)&&
+isapprox(rtsJulia,rts,atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -233,7 +247,6 @@ end;
 
 # test AMAalg athan example
 function athan()::Bool
-
 
 neq=9::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
@@ -247,24 +260,25 @@ hh=[-0.5  0.  0.  0.  0.  0.  0.  0.  0.  1.  -0.18  0.  0.  -1.  0.  0.  0.  0.
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.;
 0. 0. 0. 0. 0. 0. 0. 0. -1. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
-    
-bb=[0.828597  0.296449  -0.11369  0.212332  0.  0.  0.  0.  0.;
-0.293  0.764  -0.293  0.  0.  0.  0.  0.  0.;
-1.95019  1.3569  -0.520381  -0.486336  0.  0.  0.  0.  0.;
-0.  0.  0.  0.911  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.  1.]::Array{Float64,2}
 
-rts=[1.39878 + 0.0im;
-1. + 0.0im;
-0.911 + 0.0im;
-0.536108 + 0.222056im;
-0.536108 - 0.222056im;
-0.000000000000000166533 + 0.0im;
-0. + 0.0im]::Array{Complex{Float64},1}
+bb = [0.828597338313033  0.296448523562084  -0.113690336915825   0.212331765742260  0.  0.  0.  0.  0.;
+      0.293000000000000  0.764000000000000  -0.293000000000000   0.                 0.  0.  0.  0.  0.;
+      1.950194676626066  1.356897047124168  -0.520380673831651  -0.486336468515480  0.  0.  0.  0.  0.;
+      0.                  0.                 0.                  0.911000000000000  0.  0.  0.  0.  0.;
+      0.                  0.                 0.                  0.                 0.  0.  0.  0.  0.;
+      0.                  0.                 0.                  0.                 0.  0.  0.  0.  0.;
+      0.                  0.                 0.                  0.                 0.  0.  0.  0.  0.;
+      0.                  0.                 0.                  0.                 0.  0.  0.  0.  0.;
+      0.                  0.                 0.                  0.                 0.  0.  0.  0.  1.000000000000000]::Array{Float64,2}
+
+
+rts = [1.398783335518616 + 0.000000000000000im;
+       1.000000000000000 + 0.000000000000000im;
+       0.911000000000000 + 0.000000000000000im;
+       0.536108332240691 + 0.222056420218352im;
+       0.536108332240691 - 0.222056420218352im;
+       0.000000000000001 + 0.000000000000000im;
+       0.000000000000000 + 0.000000000000000im]::Array{Complex{Float64},1}
 
 ia=7::Int64
 
@@ -280,8 +294,14 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
+
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
+  
+isapprox(bbJulia,bb,atol=1e-16::Float64)&&
+isapprox(rtsJulia,rts,atol=1e-16::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -345,7 +365,41 @@ rts=[679.579 + 0.0im;
 -0.000096719 - 0.0000998847im;
 0.000096719 + 0.0000934444im;
 0.000096719 - 0.0000934444im]::Array{Complex{Float64},1}
+#=
+    rts =
 
+   1.0e+02 *
+
+  [679.5791882704392 + 0.000000000000000i
+  0.011174056911205 + 0.000000000000000i
+  0.010042378838699 + 0.000000000000000i
+  0.010042378838699 + 0.000000000000000i
+  0.010040319456276 + 0.000000000000000i
+  0.010000000000000 + 0.000000000000000i
+  0.009181276707310 + 0.000887657009847i
+  0.009181276707310 - 0.000887657009847i
+  0.008887900000000 + 0.000000000000000i
+  0.007147473743092 + 0.000000000000000i
+  0.005873486456557 + 0.002661299407994i
+  0.005873486456557 - 0.002661299407994i
+ -0.001291146099753 + 0.006199930896584i
+ -0.001291146099753 - 0.006199930896584i
+ -0.002944893382710 + 0.005074619572479i
+ -0.002944893382710 - 0.005074619572479i
+ -0.002307641131494 + 0.002815677946110i
+ -0.002307641131494 - 0.002815677946110i
+  0.001988989487238 + 0.001645404557007i
+  0.001988989487238 - 0.001645404557007i
+ -0.000000850833188 + 0.000000000000000i
+  0.000000014229547 + 0.000000836846336i
+  0.000000014229547 - 0.000000836846336i
+  0.000000822374090 + 0.000000000000000i]::Array{Complex{Float64},1}=#
+
+file = matopen("./matDir/AMAalg_examples/"*"habitmod.mat")
+bb=read(file,"b")
+rts=read(file,"rts")
+close(file)
+ 
 ia=24::Int64
 
 nex=7::Int64
@@ -360,8 +414,14 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
-isapprox(bbJulia,bb,rtol=0.0::Float64,atol=1e-16::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.0::Float64,atol=1e-16::Float64)&&
+
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bbJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", bb)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rtsJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", rts)
+    
+isapprox(bbJulia,bb,atol=1e-16::Float64)&&
+isapprox(rtsJulia,rts,atol=1e-12::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
