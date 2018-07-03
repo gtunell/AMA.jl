@@ -7,7 +7,7 @@ function numericShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qR
 
     # total number of shifts
     nnumeric = 0
-
+    
     # functions to seperate hh
     left = 1:qCols
     right = (qCols + 1):(qCols + neq)

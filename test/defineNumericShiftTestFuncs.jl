@@ -1,7 +1,7 @@
 module NumericShiftTests
 
-#include("../src/AMA.jl")
-using ..AMA, MAT
+include("../src/AMA.jl")
+using .AMA, MAT
 
 # test numericShift! firmvalue example
 function firmvalueFalse()::Bool
@@ -105,18 +105,7 @@ hhIn=[0.  0.  0.  0.  1.  0.  0.  1.  -1.  -1.  0.  0.;
 0.  0.  0.  0.  -0.3  1.  0.  0.  0.  -0.99  0.  0.;
 0.  0.  0.  1.  0.  0.  1.  -1.  0.  0.  0.  0.;
 0.  0.  0.  -0.66  0.  -1.1  0.  1.  0.  0.  0.  0.]::Array{Float64,2}
-
-#=============================EXPECTED OUTPUT=======================================    
-hNewMatlab=[0.  0.  0.  0.  -0.499588  -0.703545  0.  -0.710651  0.710651  1.40716  0.  0.;
-0.  0.  0.  0.  -0.91674  0.710651  0.  -0.703545  0.703545  0.000000000000000111022  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  1.  -1.;
-0.  0.  0.  0.  0.  0.  0.  -0.66  0.  -1.1  0.  1.]::Array{Float64,2}
-
-qNewMatlab=[0.  0.  0.  1.  0.  0.  1.  -1.;
-0.  0.  0.  -0.66  0.  -1.1  0.  1.;
-0.  0.  0.  0.  0.  0.  0.  0.;
-0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
-==============================END EXPECTED OUTPUT==================================#
+# exactShift!(hhIn, qq, 0, qRows, qCols, neq)
 
 # get expected output from matlab file
 file = matopen("./matDir/numericShift_examples/"*"example7False.mat")
@@ -131,11 +120,11 @@ nnumericMatlab=2
 (hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
 
 ######## uncomment to display the output in terminal ########
- show(IOContext(STDOUT, :compact=>false), "text/plain", hNewJulia)
- show(IOContext(STDOUT, :compact=>false), "text/plain", hNewMatlab)
-# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewJulia
+# show(IOContext(STDOUT, :compact=>false), "text/plain", hNewJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", hNewMatlab)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewJulia)
 # show(IOContext(STDOUT, :compact=>false), "text/plain", qNewMatlab)
-    
+
 # test the actual output against expected    
 isapprox(hNewJulia,hNewMatlab,atol=1e-16::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
@@ -337,19 +326,20 @@ end;
 # test numericShift! firmvalue example
 function firmvalueTrue()::Bool
 
-
-neq=4::Int64;nlag=1::Int64;nlead=1::Int64
-qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
-
+# inputs
+neq=4::Int64
+qRows=4::Int64
+qCols=8::Int64
+condn=0.0000000001::Float64
 
 qq=zeros(Float64,4,8)
   
-#=
 hhIn=[0.  0.  0.  0.  -2.2  0.  0.  0.  2.  2.  0.  0.;
 0.  -0.4  0.  0.  -1.1  1.  -1.  0.  1.  1.  0.  0.;
 0.  0.  0.  0.  -1.1  0.  1.  0.  1.  1.  0.  0.;
 0.  0.  0.  -1.  -1.1  0.  0.  1.  1.  1.  0.  0.]::Array{Float64,2}
 
+    #=
 hNewMatlab=[0.  0.151186  0.  0.377964  2.91033  -0.377964  0.  -0.377964  -2.64575  -2.64575  0.  0.;
 0.  0.  0.  0.  0.  0.174574  0.  0.436436  0.000000000000000222045  -0.436436  0.000000000000000111022  -0.436436;
 0.  0.  0.  0.  0.  0.23094  0.  0.211325  -0.000000000000000166533  -0.57735  1.36603  -0.211325;
@@ -360,20 +350,26 @@ qNewMatlab=[0.  0.174574  0.  0.436436  0.000000000000000222045  -0.436436  0.00
 0.  0.23094  0.  -0.788675  -0.000000000000000111022  -0.57735  0.366025  0.788675;
 0.  0.  0.  0.  0.  0.  0.  0.]::Array{Float64,2}
 =#
-  
+
+    
 file = matopen("./matDir/numericShift_examples/"*"firmvalueTrue.mat")
-hhIn = read(file, "hhIn")
-hNewMatlab = read(file, "hNewMatlab")
-qNewMatlab = read(file, "qNewMatlab")
+    hhIn = read(file, "hhIn")
+    hNewMatlab = read(file, "hNewMatlab")
+    qNewMatlab = read(file, "qNewMatlab")
 close(file)
-
-condn=0.0000000001::Float64
-
+    
+    
 iqNewMatlab=3
-
 nnumericMatlab=3
 
 (hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", hNewJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", hNewMatlab)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewMatlab)
+    
 isapprox(hNewJulia,hNewMatlab,rtol=0.0::Float64,atol=1e-16::Float64)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
