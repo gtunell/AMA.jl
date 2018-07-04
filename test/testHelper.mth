@@ -142,11 +142,15 @@ MEvaluate[TemplateApply[StringTemplate["qq=zeros(``,``)"],
 (*"[hhEx,qq,iq,nexact] = SPExact_shift(hh,qq,0,``,``,``)",
 {qRows,qCols,neq}]]];*)
 MEvaluate[TemplateApply[StringTemplate[
-"[hNew,qNew,iqNew,nnumeric] = SPNumeric_shift(hh,qq,0,``,``,``,1.0e-8)",
+"[hNew,qNew,iqNew,nnumeric] = SPNumeric_shift(hh,qq,0,``,``,``,1.0e-11)",
 {qRows,qCols,neq}]]];
+uFileName=ToString[Unique["fc"]]<>ToString[DecimalForm[Round[2000*AbsoluteTime[]]]]<>".mat";
 MEvaluate["hNewFull=full(hNew)"];
 MEvaluate["qNewFull=full(qNew)"];
+MEvaluate[TemplateApply[StringTemplate[
+"save('../../matDir/``','hh','hNewFull','qNewFull')",uFileName]]];
 hNewMatlab=myMGet["hNewFull"];
+(*Print[aModel,":hNewFullMatlab=",hNewMatlab//InputForm];*)
 qNewMatlab=myMGet["qNewFull"];
 iqNewMatlab=Round[myMGet["iqNew"]];
 nnumericNewMatlab=Round[myMGet["nnumeric"]];
@@ -157,14 +161,18 @@ StringTemplate["# test numericShift! `1` example\nfunction `1``2`()::Bool\n"],
 {aModel,ToString[OptionValue["doMult"]]}],
 modDimsString,
 TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
-genJuliaMatInit["hhIn",allH,"Array{Float64,2}"],
-genJuliaMatInit["hNewMatlab",hNewMatlab,"Array{Float64,2}"],
-genJuliaMatInit["qNewMatlab",qNewMatlab,"Array{Float64,2}"],
+TemplateApply[StringTemplate[
+"file = matopen(\"./matDir/\"*\"``\")
+hhIn=read(file,\"hh\")
+hNewMatlab=read(file,\"hNewFull\")
+qNewMatlab=read(file,\"qNewFull\")
+close(file)",
+uFileName]],
 doJuliaAssn[10^(-10),"condn","Float64"],
 TemplateApply[StringTemplate["iqNewMatlab=``"],iqNewMatlab],
 TemplateApply[StringTemplate["nnumericMatlab=``"],nnumericNewMatlab],
 "(hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
-isapprox(hNewJulia,hNewMatlab,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+sameSpan(hNewJulia,hNewMatlab)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericMatlab
@@ -562,5 +570,9 @@ MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue3Leads2Lags"];
 
 
 
+(*
+hftest=
+{{0.0,0.151186,0.0,0.377964,2.91033,-0.377964,0.0,-0.377964,-2.64575,-2.64575,0.0,0.0},{0.0,0.0,0.0,0.0,0.0,-0.367457,0.0,0.081357,-2.22045*10^-16,0.918643,-1.0,-0.081357},{0.0,0.0,0.0,0.0,0.0,0.0325428,0.0,0.081357,-2.22045*10^-16,-0.081357,1.0,-0.081357},{0.0,0.0,0.0,0.0,0.0,0.0325428,0.0,-0.918643,-2.22045*10^-16,-0.081357,0.0,0.918643}}
 
+*)
 
