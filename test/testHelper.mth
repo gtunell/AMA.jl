@@ -147,11 +147,9 @@ MEvaluate[TemplateApply[StringTemplate[
 uFileName=ToString[Unique["fc"]]<>ToString[DecimalForm[Round[2000*AbsoluteTime[]]]]<>".mat";
 MEvaluate["hNewFull=full(hNew)"];
 MEvaluate["qNewFull=full(qNew)"];
-MEvaluate[TemplateApply[StringTemplate[
-"save('../../matDir/``','hh','hNewFull','qNewFull')",uFileName]]];
-hNewMatlab=myMGet["hNewFull"];
-(*Print[aModel,":hNewFullMatlab=",hNewMatlab//InputForm];*)
-qNewMatlab=myMGet["qNewFull"];
+fNameNow="numericShiftTestMats"<>aModel<>ToString[OptionValue["doMult"]];
+MEvaluate[
+writeDotMat[fNameNow,{"hh","hNewFull","qNewFull"}]];
 iqNewMatlab=Round[myMGet["iqNew"]];
 nnumericNewMatlab=Round[myMGet["nnumeric"]];
 SetOptions["stdout", PageWidth -> Infinity];
@@ -161,13 +159,9 @@ StringTemplate["# test numericShift! `1` example\nfunction `1``2`()::Bool\n"],
 {aModel,ToString[OptionValue["doMult"]]}],
 modDimsString,
 TemplateApply[StringTemplate["qq=zeros(Float64,``,``)"],{qRows,qCols}],
-TemplateApply[StringTemplate[
-"file = matopen(\"./matDir/\"*\"``\")
-hhIn=read(file,\"hh\")
-hNewMatlab=read(file,\"hNewFull\")
-qNewMatlab=read(file,\"qNewFull\")
-close(file)",
-uFileName]],
+readDotMat[fNameNow,"hhIn","hh"],
+readDotMat[fNameNow,"hNewMatlab","hNewFull"],
+readDotMat[fNameNow,"qNewMatlab","qNewFull"],
 doJuliaAssn[10^(-10),"condn","Float64"],
 TemplateApply[StringTemplate["iqNewMatlab=``"],iqNewMatlab],
 TemplateApply[StringTemplate["nnumericMatlab=``"],nnumericNewMatlab],
@@ -233,6 +227,21 @@ end;
 "}]];
 SetOptions["stdout", System`PageWidth -> oldPW];
 ]
+
+readDotMat[fName_String,julVar_String,matlabVar_String]:=
+TemplateApply[StringTemplate[
+"file = matopen(\"./matDir/\"*\"`1`\")
+`2`=read(file,\"`3`\")
+`2`=if(typeof(`2`)==(Array{Float64,2})) `2` else hcat(`2`) end
+close(file)",
+{fName<>".mat",julVar,matlabVar}]]
+
+writeDotMat[fName_String,theVars:{_String..}]:=
+With[{theStr=TemplateApply[StringTemplate[
+"save('../../matDir/`1`',`2`)"],{fName,StringJoin @@Riffle[("'"<>#<>"'")&/@theVars,","]}]},
+MEvaluate[theStr]];
+
+
 (*
 
 wfile = matopen("checkMat.mat")
@@ -354,6 +363,8 @@ SetOptions["stdout", System`PageWidth -> oldPW];
 ]
 
 
+
+Options[genReducedFormTestMatrices]={"doMult"->True}
 genReducedFormTestMatrices[aDir_String,aModel_String,params_String,
 opts:OptionsPattern[]]:=
 Module[{oldPW=System`PageWidth/.Options["stdout"],
@@ -388,27 +399,27 @@ ww=myMGet["ww"];
 rts=myMGet["rts"];
 lgroots=myMGet["lgroots"];
 doMatlabFunc["qFinal = SPCopy_w(qNew,ww,js,iqNew,``)",{qRows}];
-qNew=myMGet["qNew"];
-qFinal=myMGet["qFinal"];
-qFinal=myMGet["qFinal"];
 doMatlabFunc["[nonsing,bb]=SPReduced_form(qFinal,``,``,``,``,``)",
 {qRows,qCols,neq*nlag,neq,10^(-10)}];
-bb=myMGet["bb"];
+fNameNow="reducedFormTestMats"<>aModel<>ToString[OptionValue["doMult"]];
+MEvaluate[
+writeDotMat[fNameNow,{"qFinal","bb"}]];
 nonsing=myMGet["nonsing"];
 SetOptions["stdout", PageWidth -> Infinity];
 Print[TableForm[
 {TemplateApply[
-StringTemplate["# test reducedForm `1` example\nfunction `1`()::Bool\n"],aModel],
+StringTemplate["# test reducedForm `1` example\nfunction `1``2`()::Bool\n"],
+{aModel,ToString[OptionValue["doMult"]]}],
 modDimsString,
-genJuliaMatInit["bb",bb,"Array{Float64,2}"],
-genJuliaMatInit["qNew",qNew,"Array{Float64,2}"],
+readDotMat[fNameNow,"bb","bb"],
+readDotMat[fNameNow,"qFull","qFinal"],
 doJuliaAssn[nonsing,"nonsing"],
 doJuliaAssn[qRows,"qRows","Int64"],
 doJuliaAssn[qCols,"qCols","Int64"],
 doJuliaAssn[neq*nlag,"bCols","Int64"],
 doJuliaAssn[10^(-10),"anEpsi","Float64"],
-"(nonsingJulia,bbJulia)=reducedForm(qNew,qRows,qCols,bCols,neq,anEpsi)
-isapprox(bbJulia,bb,rtol=0.1e-16::Float64,atol=0.0::Float64)&&
+"(nonsingJulia,bbJulia)=reducedForm(qFull,qRows,qCols,bCols,neq,anEpsi)
+isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 nonsingJulia==nonsing
 end;
 "}]];
