@@ -106,13 +106,21 @@ end
 
 include("defineAMAalgTestFuncs.jl")
 @testset "test AMAalg" begin
-@test AMAalgTests.firmvalue()
-@test AMAalgTests.firmvalue3Leads2Lags()
-@test AMAalgTests.example7()
-@test AMAalgTests.oneEquationNoLead()
-@test AMAalgTests.reliablePaperExmpl()
-@test AMAalgTests.athan()
-@test AMAalgTests.habitmod()
+@test AMAalgTests.firmvalueTrue()
+@test AMAalgTests.firmvalue3Leads2LagsTrue()
+@test AMAalgTests.example7True()
+@test AMAalgTests.oneEquationNoLeadTrue()
+@test AMAalgTests.reliablePaperExmplTrue()
+@test AMAalgTests.athanTrue()
+@test AMAalgTests.habitmodTrue()
+
+@test AMAalgTests.firmvalueFalse()
+@test AMAalgTests.firmvalue3Leads2LagsFalse()
+@test AMAalgTests.example7False()
+@test AMAalgTests.oneEquationNoLeadFalse()
+@test AMAalgTests.reliablePaperExmplFalse()
+@test AMAalgTests.athanFalse()
+@test AMAalgTests.habitmodFalse()
 end
 
 end #outer
