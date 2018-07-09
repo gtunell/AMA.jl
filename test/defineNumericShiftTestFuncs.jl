@@ -271,19 +271,6 @@ iqNewMatlab=7
 nnumericMatlab=7
 
 (hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
-print((sameSpan(hNewJulia,hNewMatlab),sameSpan(qNewJulia,qNewMatlab),
-iqNew==iqNewMatlab,
-nnumeric==nnumericMatlab
-       ))
-
-
-print((rank(qNewJulia),rank(qNewMatlab),
-       rank(vcat(qNewJulia,qNewMatlab),10e-13)
-       ))
-    
-print((size(qNewJulia),size(qNewMatlab)))
-
-
 
 sameSpan(hNewJulia,hNewMatlab)&&
 sameSpan(qNewJulia,qNewMatlab)&&
