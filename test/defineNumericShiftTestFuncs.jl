@@ -271,6 +271,7 @@ iqNewMatlab=7
 nnumericMatlab=7
 
 (hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
+
 sameSpan(hNewJulia,hNewMatlab)&&
 sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
