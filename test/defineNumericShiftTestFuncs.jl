@@ -545,7 +545,17 @@ nnumericMatlab=7
 
 (hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
 sameSpan(hNewJulia,hNewMatlab)&&
-sameSpan(qNewJulia,qNewMatlab)&&
+
+
+######## uncomment to display the output in terminal ########
+# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewMatlab)
+#display(hNewJulia)
+#display(hNewMatlab)
+
+    
+    
+#sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericMatlab
 end;
