@@ -18,12 +18,6 @@ function firmvalue()::Bool
 
     cSparseAMA( hh, nlags, nleads )
     
-    #====
-    cSparseAMA( maxNumberOfHElements, discreteTime, hrows, hcols, leads,
-         hmat, hmatj, hmati, newHmat, newHmatj, newHmati,
-         auxiliaryInitialConditions, rowsInQ, qmat, qmatj, qmati,
-         essential, rootr, rooti, returnCode, aPointerToVoid )
-    ===#    
 end
 
 end # module

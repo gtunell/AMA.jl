@@ -12,7 +12,7 @@ ma50ad.o second.o
 allObjs= $(allFortObjs) $(allCObjs)
 
 sharedLink:	 clean  $(allObjs)
-		   ar rcs libSPARSEAMA.so $(allObjs)
+		   $(CC) -shared -fPIC -o libSPARSEAMA.so $(allObjs)
 
 
 
