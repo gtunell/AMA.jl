@@ -35,20 +35,28 @@ function cSparseAMA( hh, nlags, nleads )
     returnCode = 0
     aPointerToVoid = Ref{Ptr{Void}}()
 
-    ccall((:sparseAim, "libSPARSEAMA"), Void,
+    ptrMaxNumberOfHElements = Ref{Ptr{Int32}(maxNumberOfHElements)}
+    ptrAuxiliaryInitialConditions = Ref{Ptr{Int32}(auxiliaryInitialConditions)}
+    ptrRowsInQ = Ref{Ptr{Int32}(rowsInQ)}
+    ptrEssential = Ref{Ptr{Int32}(essential)}
+    ptrReturnCode = Ref{Ptr{Int32}(returnCode)}
+    
+    ccall((:sparseAim, "libSPARSEAMA"), Bool,
          (  Ptr{Int32}, Int32,
             Int32, Int32, Int32,
             Ptr{Float64}, Ptr{Int32}, Ptr{Int32}, # points to mem of first ele
             Ptr{Float64}, Ptr{Int32}, Ptr{Int32}, # points to mem of first ele
             Ptr{Int32}, Ptr{Int32},
             Ptr{Float64}, Ptr{Int32}, Ptr{Int32},
-            Ptr{Int32}, Ptr{Float64}, Ptr{Float64}, Ptr{Int32}, Ptr{Void}   ),
-         Ptr{Int32}(maxNumberOfHElements), Int32(discreteTime),
+            Ptr{Int32}, Ptr{Float64}, Ptr{Float64}, Ptr{Int32}, Ref{Ptr{Void}}   ),
+         ptrMaxNumberOfHElements[], Int32(discreteTime),
          Int32(hrows), Int32(hcols), Int32(nleads),
          Float64.(hmat), Int32.(hmatj), Int32.(hmati), 
          Float64.(newHmat), Int32.(newHmatj), Int32.(newHmati), 
-         Ptr{Int32}(auxiliaryInitialConditions), Ptr{Int32}(rowsInQ),
+         ptrAuxiliaryInitialConditions[], ptrRowsInQ[],
          Float64.(qmat), Int32.(qmatj), Int32.(qmati),
-         Ptr{Int32}(essential), Float64.(rootr), Float64.(rooti),
-         Ptr{Int32}(returnCode), aPointerToVoid[])
+         ptrEssential[], Float64.(rootr), Float64.(rooti),
+         ptrReturnCode[], aPointerToVoid)
+
+    #return (maxNumberOfHElements)
 end
