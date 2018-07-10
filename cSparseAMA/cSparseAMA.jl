@@ -33,7 +33,7 @@ function cSparseAMA( hh, nlags, nleads )
     essential = qcols
     
     returnCode = 0
-    aPointerToVoid = nothing
+    aPointerToVoid = Ref{Ptr{Void}}()
 
     ccall((:sparseAim, "libSPARSEAMA"), Void,
          (  Ptr{Int32}, Int32,
@@ -42,13 +42,13 @@ function cSparseAMA( hh, nlags, nleads )
             Ptr{Float64}, Ptr{Int32}, Ptr{Int32}, # points to mem of first ele
             Ptr{Int32}, Ptr{Int32},
             Ptr{Float64}, Ptr{Int32}, Ptr{Int32},
-            Ptr{Int32}, Ptr{Float64}, Ptr{Float64}, Ptr{Int32}, Ptr   ),
+            Ptr{Int32}, Ptr{Float64}, Ptr{Float64}, Ptr{Int32}, Ptr{Void}   ),
          Ptr{Int32}(maxNumberOfHElements), Int32(discreteTime),
          Int32(hrows), Int32(hcols), Int32(nleads),
          Float64.(hmat), Int32.(hmatj), Int32.(hmati), 
          Float64.(newHmat), Int32.(newHmatj), Int32.(newHmati), 
          Ptr{Int32}(auxiliaryInitialConditions), Ptr{Int32}(rowsInQ),
          Float64.(qmat), Int32.(qmatj), Int32.(qmati),
-         Int32(essential), Float64.(rootr), Float64.(rooti),
-         Int32(returnCode), aPointerToVoid)
+         Ptr{Int32}(essential), Float64.(rootr), Float64.(rooti),
+         Ptr{Int32}(returnCode), aPointerToVoid[])
 end
