@@ -13,10 +13,14 @@ function cSparseAMA( hh, nlags, nleads )
     hcols = size(hh, 2)
 
     (I, J, V) = findnz(hh)
-    hmat = V
-    hmatj = J
-    hmati = I
+    hmat = Float64.(V)
+    hmatj = Int32.(J)
+    hmati = Int32.(I)
 
+
+    display(hh)
+
+    
     newHmat = zeros(qmax)
     newHmatj = zeros(qmax)
     newHmati = zeros(hrows + 1)
@@ -35,28 +39,30 @@ function cSparseAMA( hh, nlags, nleads )
     returnCode = 0
     aPointerToVoid = Ref{Ptr{Void}}()
 
-    ptrMaxNumberOfHElements = Ref{Ptr{Int32}(maxNumberOfHElements)}
+    ptrMaxNumberOfHElements = Ptr{Int32}(maxNumberOfHElements)
     ptrAuxiliaryInitialConditions = Ref{Ptr{Int32}(auxiliaryInitialConditions)}
     ptrRowsInQ = Ref{Ptr{Int32}(rowsInQ)}
     ptrEssential = Ref{Ptr{Int32}(essential)}
     ptrReturnCode = Ref{Ptr{Int32}(returnCode)}
-    
-    ccall((:sparseAim, "libSPARSEAMA"), Bool,
+
+# display(hh)
+    ccall((:sparseAim, "libSPARSEAMA"), Void,
          (  Ptr{Int32}, Int32,
             Int32, Int32, Int32,
             Ptr{Float64}, Ptr{Int32}, Ptr{Int32}, # points to mem of first ele
             Ptr{Float64}, Ptr{Int32}, Ptr{Int32}, # points to mem of first ele
             Ptr{Int32}, Ptr{Int32},
             Ptr{Float64}, Ptr{Int32}, Ptr{Int32},
-            Ptr{Int32}, Ptr{Float64}, Ptr{Float64}, Ptr{Int32}, Ref{Ptr{Void}}   ),
-         ptrMaxNumberOfHElements[], Int32(discreteTime),
+            Ptr{Int32}, Ptr{Float64}, Ptr{Float64}, Ptr{Int32}, Any  ),
+         &maxNumberOfHElements, Int32(discreteTime),
          Int32(hrows), Int32(hcols), Int32(nleads),
-         Float64.(hmat), Int32.(hmatj), Int32.(hmati), 
-         Float64.(newHmat), Int32.(newHmatj), Int32.(newHmati), 
-         ptrAuxiliaryInitialConditions[], ptrRowsInQ[],
-         Float64.(qmat), Int32.(qmatj), Int32.(qmati),
-         ptrEssential[], Float64.(rootr), Float64.(rooti),
-         ptrReturnCode[], aPointerToVoid)
+         &hmat[], &hmatj[], &hmati[], 
+         &newHmat[], &newHmatj[], &newHmati[], 
+         &auxiliaryInitialConditions, &rowsInQ,
+         &qmat[], &qmatj[], &qmati[],
+         &essential, &rootr[], &rooti[],
+         &returnCode, Void)
 
+#display(hh)
     #return (maxNumberOfHElements)
 end
