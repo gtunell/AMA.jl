@@ -1,6 +1,7 @@
-    Libdl.push!(Libdl.DL_LOAD_PATH,
+Libdl.push!(Libdl.DL_LOAD_PATH,
                 "/msu/home/m1gmt00/summer_project/AMA.jl/cSparseAMA/src")
-    global const clibrary = Libdl.find_library("libSPARSEAMA", Libdl.DL_LOAD_PATH)
+                
+global const clibrary = Libdl.find_library("libSPARSEAMA", Libdl.DL_LOAD_PATH)
 
 function cSparseAMA( hh, nlags, nleads )
 

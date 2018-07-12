@@ -900,8 +900,7 @@ static int constructQRDecomposition (
 	/* dgeqpf computes QR factorization with column pivoting of denseA */
 	/* rwt profile QR decomposition */
 	time0 = cputime() ; /* rwt */
-	// dgeqpf_(&nr,&nc,denseA,&nr,pcol,tau,work,&info); 
-	DGEQPF(&nr,&nc,denseA,&nr,pcol,tau,work,&info); 
+	dgeqp3_(&nr,&nc,denseA,&nr,pcol,tau,work,&info); 
 
 	qr_sec += cputime()-time0 ; /* rwt */
 
