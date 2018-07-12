@@ -1,5 +1,6 @@
-push!(Libdl.DL_LOAD_PATH,
-      "/msu/home/m1gmt00/summer_project/AMA.jl/cSparseAMA/src")
+    Libdl.push!(Libdl.DL_LOAD_PATH,
+                "/msu/home/m1gmt00/summer_project/AMA.jl/cSparseAMA/src")
+    global const clibrary = Libdl.find_library("libSPARSEAMA", Libdl.DL_LOAD_PATH)
 
 function cSparseAMA( hh, nlags, nleads )
 
@@ -45,7 +46,10 @@ function cSparseAMA( hh, nlags, nleads )
     ptrEssential = Ref{Ptr{Int32}(essential)}
     ptrReturnCode = Ref{Ptr{Int32}(returnCode)}
 
-    ccall((:sparseAim, "libSPARSEAMA"), Void,
+
+    handle = Libdl.dlopen(clibrary)
+    
+    ccall((:sparseAim, clibrary), Void,
          (  Ptr{Int32}, Int32,
             Int32, Int32, Int32,
             Ptr{Float64}, Ptr{Int32}, Ptr{Int32}, # points to mem of first ele
@@ -62,6 +66,11 @@ function cSparseAMA( hh, nlags, nleads )
          &essential, rootr, rooti,
          &returnCode, Void)
 
+    Libdl.dlclose(handle)
+    
+    return true;
 #display(hh)
     #return (maxNumberOfHElements)
 end
+
+#Libdl.close(handle)

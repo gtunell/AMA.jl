@@ -1,7 +1,7 @@
 FC= gfortran
-FFLAGS=  -fPIC -c -O2
+FFLAGS= -shared -fPIC -c -O2
 CC= gcc
-CFLAGS=  -fPIC -c -O2
+CFLAGS= -shared -fPIC -c -O2
 
 allCObjs=	   callSparseAim.o sparseAim.o sparskit2.o
 
@@ -12,7 +12,7 @@ ma50ad.o second.o
 allObjs= $(allFortObjs) $(allCObjs)
 
 sharedLink:	 clean  $(allObjs)
-		   $(CC) -shared -fPIC -o libSPARSEAMA.so $(allObjs)
+		   gcc -std=gnu99 -shared -o libSPARSEAMA.so $(allObjs) -lblas -lgfortran
 
 
 
@@ -22,4 +22,3 @@ sharedLink:	 clean  $(allObjs)
 
 clean: 
 	rm -f *.o
-
