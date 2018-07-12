@@ -259,9 +259,6 @@ void sparseAim (
              
 )
 {
-
-
-
 	static int maxHElementsEncountered=0;
 	int originalMaxHElements;
 	double * annihilator;int * annihilatorj;int * annihilatori;
@@ -289,14 +286,6 @@ void sparseAim (
     sparseAimAssert(hrows > 0, sparseAimPreHrows);
     sparseAimAssert((hcols > 0)&&(hcols>=hrows)&&((hcols%hrows) == 0), sparseAimPreHcolsHrows);
     sparseAimAssert(leads > 0, sparseAimPreLeads);
-
-int xx;for(xx=0;xx<hrows;xx++){printf("%f\n",hmat[xx]);}printf("\n");
-int ii;for(ii=0;ii<hrows;ii++){printf("%d\n",hmati[ii]);}printf("\n");
-int jj;for(jj=0;jj<hrows;jj++){printf("%d\n",hmatj[jj]);}printf("\n");
-
-
-
-
  	sparseAimAssert(validCSRMatrix(hrows,hmat,hmatj,hmati), sparseAimPreHmat);
 	sparseAimAssert(hmati[hrows]-hmati[0]<=*maxNumberOfHElements, sparseAimPreHmatTotElems);
     sparseAimAssert(*auxiliaryInitialConditions >= 0, sparseAimPreAuxRows);
@@ -2222,21 +2211,21 @@ int result;
 switch(lineNo)
 {
 case  sparseAimPreMaxNumberOfHElementsLEZero: result=
-  sparseAim_PRECONDITIONS_VIOLATED; printf("1");  break;
+  sparseAim_PRECONDITIONS_VIOLATED; break;
 case  sparseAimPreHrows: result=
-  sparseAim_PRECONDITIONS_VIOLATED; printf("2");  break;
+  sparseAim_PRECONDITIONS_VIOLATED; break;
 case  sparseAimPreHcolsHrows: result=
-  sparseAim_PRECONDITIONS_VIOLATED; printf("3");  break;
+  sparseAim_PRECONDITIONS_VIOLATED; break;
 case  sparseAimPreLeads: result=
-  sparseAim_PRECONDITIONS_VIOLATED; printf("4"); break;
+  sparseAim_PRECONDITIONS_VIOLATED; break;
 case  sparseAimPreHmat: result=
-  sparseAim_PRECONDITIONS_VIOLATED; printf("5"); break;
+  sparseAim_PRECONDITIONS_VIOLATED; break;
 case  sparseAimPreAuxRows: result=
-  sparseAim_PRECONDITIONS_VIOLATED; printf("6"); break;
+  sparseAim_PRECONDITIONS_VIOLATED; break;
 case  sparseAimPreRowsInQ: result=
-  sparseAim_PRECONDITIONS_VIOLATED; printf("7");  break;
+  sparseAim_PRECONDITIONS_VIOLATED; break;
 case  sparseAimPreQmat: result=
-  sparseAim_PRECONDITIONS_VIOLATED; printf("8"); break;
+  sparseAim_PRECONDITIONS_VIOLATED; break;
 case  autoRegressionPostValidQ: result=
   autoRegression_POSTCONDITIONS_VIOLATED; break;
 case  autoRegressionPostValidH: result=

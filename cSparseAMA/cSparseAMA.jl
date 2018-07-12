@@ -12,15 +12,15 @@ function cSparseAMA( hh, nlags, nleads )
     hrows = size(hh, 1)
     hcols = size(hh, 2)
 
-    (I, J, V) = findnz(hh)
-    hmat = Float64.(V)
-    hmatj = Int32.(J)
-    hmati = Int32.(I)
-
-
-    display(hh)
-
-    
+    sparseH = sparse(hh')
+    hmat = Float64.(nonzeros(sparseH))
+    hmatj = Int32.(rowvals(sparseH))
+    hmati = Array{Int32, 1}(hrows + 1)
+    for index in 1:hrows
+        hmati[index] = nzrange(sparseH, index)[1]
+    end
+    hmati[hrows + 1] = hmati[1] + length(hmat)
+  
     newHmat = zeros(qmax)
     newHmatj = zeros(qmax)
     newHmati = zeros(hrows + 1)
@@ -45,7 +45,6 @@ function cSparseAMA( hh, nlags, nleads )
     ptrEssential = Ref{Ptr{Int32}(essential)}
     ptrReturnCode = Ref{Ptr{Int32}(returnCode)}
 
-# display(hh)
     ccall((:sparseAim, "libSPARSEAMA"), Void,
          (  Ptr{Int32}, Int32,
             Int32, Int32, Int32,
@@ -56,11 +55,11 @@ function cSparseAMA( hh, nlags, nleads )
             Ptr{Int32}, Ptr{Float64}, Ptr{Float64}, Ptr{Int32}, Any  ),
          &maxNumberOfHElements, Int32(discreteTime),
          Int32(hrows), Int32(hcols), Int32(nleads),
-         &hmat[], &hmatj[], &hmati[], 
-         &newHmat[], &newHmatj[], &newHmati[], 
+         hmat, hmatj, hmati, 
+         newHmat, newHmatj, newHmati, 
          &auxiliaryInitialConditions, &rowsInQ,
-         &qmat[], &qmatj[], &qmati[],
-         &essential, &rootr[], &rooti[],
+         qmat, qmatj, qmati,
+         &essential, rootr, rooti,
          &returnCode, Void)
 
 #display(hh)
