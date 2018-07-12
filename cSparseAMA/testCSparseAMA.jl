@@ -18,14 +18,31 @@ function firmvalue()::Bool
 
     file = matopen("../test/matDir/"*"amaAlgTestMatsfirmvalueFalse.mat")
     hh=read(file,"hh")
+    hBefore=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
     
     nlags = 1
     nleads = 1
     neq = size(hh, 1)
+
+    (maxNumberOfHElements, newHmat, newHmatj, newHmati,
+     auxiliaryInitialConditions, rowsInQ, qmat, qmatj, qmati,
+     essential, rootr, rooti, returnCode) = cSparseAMA( hh, nlags, nleads )
+
+    display(newHmat)
+    display(newHmatj)
+    display(newHmati)
     
-    hh = cSparseAMA( hh, nlags, nleads )
+    newHmat = Float64.(newHmat)
+    newHmatj = Float64.(newHmatj)
+    newHmati = Float64.(newHmati)
+    
+    display(hBefore)
+    display(full(sparse(newHmati, newHmatj, newHmat)))
+
+    
+    true 
     
 end
 

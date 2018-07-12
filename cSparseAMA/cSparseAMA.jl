@@ -68,9 +68,10 @@ function cSparseAMA( hh, nlags, nleads )
          &returnCode, Void)
 
     Libdl.dlclose(handle)
-    
-    return true;
-#display(hh)
+
+    return (maxNumberOfHElements, newHmat, newHmatj, newHmati,
+            auxiliaryInitialConditions, rowsInQ, qmat, qmatj, qmati, essential,
+            rootr, rooti, returnCode)
     #return (maxNumberOfHElements)
 end
 
