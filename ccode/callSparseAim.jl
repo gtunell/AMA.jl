@@ -1,8 +1,8 @@
-Libdl.push!(Libdl.DL_LOAD_PATH,
-                "/msu/home/m1gmt00/summer_project/AMA.jl/cSparseAMA/src")
-                
-clibrary = Libdl.find_library("libSPARSEAMA", Libdl.DL_LOAD_PATH)
+"""
+    callSParseAim(hh, leads, lags)
 
+Julia wrapper function that calls the c function callSparseAim.
+"""
 function callSparseAim( hh, leads, lags )
 
     neq = size(hh, 1)
@@ -14,14 +14,16 @@ function callSparseAim( hh, leads, lags )
     cofb = zeros(neq, neq)
     qmatrix = zeros(hrows, hcols)
 
-    handle = Libdl.dlopen(clibrary)
-    ccall((:callSparseAim, clibrary), Void,
+    handle = Libdl.dlopen(libc)
+    
+    ccall((:callSparseAim, libc), Void,
           (  Ptr{Float64}, Int32, Int32, Int32, Int32,
           Int32, Int32, Int32,
           Ptr{Float64}, Ptr{Float64}, Ptr{Float64}  ),
           hh, hrows, hcols, neq, leads, lags, nstate,
           qmax, &returnCodePointer, cofb, qmatrix)
 
+    Libdl.dlclose(handle)
     
     return hh, cofb, qmatrix, returnCodePointer
 end
