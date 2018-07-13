@@ -1,9 +1,8 @@
 module AMAalgTests
 
- include("../src/AMA.jl")
+# include("../src/AMA.jl")
 # test AMAalg
-using .AMA, MAT
-
+using ..AMA, MAT
     
 #tweaked= False
 # test AMAalg firmvalueFalse example
@@ -29,9 +28,6 @@ hh=read(file,"hh")
 hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
 close(file)
 
-    
-
-    
 ia=3::Int64
 
 nex=3::Int64
