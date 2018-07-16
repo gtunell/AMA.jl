@@ -2,8 +2,9 @@ module CSparseAMATests
 
 using MAT
 
-# const libc = Libdl.find_library("libSPARSEAMA", Libdl.DL_LOAD_PATH)
-const libc = Libdl.find_library("libAll", Libdl.DL_LOAD_PATH)
+const lib1 = Libdl.find_library("libSPARSEAMA", Libdl.DL_LOAD_PATH)
+# const lib1 = Libdl.find_library("libCombinedlib", Libdl.DL_LOAD_PATH)
+
 include("callSparseAim.jl")
 
 function firmvalue()::Bool

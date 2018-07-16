@@ -14,9 +14,9 @@ function callSparseAim( hh, leads, lags )
     cofb = zeros(neq, neq * lags)
     qmatrix = zeros(neq, hcols)
 
-    handle = Libdl.dlopen(libc)
+    handle = Libdl.dlopen(lib1)
     
-    ccall((:callSparseAim, libc), Void,
+    ccall((:callSparseAim, lib1), Void,
           (  Ptr{Float64}, Int32, Int32, Int32, Int32,
           Int32, Int32, Int32,
           Ptr{Float64}, Ptr{Float64}, Ptr{Float64}  ),

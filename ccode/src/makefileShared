@@ -20,4 +20,4 @@ sharedLink:	 clean  $(allObjs)
 		   
 
 clean: 
-	rm -f *.o
+	rm -f *.o *.so
