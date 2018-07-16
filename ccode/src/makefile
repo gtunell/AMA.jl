@@ -15,5 +15,5 @@ staticLink:	   $(allObjs)
 		   ar rcs libSPARSEAMA.a $(allObjs)
 
 clean: 
-	rm -f *.o *.a
+	rm -f *.o *.a *.so
 

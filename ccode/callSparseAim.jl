@@ -11,8 +11,8 @@ function callSparseAim( hh, leads, lags )
     hcols = size(hh, 2)
     qmax = length(hh)
     returnCodePointer = 0
-    cofb = zeros(neq, neq)
-    qmatrix = zeros(hrows, hcols)
+    cofb = zeros(neq, neq * lags)
+    qmatrix = zeros(neq, hcols)
 
     handle = Libdl.dlopen(libc)
     

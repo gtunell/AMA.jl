@@ -1,24 +1,24 @@
-WORD_SIZE := $(shell julia -e "print(Sys.WORD_SIZE)")
-
-ifeq ($(WORD_SIZE), 64)
-	INTFLAG = -fdefault-integer-8
-else
-	INTFLAG =
-endif
+FC= gfortran
+FFLAGS= -shared -fPIC -g -c -O2
+CC= gcc
+CFLAGS= -shared -fPIC -c -O2
 
 allCObjs=	   callSparseAim.o sparseAim.o sparskit2.o
 
 allFortObjs=  dgetv0.o dlaqrb.o dmout.o dnaitr.o dnapps.o dnaup2.o dnaupd.o \
 dnconv.o dneigh.o dneupd.o dngets.o dsortc.o dstatn.o dvout.o ivout.o \
-ma50ad.o second.o
+ma50ad.o 
+# second.o  
 
 allObjs= $(allFortObjs) $(allCObjs)
 
-%.o: %.f Makefile
-	gfortran -m$(WORD_SIZE) $(INTFLAG) -fpic -O3 -pipe -g -c $< -o $@
+staticLink:	   $(allObjs)
+		   ar rcs libSPARSEAMA.a $(allObjs)
 
-mylib.so: $(allObjs)
-	gcc -std=gnu99 -shared -o mylib.so $(allObjs) -lblas -lgfortran
+shared: clean $(allObjs) 
+	$(CC) -shared -fPIC -o libAll.so $(allObjs) \
+	-Wl,--whole-archive ./LAPACK/liblapack.a -Wl,--no-whole-archive
 
-clean:
-	rm -rf *o
+clean: 
+	rm -f *.o *.a
+

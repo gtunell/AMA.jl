@@ -5,4 +5,5 @@ include("testCallSparseAim.jl")
 using Base.Test
 @testset "test ccall" begin
     @test CSparseAMATests.firmvalue()
+    @test CSparseAMATests.firmvalue3Leads2Lags()
 end
