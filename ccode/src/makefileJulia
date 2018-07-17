@@ -20,11 +20,10 @@ combine: clean $(allLibs)
 	ar rcs libSPARSEAMA.a $(allObjs)
 
 shared: clean $(allObjs) 
-	$(CC) -shared $(allObjs)  \
-	-Wl,--whole-archive ./LAPACK/liblapack.a -Wl,--no-whole-archive \
-	-Wl,--whole-archive ./LAPACK/librefblas.a -Wl,--no-whole-archive \
-	
-	 -o libSPARSEAMA.so
+	$(CC) -shared -lgfortran $(allObjs)  \
+	./LAPACK/librefblas.a \
+	./LAPACK/liblapack.a  \
+	 -o libSPARSEAMA.so 	 -o libSPARSEAMA.so 
 
 clean: 
 	rm -f *.o *.a *.so
