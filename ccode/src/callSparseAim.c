@@ -102,10 +102,11 @@ void callSparseAim(double *hmatFull,int hrows,int hcols,
 		&auxCond, &rowsInQ, qmat, qmatj, qmati,
 		&essential, rootr, rooti, &returnCode, aPointerToVoid
 	) ;
-	
+
 
 	*returnCodePointer = returnCode;
 	if (returnCode == 0) {
+
 		/* compute B matrix */
 		bmat = (double *)calloc(maxSize,sizeof(double)) ;
 		bmatj = (int *)calloc(maxSize,sizeof(int)) ;
@@ -116,7 +117,6 @@ void callSparseAim(double *hmatFull,int hrows,int hcols,
 		) ;
 	fflush(stdout);
 
-	
 		csrToDns (&qrows, &qcols, qmat, qmatj, qmati, qmatrix, &qrows, &ierr);
 	
 

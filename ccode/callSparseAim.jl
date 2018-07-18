@@ -11,10 +11,8 @@ function callSparseAim( hh, leads, lags )
     hcols = size(hh, 2)
     qmax = length(hh)
     returnCodePointer = 0
-    cofb = zeros(neq, neq * leads)
+    cofb = zeros(neq, neq * lags)
     qmatrix = zeros(neq, hcols)
-    #cofb = zeros(hrows, hcols)
-    #qmatrix = zeros(hrows, hcols)
 
     ccall((:callSparseAim, libSPARSEAMA), Void,
           (  Ptr{Float64}, Int32, Int32, Int32, Int32,
@@ -22,6 +20,6 @@ function callSparseAim( hh, leads, lags )
           Ptr{Float64}, Ptr{Float64}, Ptr{Float64}  ),
           hh, hrows, hcols, neq, leads, lags, nstate,
           qmax, &returnCodePointer, cofb, qmatrix)
-    
+ 
     return hh, cofb, qmatrix, returnCodePointer
 end
