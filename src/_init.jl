@@ -13,8 +13,4 @@ end
 if length(findin(theFile,LOAD_PATH))==0
     push!(LOAD_PATH,theFile)
     println("pushing ",theFile," onto LOAD_PATH")
-
-    if (homedir() == "/msu/home/m1gmt00")
-        push!(LOAD_PATH,"/msu/home/m1gmt00/summer_project/AMA_workflow/AMA.jl/src")
-    end
 end
