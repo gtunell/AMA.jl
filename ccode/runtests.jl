@@ -2,9 +2,7 @@
 Libdl.push!(Libdl.DL_LOAD_PATH,
                 "/msu/home/m1gmt00/summer_project/AMA.jl/ccode/src")
 
-include("callSparseAim.jl")
 include("test/AMATests.jl")
-
 using Base.Test, .AMATests 
 
 @testset "test ccall" begin
