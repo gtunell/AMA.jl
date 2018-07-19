@@ -75,7 +75,7 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
                 return
             end
         end
-        (ww,rts,lgroots)=eigenSys!(aa,upper,min(length(js),qrows - iq + 1))
+        (ww,rts,lgroots)=eigenSys!(aa,upper,min(size(js, 1),qrows - iq + 1))
 
 
         qq = augmentQ!(qq,ww,js,iq,qrows)
