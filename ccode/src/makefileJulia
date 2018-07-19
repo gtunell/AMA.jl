@@ -15,11 +15,8 @@ ma50ad.o
 
 allObjs= $(allFortObjs) $(allCObjs)
 
-combine: clean $(allLibs)
-	ar rcs libSPARSEAMA.a $(allObjs)
-
 shared: clean $(allObjs) 
-	gfortran -shared  $(allObjs) $(allLibs) \
+	gfortran -shared $(allObjs) $(allLibs) \
 	 -o libSPARSEAMA.so 	
 
 clean: 

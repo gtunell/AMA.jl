@@ -1,7 +1,12 @@
-# packaged tests 
+# make C library visible for call to C code. In src/ use: make -f makefileJulia
+Libdl.push!(Libdl.DL_LOAD_PATH,
+                "/msu/home/m1gmt00/summer_project/AMA.jl/ccode/src")
+
+include("callSparseAim.jl")
 include("test/AMATests.jl")
-using .AMATests, Base.Test
-   
+
+using Base.Test, .AMATests 
+
 @testset "test ccall" begin
     @test AMATests.firmvalueFalse()
     @test AMATests.firmvalue3Leads2LagsFalse()

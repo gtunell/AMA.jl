@@ -5,6 +5,7 @@ Julia wrapper function that calls the c function callSparseAim.
 """
 function callSparseAim( hh, leads, lags )
 
+    # allocate space for the matrices and initialize inputs
     neq = size(hh, 1)
     nstate = 0
     hrows = neq
@@ -14,6 +15,9 @@ function callSparseAim( hh, leads, lags )
     cofb = zeros(neq, neq * lags)
     qmatrix = zeros(neq, hcols)
 
+    # use the library libSPARSEAMA to call c function ...
+    # libSPARSEAMA is a shared library that combines sparseAMA
+    # and LAPACK. LAPACK must be recompiled with -fPIC. 
     ccall((:callSparseAim, libSPARSEAMA), Void,
           (  Ptr{Float64}, Int32, Int32, Int32, Int32,
           Int32, Int32, Int32,
