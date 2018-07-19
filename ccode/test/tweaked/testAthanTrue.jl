@@ -1,20 +1,20 @@
-function example7()
-  
-    file = matopen("../test/matDir/"*"amaAlgTestMatsexample7False.mat")
+function athanTrue()
+
+    file = matopen("../test/matDir/"*"amaAlgTestMatsathanTrue.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("../test/matDir/"*"amaAlgTestMatsexample7False.mat")
+    file = matopen("../test/matDir/"*"amaAlgTestMatsathanTrue.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("../test/matDir/"*"amaAlgTestMatsexample7False.mat")
+    file = matopen("../test/matDir/"*"amaAlgTestMatsathanTrue.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
-    
+
     nlags = 1
     nleads = 1
 

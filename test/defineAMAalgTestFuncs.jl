@@ -613,7 +613,6 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 file = matopen("./matDir/"*"amaAlgTestMatshabitmodTrue.mat")
 bb=read(file,"bb")
-    display(bb)
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
