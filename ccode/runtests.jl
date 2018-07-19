@@ -12,7 +12,7 @@ using .AMATests, Base.Test
     @test AMATests.habitmodFalse()
 
     @test AMATests.firmvalueTrue()
-    @test AMATests.firmvalue3Leads2LagsTrue()
+    #@test AMATests.firmvalue3Leads2LagsTrue()
     #@test AMATests.example7True()
     #@test AMATests.oneEquationNoLeadTrue()
     #@test AMATests.reliablePaperExmplTrue()

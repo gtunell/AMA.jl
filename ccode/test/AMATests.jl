@@ -19,10 +19,10 @@ include("original/testHabitmodFalse.jl")
 
 include("tweaked/testFirmvalueTrue.jl")
 include("tweaked/testFirmvalue3Leads2LagsTrue.jl")
-#include("tweaked/testExample7True.jl")
-#include("tweaked/testOneEquationNoLeadTrue.jl")
-#include("tweaked/testReliablePaperExmplTrue.jl")
-#include("tweaked/testAthanTrue.jl")
-#include("tweaked/testHabitmodTrue.jl")
+include("tweaked/testExample7True.jl")
+include("tweaked/testOneEquationNoLeadTrue.jl")
+include("tweaked/testReliablePaperExmplTrue.jl")
+include("tweaked/testAthanTrue.jl")
+include("tweaked/testHabitmodTrue.jl")
 
 end # module 
