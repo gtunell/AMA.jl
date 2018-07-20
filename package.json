@@ -4,7 +4,7 @@
     "author": "Gregory Tunell",
     "version": "0.0.1",
     "devDependencies": {
-	"julia: 0.6.0"
+	"julia: 0.6"
     },
     "scripts": {
 	"test": "julia-0.6 runtests.jl"
