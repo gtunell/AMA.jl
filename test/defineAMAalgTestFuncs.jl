@@ -1,8 +1,8 @@
 module AMAalgTests
 
-# include("../src/AMA.jl")
+ include("../src/AMA.jl")
 # test AMAalg
-using ..AMA, MAT
+using .AMA, MAT
     
 #tweaked= False
 # test AMAalg firmvalueFalse example
