@@ -641,7 +641,7 @@ anEpsi=0.0000000001::Float64
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 
-isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
+#isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 #isapprox(rtsJulia,rts,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
