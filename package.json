@@ -1,12 +1,18 @@
 {
-    "name": "AMA julia implementation",
-    "description": "Test julia code to preform AMA",
-    "author": "Gregory Tunell",
-    "version": "0.0.1",
-    "devDependencies": {
-	"julia: 0.6"
-    },
-    "scripts": {
-	"test": "julia-0.6 runtests.jl"
-    }
+  "os": "linux",
+  "dist": "trusty",
+  "sudo": false,
+  "group": "stable",
+  "julia": "nightly",
+  "script": [
+    "if [[ -a .git/shallow ]]; then git fetch --unshallow; fi",
+    "julia -e 'Pkg.clone(pwd()); Pkg.build(\"AMA\"); Pkg.test(\"AMA\"; coverage=true)'"
+  ],
+  "language": "julia",
+  "after_success": [
+    "julia -e 'cd(Pkg.dir(\"LightGraphs\")); Pkg.add(\"Coverage\"); using Coverage; Codecov.submit(process_folder())'",
+    "julia -e 'Pkg.add(\"Documenter\")'",
+    "julia -e 'cd(Pkg.dir(\"LightGraphs\")); include(joinpath(\"docs\", \"make.jl\"))'"
+  ]
 }
+
