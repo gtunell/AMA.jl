@@ -32,6 +32,7 @@ before_script: # homebrew for mac
 
 ## uncomment the following lines to override the default test script
 script:
+  - julia -e 'using Pkg'
   - julia -e 'Pkg.add("MAT")'
   - julia -e 'Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true)'
 after_success:
