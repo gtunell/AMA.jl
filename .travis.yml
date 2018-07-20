@@ -6,7 +6,7 @@ os:
   - osx
 julia:
   - 0.6.0
-  - nightly
+#  - nightly
 notifications:
   email: false
 git:
@@ -18,15 +18,16 @@ branches:
 
 ## uncomment the following lines to allow failures on nightly julia
 ## (tests will run but not make your overall status red)
-#matrix:
-#  allow_failures:
-#  - julia: nightly
+matrix:
+  allow_failures:
+    - julia: 0.6.0
+#    - julia: nightly
 
 ## uncomment and modify the following lines to manually install system packages
-addons:
-  apt: # apt-get for linux
-    packages:
-    - gfortran
+#addons:
+#  apt: # apt-get for linux
+#    packages:
+#    - gfortran
 #before_script: # homebrew for mac
 #  - if [ $TRAVIS_OS_NAME = osx ]; then brew update && brew bundle
 #; brew install gcc; fi
