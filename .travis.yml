@@ -28,10 +28,12 @@ addons:
     packages:
     - gfortran
 before_script: # homebrew for mac
-  - if [ $TRAVIS_OS_NAME = osx ]; then brew update; brew install gcc; fi
+  - if [ $TRAVIS_OS_NAME = osx ]; then brew update && brew bundle
+#; brew install gcc; fi
 
 ## uncomment the following lines to override the default test script
 script:
+  - if [ $TRAVIS_JULIA_VERSION = nightly ] then using Pkg
   - julia -e 'Pkg.add("MAT")'
   - julia -e 'Pkg.clone(pwd())'
   - julia -e 'Pkg.build("AMA")'
