@@ -1,16 +1,16 @@
 function athanFalse()
 
-    file = matopen("../test/matDir/"*"amaAlgTestMatsathanFalse.mat")
+    file = matopen(matDir*"amaAlgTestMatsathanFalse.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("../test/matDir/"*"amaAlgTestMatsathanFalse.mat")
+    file = matopen(matDir*"amaAlgTestMatsathanFalse.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("../test/matDir/"*"amaAlgTestMatsathanFalse.mat")
+    file = matopen(matDir*"amaAlgTestMatsathanFalse.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)

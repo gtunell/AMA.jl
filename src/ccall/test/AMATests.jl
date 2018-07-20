@@ -1,7 +1,7 @@
 module AMATests
 
 using MAT
-
+const matDir = "../../test/matDir/"
 #const libSPARSEAMA = Libdl.find_library("libSPARSEAMA.so", Libdl.DL_LOAD_PATH)
 
 # files to include

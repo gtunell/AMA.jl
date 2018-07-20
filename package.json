@@ -1,0 +1,12 @@
+{
+    "name": "AMA julia implementation",
+    "description": "Test julia code to preform AMA",
+    "author": "Gregory Tunell",
+    "version": "0.0.1",
+    "devDependencies": {
+	"julia: 0.6.0"
+    },
+    "scripts": {
+	"test": "julia-0.6 runtests.jl"
+    }
+}
