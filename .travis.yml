@@ -35,7 +35,7 @@ branches:
 #  -
 
 before_script: # homebrew for mac
-- julia -e 'Pkg.update()'
+- julia -e 'using MAT'
 #  - if [ $TRAVIS_OS_NAME = osx ]; then brew install gcc; fi
 #  - if [ $TRAVIS_OS_NAME = linux ]; then apt-get update; fi
 
