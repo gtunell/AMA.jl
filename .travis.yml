@@ -2,19 +2,20 @@
 language: julia
 sudo: required
 os:
-- linux
-- osx
+	- linux
+	- osx
 julia:
-- 0.6.0
-- nightly
+	- 0.6.0
+	- nightly
 notifications:
-email: false
+	email: false
 git:
-depth: 99999999
+	depth: 99999999
+
 # safelist
 branches:
-only:
-- develop
+	only:
+	- develop
 
 ## uncomment the following lines to allow failures on nightly julia
 ## (tests will run but not make your overall status red)
@@ -31,10 +32,8 @@ only:
 #     packages:
 #     - gfortran
 
-#install:
-#  -
-
-before_script: # homebrew for mac
+# before_script: # homebrew for mac
+   - julia -e Pkg.add("MAT")
 #  - if [ $TRAVIS_OS_NAME = osx ]; then brew install gcc; fi
 #  - if [ $TRAVIS_OS_NAME = linux ]; then apt-get update; fi
 
