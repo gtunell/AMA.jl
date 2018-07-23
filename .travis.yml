@@ -25,11 +25,11 @@ branches:
 #    - julia: nightly
 
 ## uncomment and modify the following lines to manually install system packages
-#addons:
-#  apt: # apt-get for linux
-#     update: true
-#     packages:
-#     - gfortran
+addons:
+  apt: # apt-get for linux
+     update: true
+     packages:
+     - gfortran
 
 #install:
 #  -
