@@ -23,6 +23,8 @@ function firmvalue3Leads2LagsTrue()::Bool
     display(bb)
     
     (hh, cofb, qmatrix, returnCode) = callSparseAim(hh, nleads, nlags)
-
+print("here\n")
+print(norm(cofb- bb))
+print("there\n")
     isapprox(cofb, bb)
 end

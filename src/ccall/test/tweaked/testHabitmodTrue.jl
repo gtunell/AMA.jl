@@ -19,7 +19,10 @@ function habitmodTrue()
     nleads = 1
 
     (hh, cofb, qmatrix, returnCode) = callSparseAim(hh, nleads, nlags)
-
+print("here\n")
+print(size(cofb),size(bb),returnCode)
+print("here\n")
+   display(bb) 
     isapprox(cofb, bb)
 
 end

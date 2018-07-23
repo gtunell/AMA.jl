@@ -10,10 +10,10 @@ function callSparseAim( hh, leads, lags )
     nstate = 0
     hrows = neq
     hcols = size(hh, 2)
-    qmax = length(hh)
+    qmax = hrows*leads*(hrows*(lags+leads+1))
     returnCodePointer = 0
     cofb = zeros(neq, neq * lags)
-    qmatrix = zeros(neq, hcols)
+    qmatrix = zeros(neq*leads, hcols)
 
     # use the library libSPARSEAMA to call c function ...
     # libSPARSEAMA is a shared library that combines sparseAMA

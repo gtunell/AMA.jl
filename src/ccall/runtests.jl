@@ -15,11 +15,11 @@ using Base.Test, .AMATests
     @test AMATests.habitmodFalse()
 
     @test AMATests.firmvalueTrue()
-    #@test AMATests.firmvalue3Leads2LagsTrue()
-    #@test AMATests.example7True()
-    #@test AMATests.oneEquationNoLeadTrue()
-    #@test AMATests.reliablePaperExmplTrue()
-    #@test AMATests.athanTrue()
-    #@test AMATests.habitmodTrue()
+    @test AMATests.firmvalue3Leads2LagsTrue()
+    @test AMATests.example7True()
+    @test AMATests.oneEquationNoLeadTrue()
+    @test AMATests.reliablePaperExmplTrue()
+    @test AMATests.athanTrue()
+    @test AMATests.habitmodTrue()
     
 end
