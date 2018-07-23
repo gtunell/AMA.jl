@@ -25,11 +25,11 @@ only:
 #    - julia: nightly
 
 ## uncomment and modify the following lines to manually install system packages
-addons:
-  apt: # apt-get for linux
-     update: true
-     packages:
-     - gfortran
+#addons:
+#  apt: # apt-get for linux
+#     update: true
+#     packages:
+#     - gfortran
 
 #install:
 #  -
@@ -37,12 +37,10 @@ addons:
 before_script: # homebrew for mac
 #  - if [ $TRAVIS_OS_NAME = osx ]; then brew install gcc; fi
 #  - if [ $TRAVIS_OS_NAME = linux ]; then apt-get update; fi
-   - if [ $TRAVIS_OS_NAME = osx ]; brew install hdf5; Pkg.build("HDF5"); fi
 
 ## uncomment the following lines to override the default test script
 script:
 - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-- julia -e 'Pkg.build("HDF5")'
 - julia -e 'Pkg.clone(pwd())'
 - julia -e 'Pkg.build("AMA")'
 - julia -e 'Pkg.test("AMA"; coverage=true)'
