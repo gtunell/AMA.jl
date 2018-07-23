@@ -551,6 +551,8 @@ MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveHabitmod"];
 generator["./","habitmod","habitmodParams",opts];
 ]
 (*
+
+
 genAllTests[genShiftRightTestMatrices]
 genAllTests[genExactShiftTestMatrices]
 genAllTests[genNumericShiftTestMatrices]
@@ -571,6 +573,17 @@ genAllTests[genAMAalgTestMatrices,"doMult"->False]
 genAllTests[genReducedFormTestMatrices,"doMult"->True]
 
 genAllTests[genBuildATestMatrices,"doMult"->False]
+
+*)
+
+(*
+fix habitmod matrices
+MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveHabitmod"];
+(*matrices for exactshifts*)
+genAMAalgTestMatrices["./","habitmod","habitmodParams",opts];
+{zfhf,tm,ljs,levs,qmat,bmat,smat,s0inv}=numericAMA[allH,4,0];
+
+bb rts ia nex nnum lgrts amacode
 
 *)
 

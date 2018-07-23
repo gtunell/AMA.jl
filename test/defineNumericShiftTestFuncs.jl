@@ -548,15 +548,15 @@ nnumericMatlab=7
 sameSpan(hNewJulia,hNewMatlab)&&
 
 
-######## uncomment to display the output in terminal ########
-# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewJulia)
-# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewMatlab)
-#display(hNewJulia)
-#display(hNewMatlab)
+####### uncomment to display the output in terminal ########
+ show(IOContext(STDOUT, :compact=>false), "text/plain", qNewJulia)
+ show(IOContext(STDOUT, :compact=>false), "text/plain", qNewMatlab)
+display(hNewJulia)
+display(hNewMatlab)
 
     
     
-#sameSpan(qNewJulia,qNewMatlab)&&
+sameSpan(qNewJulia,qNewMatlab)&&
 iqNew==iqNewMatlab&&
 nnumeric==nnumericMatlab
 end;
