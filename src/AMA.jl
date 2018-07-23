@@ -2,6 +2,7 @@ module AMA
 # http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
 
 # Include relevant files
+include("AMA/checkAMA.jl")
 include("AMA/exactShift!.jl")
 include("AMA/numericShift!.jl")
 include("AMA/shiftRight!.jl")
