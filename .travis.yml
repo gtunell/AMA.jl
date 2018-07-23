@@ -25,13 +25,19 @@ only:
 #    - julia: nightly
 
 ## uncomment and modify the following lines to manually install system packages
-#addons:
-#  apt: # apt-get for linux
-#    packages:
-#    - gfortran
+addons:
+  apt: # apt-get for linux
+     update: true
+     packages:
+     - hdf5
+     - gfortran
+
+install:
+  -
+
 before_script: # homebrew for mac
   - if [ $TRAVIS_OS_NAME = osx ]; then brew install gcc; fi
-  - if [ $TRAVIS_OS_NAME = linux ]; then apt-get update; fi
+#  - if [ $TRAVIS_OS_NAME = linux ]; then apt-get update; fi
 
 ## uncomment the following lines to override the default test script
 script:
@@ -39,6 +45,7 @@ script:
 - julia -e 'Pkg.clone(pwd())'
 - julia -e 'Pkg.build("AMA")'
 - julia -e 'Pkg.test("AMA"; coverage=true)'
+
 after_success:
 - if [ "$TRAVIS_JULIA_VERSION" != "nightly" ]; then
       julia -e 'cd(Pkg.dir("AMA")); using Coverage; amaRes = process_folder(); Coveralls.submit(amaRes); Codecov.submit(amaRes)';
