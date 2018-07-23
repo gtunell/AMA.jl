@@ -29,7 +29,6 @@ addons:
   apt: # apt-get for linux
      update: true
      packages:
-     - hdf5
      - gfortran
 
 install:
