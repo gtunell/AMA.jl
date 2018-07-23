@@ -31,11 +31,11 @@ addons:
      packages:
      - gfortran
 
-install:
-  -
+#install:
+#  -
 
 before_script: # homebrew for mac
-  - if [ $TRAVIS_OS_NAME = osx ]; then brew install gcc; fi
+#  - if [ $TRAVIS_OS_NAME = osx ]; then brew install gcc; fi
 #  - if [ $TRAVIS_OS_NAME = linux ]; then apt-get update; fi
 
 ## uncomment the following lines to override the default test script
