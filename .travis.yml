@@ -41,8 +41,12 @@ before_script: # homebrew for mac
 ## uncomment the following lines to override the default test script
 script:
 - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-- if [ "$TRAVIS_JULIA_VERSION" = "nightly" ]; using Pkg; Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); fi
-- if [ "$TRAVIS_JULIA_VERSION" = "0.6.0" ]; Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); fi
+- if [ "$TRAVIS_JULIA_VERSION" = "nightly" ]; then 
+     using Pkg; Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); 
+  fi
+- if [ "$TRAVIS_JULIA_VERSION" = "0.6.0" ]; then 
+     Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); 
+  fi
 #- julia -e 'Pkg.add("MAT")'
 #- julia -e 'Pkg.clone(pwd())'
 #- julia -e 'Pkg.build("AMA")'
