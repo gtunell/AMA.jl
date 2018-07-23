@@ -39,7 +39,7 @@ branches:
 ## uncomment the following lines to override the default test script
 script:
 - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-- julia -e Pkg.add("MAT")
+- julia -e 'Pkg.add("MAT")'
 - julia -e 'Pkg.clone(pwd())'
 - julia -e 'Pkg.build("AMA")'
 - julia -e 'Pkg.test("AMA"; coverage=true)'
