@@ -1,3 +1,4 @@
+Pkg.add("MAT")
 using Base.Test
 include("../src/AMA.jl")
 
