@@ -35,8 +35,7 @@ branches:
 #  -
 
 before_script: # homebrew for mac
-- julia -e 'Pkg.build("HDF5")'
-- julia -e 'Pkg.add("MAT")'
+- julia -e 'Pkg.update()'
 #  - if [ $TRAVIS_OS_NAME = osx ]; then brew install gcc; fi
 #  - if [ $TRAVIS_OS_NAME = linux ]; then apt-get update; fi
 
