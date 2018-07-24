@@ -47,10 +47,11 @@ script:
 #- if [ "$TRAVIS_JULIA_VERSION" = "0.6.0" ]; then 
 #     julia -e Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); 
 #  fi
-- julia -e 'Pkg.add("MAT")'
-- julia -e 'Pkg.clone(pwd())'
-- julia -e 'Pkg.build("AMA")'
-- julia -e 'Pkg.test("AMA"; coverage=true)'
+#- julia -e 'Pkg.add("MAT")'
+#- julia -e 'Pkg.clone(pwd())'
+#- julia -e 'Pkg.build("AMA")'
+#- julia -e 'Pkg.test("AMA"; coverage=true)'
+- julia -e 'Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
 
 after_success:
 - if [ "$TRAVIS_JULIA_VERSION" != "nightly" ]; then
