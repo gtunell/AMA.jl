@@ -1,16 +1,22 @@
 ## Documentation: http://docs.travis-ci.com/user/languages/julia/
 language: julia
+
 sudo: required
+
 os:
   - linux
   - osx
+
 julia:
   - 0.6
   - nightly
+
 notifications:
   email: false
+
 git:
   depth: 99999999
+
 # safelist
 branches:
   only:
@@ -19,10 +25,10 @@ branches:
 ## uncomment the following lines to allow failures on nightly julia
 ## (tests will run but not make your overall status red)
 
-#matrix:
-#  allow_failures:
-#    - julia: 0.6.0
-#    - julia: nightly
+matrix:
+  allow_failures:
+    - julia: 0.6.0
+    - julia: nightly
 
 ## uncomment and modify the following lines to manually install system packages
 #addons:
@@ -32,29 +38,15 @@ branches:
 #     - gfortran
 #     - gcc
 
-#install:
-#  -
-
-#before_script: # homebrew for mac
-#  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew tap homebrew/science; brew install hdf5; fi
-#  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew install gcc; fi
-#  - if [ ${TRAVIS_OS_NAME} = linux ]; then apt-get update; fi
-
 ## uncomment the following lines to override the default test script
 #script:
-#- if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-#- if [ "$TRAVIS_JULIA_VERSION" = "nightly" ]; then 
-#     julia -e using Pkg; Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); 
-#  fi
-#- if [ "$TRAVIS_JULIA_VERSION" = "0.6.0" ]; then 
-#     julia -e Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); 
-#  fi
-#- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
-#     julia -e 'Pkg.add("MAT")'; 
-#  elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-#     brew tap homebrew/science; brew install hdf5; julia -e 'Pkg.add("HDF5"); Pkg.add("MAT")';
-#  fi
-#- julia -e 'Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
+- if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
+     julia -e 'Pkg.add("MAT")'; 
+  elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+     brew tap homebrew/science; brew install hdf5; julia -e 'Pkg.add("HDF5"); Pkg.add("MAT")';
+  fi
+- julia -e 'Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
 
 after_success:
 - if [ "$TRAVIS_JULIA_VERSION" != "nightly" ]; then
