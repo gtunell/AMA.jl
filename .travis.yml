@@ -53,7 +53,7 @@ script:
 #- julia -e 'Pkg.build("AMA")'
 #- julia -e 'Pkg.test("AMA"; coverage=true)'
 - if [ "$TRAVIS_OS_NAME" = "linux" ] then 
-     julia -e 'Pkg.add("MAT")' 
+     julia -e 'Pkg.add("MAT")'; 
   fi
 - julia -e 'Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
 
