@@ -1,6 +1,10 @@
 # AMA
 
+*Release verison*:
+
 [![Build Status](https://travis-ci.org/es335mathwiz/AMA.jl.svg?branch=develop)](https://travis-ci.org/es335mathwiz/AMA.jl)
+
+*Development version*:
 
 [![Build status](https://ci.appveyor.com/api/projects/status/kh7w0y6d1652t0by/branch/develop?svg=true)](https://ci.appveyor.com/project/GaryAnderson/ama-jl/branch/develop)
 
