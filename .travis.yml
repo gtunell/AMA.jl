@@ -39,7 +39,7 @@ matrix:
 #     - gcc
 
 ## uncomment the following lines to override the default test script
-#script:
+script:
 - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
 - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
      julia -e 'Pkg.add("MAT")'; 
