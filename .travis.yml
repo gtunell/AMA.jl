@@ -30,6 +30,7 @@ addons:
      update: true
      packages:
      - gfortran
+     - gcc
 
 #install:
 #  -
@@ -51,7 +52,8 @@ script:
 #- julia -e 'Pkg.clone(pwd())'
 #- julia -e 'Pkg.build("AMA")'
 #- julia -e 'Pkg.test("AMA"; coverage=true)'
-- julia -e 'Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
+- if [ "$TRAVIS_OS_NAME" = "linux" ] then julia -e 'Pkg.add("MAT")'; fi
+- julia -e 'Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
 
 after_success:
 - if [ "$TRAVIS_JULIA_VERSION" != "nightly" ]; then
