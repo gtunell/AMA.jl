@@ -36,6 +36,7 @@ addons:
 #  -
 
 before_script: # homebrew for mac
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew tap homebrew/science; brew install hdf5; fi
 #  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew install gcc; fi
 #  - if [ ${TRAVIS_OS_NAME} = linux ]; then apt-get update; fi
 
@@ -48,14 +49,10 @@ script:
 #- if [ "$TRAVIS_JULIA_VERSION" = "0.6.0" ]; then 
 #     julia -e Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); 
 #  fi
-#- julia -e 'Pkg.add("MAT")'
-#- julia -e 'Pkg.clone(pwd())'
-#- julia -e 'Pkg.build("AMA")'
-#- julia -e 'Pkg.test("AMA"; coverage=true)'
 - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
      julia -e 'Pkg.add("MAT")'; 
   elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-     julia -e 'Pkg.add("MAT"); Pkg.build("HDF5")';
+     julia -e 'Pkg.add("HDF5"); Pkg.add("MAT")';
   fi
 - julia -e 'Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
 
