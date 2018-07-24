@@ -85,11 +85,12 @@ lgrts=3::Int64
 AMAcode=1::Int64
 
 anEpsi=0.0000000001::Float64
-
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
+
 isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
-isapprox(rtsJulia,rts,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
+#transition matrix has three eigenvalues of equal magnitude two complex matlab orders them differently than  julia so just checking the magnitudes
+isapprox(abs.(rtsJulia[1:lgrts,1]),abs.(rts[1:lgrts,1]),rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -315,11 +316,20 @@ lgrts=5::Int64
 AMAcode=1::Int64
 
 anEpsi=0.0000000001::Float64
-
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
+
+print("done\n")    
+print("\n")
+print(norm(bbJulia-bb))
+print("\n")
+print(bbJulia)
+print("\n")
+
+
+
 isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
-#isapprox(rtsJulia,rts,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
+isapprox(rtsJulia[1:lgrts],rts[1:lgrts],rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -390,7 +400,7 @@ file = matopen("./matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsTrue.mat")
 rts=read(file,"rts")
 rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
 close(file)
-
+    
 file = matopen("./matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsTrue.mat")
 hh=read(file,"hh")
 hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
@@ -411,7 +421,8 @@ anEpsi=0.0000000001::Float64
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)  
 isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
-#isapprox(rtsJulia,rts,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
+#transition matrix has three eigenvalues of equal magnitude two complex matlab orders them differently than  julia so just checking the magnitudes
+isapprox(abs.(rtsJulia[1:lgrts,1]),abs.(rts[1:lgrts,1]),rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -595,7 +606,7 @@ anEpsi=0.0000000001::Float64
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
-#isapprox(rtsJulia,rts,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
+isapprox(rtsJulia[1:lgrts],rts[1:lgrts],rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
@@ -641,13 +652,18 @@ anEpsi=0.0000000001::Float64
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 
-#isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
-#isapprox(rtsJulia,rts,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
+print("\n")
+print(norm(bbJulia-bb))
+print("\n")
+
+    
+isapprox(bbJulia,bb,rtol=0.1e-7::Float64,atol=0.0::Float64)&&
+isapprox(rtsJulia[1:lgrts],rts[1:lgrts],rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 iaJulia==ia&&
 nexJulia==nex&&
 nnumJulia==nnum&&
 iaJulia==ia
 end;
-===#
+
 
 end
