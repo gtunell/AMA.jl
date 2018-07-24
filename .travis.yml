@@ -55,7 +55,7 @@ script:
 - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
      julia -e 'Pkg.add("MAT")'; 
   elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-     julia -e 'Pkg.add("MAT"); Pkg.build("HDF5)';
+     julia -e 'Pkg.add("MAT"); Pkg.build("HDF5")';
   fi
 - julia -e 'Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
 
