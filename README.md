@@ -2,7 +2,8 @@
 
 *Release verison*:
 
-[![Build Status](https://travis-ci.org/es335mathwiz/AMA.jl.svg?branch=develop)](https://travis-ci.org/es335mathwiz/AMA.jl)
+# [![Build Status](https://travis-ci.org/es335mathwiz/AMA.jl.svg?branch=develop)](https://travis-ci.org/es335mathwiz/AMA.jl)
+[![GitHub Release](https://travis-ci.org/es335mathwiz/AMA.jl.svg?branch=develop)](https://travis-ci.org/es335mathwiz/AMA.jl)
 
 *Development version*:
 
