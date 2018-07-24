@@ -6,7 +6,7 @@ os:
   - osx
 julia:
   - 0.6.0
-  - nightly
+#  - nightly
 notifications:
   email: false
 git:
@@ -40,17 +40,17 @@ before_script: # homebrew for mac
 
 ## uncomment the following lines to override the default test script
 script:
-- if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-- if [ "$TRAVIS_JULIA_VERSION" = "nightly" ]; then 
-     julia -e using Pkg; Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); 
-  fi
-- if [ "$TRAVIS_JULIA_VERSION" = "0.6.0" ]; then 
-     julia -e Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); 
-  fi
-#- julia -e 'Pkg.add("MAT")'
-#- julia -e 'Pkg.clone(pwd())'
-#- julia -e 'Pkg.build("AMA")'
-#- julia -e 'Pkg.test("AMA"; coverage=true)'
+#- if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+#- if [ "$TRAVIS_JULIA_VERSION" = "nightly" ]; then 
+#     julia -e using Pkg; Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); 
+#  fi
+#- if [ "$TRAVIS_JULIA_VERSION" = "0.6.0" ]; then 
+#     julia -e Pkg.add("MAT"); Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true); 
+#  fi
+- julia -e 'Pkg.add("MAT")'
+- julia -e 'Pkg.clone(pwd())'
+- julia -e 'Pkg.build("AMA")'
+- julia -e 'Pkg.test("AMA"; coverage=true)'
 
 after_success:
 - if [ "$TRAVIS_JULIA_VERSION" != "nightly" ]; then
