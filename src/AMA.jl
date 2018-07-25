@@ -1,3 +1,5 @@
+__precompile__()
+
 module AMA
 # http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
 

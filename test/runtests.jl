@@ -104,6 +104,7 @@ include("defineReducedFormTestFuncs.jl")
 @test ReducedFormTests.habitmodTrue()
 end
 
+tic();
 include("defineAMAalgTestFuncs.jl")
 @testset "test AMAalg" begin
 @test AMAalgTests.firmvalueTrue()
@@ -122,7 +123,9 @@ include("defineAMAalgTestFuncs.jl")
 @test AMAalgTests.athanFalse()
 @test AMAalgTests.habitmodFalse()
 end
+toc();
 
+tic();
 include("defineCcallTestFuncs.jl")
 @testset "test ccall" begin
     @test CcallTests.firmvalueFalse()
@@ -141,7 +144,7 @@ include("defineCcallTestFuncs.jl")
     @test CcallTests.athanTrue()
     @test CcallTests.habitmodTrue()  
 end
-
+toc();
 
 end #outer
 
