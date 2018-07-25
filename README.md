@@ -19,7 +19,7 @@ Pkg.add("AMA")
 
 ## Usage
 
-There is fast and slightly faster way to use this algorithm to solve linear rational expectations models which we outline below. The former calls a julia language implementation and the latter calls a C/Fortran implementation. To begin,
+There is fast and slightly faster way to use this algorithm to solve linear rational expectations models which is outlined below. The former calls a julia language implementation and the latter calls a C/Fortran implementation. To begin,
 
 Load the module:
 
