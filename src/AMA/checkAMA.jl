@@ -9,15 +9,14 @@ function checkAMA(neq, nlag, nlead, h, b)
 
 # Append negative identity matrix to b
 
-#b = [b, -eye(neq)];
-b = [b, -eye(neq)]
+b = cat(2, b, -eye(neq))
     
 # Define indexes into the lagged part (minus)
 # and the current and lead part (plus) of h
 
 minus = 1:(neq * nlag)
 plus  = (neq * nlag + 1):(neq * (nlag + 1 + nlead))
-
+    
 # Initialize q
 
 q = zeros(neq * (nlead + 1), neq * (nlag + 1 + nlead))
@@ -35,7 +34,7 @@ for i in (1:nlead)
    rows = i * neq + (1:neq)
    q[rows,:] = shiftRight!( q[(rows - neq), :], neq )
 end
-
+    
 # Premultiply the left block of q by the negative inverse
 # of the right block of q (use equation solver to avoid
 # actually computing the inverse).
@@ -43,16 +42,16 @@ end
 q[:,minus] =  -q[:,plus] \ q[:,minus]
 
 # Define the solution error
-
-error = h[:,minus] + ( h[:,plus] * q[:,minus] )
+    
+error = h[:,minus] +  h[:,plus] * q[:,minus] 
 
 # Take maximum absolute value of the vec of error (error(:))
 
-err = max( abs( error[:] ) );
+err = maximum( abs.( error ) );
 
 # space
-display("Maximum absolute error: ")
-display(err)
+print("Maximum absolute error: ")
+println(err)
 
 # Resize q, removing the additional neq columns and rows
 

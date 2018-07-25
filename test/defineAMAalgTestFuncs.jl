@@ -25,6 +25,7 @@ close(file)
 
 file = matopen("./matDir/"*"amaAlgTestMatsfirmvalueFalse.mat")
 hh=read(file,"hh")
+checkH=read(file,"hh")
 hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
 close(file)
 
@@ -42,6 +43,9 @@ anEpsi=0.0000000001::Float64
 
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
+
+checkAMA(neq, nlag, nlead, checkH, bbJulia)
+    
 isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 isapprox(rtsJulia,rts,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 iaJulia==ia&&
@@ -326,7 +330,8 @@ AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 #print(bbJulia)
 #print("\n")
 
-
+res = checkAMA(neq, nlag, nlead, hh, bbJulia)
+ 
 
 isapprox(bbJulia,bb,rtol=0.1e-10::Float64,atol=0.0::Float64)&&
 isapprox(rtsJulia[1:lgrts],rts[1:lgrts],rtol=0.1e-10::Float64,atol=0.0::Float64)&&
@@ -656,6 +661,7 @@ AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 #print(norm(bbJulia-bb))
 #print("\n")
 
+checkAMA(neq, nlag, nlead, checkH, bbJulia)
     
 isapprox(bbJulia,bb,rtol=0.1e-7::Float64,atol=0.0::Float64)&&
 isapprox(rtsJulia[1:lgrts],rts[1:lgrts],rtol=0.1e-10::Float64,atol=0.0::Float64)&&
