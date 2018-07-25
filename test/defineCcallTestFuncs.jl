@@ -228,10 +228,6 @@ function firmvalue3Leads2LagsTrue()::Bool
     
     nlags=2
     nleads=3
-
-    display(hh)
-    display(rts)
-    display(bb)
     
     (hh, cofb, qmatrix, returnCode) = callSparseAim(hh, nleads, nlags)
 
