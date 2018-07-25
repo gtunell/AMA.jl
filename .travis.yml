@@ -15,7 +15,7 @@ notifications:
   email: false
 
 git:
-  depth: 99999999
+  depth: 1
 
 # safelist
 branches:
@@ -41,7 +41,7 @@ addons:
 ## uncomment the following lines to override the default test script
 script:
 - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
--  if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
+- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
      julia -e 'Pkg.add("MAT")'; 
   elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
      brew tap homebrew/science; brew install hdf5; julia -e 'Pkg.add("HDF5"); Pkg.add("MAT")';
