@@ -319,12 +319,12 @@ anEpsi=0.0000000001::Float64
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 
-print("done\n")    
-print("\n")
-print(norm(bbJulia-bb))
-print("\n")
-print(bbJulia)
-print("\n")
+#print("done\n")    
+#print("\n")
+#print(norm(bbJulia-bb))
+#print("\n")
+#print(bbJulia)
+#print("\n")
 
 
 
@@ -652,9 +652,9 @@ anEpsi=0.0000000001::Float64
 (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) = 
 AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 
-print("\n")
-print(norm(bbJulia-bb))
-print("\n")
+#print("\n")
+#print(norm(bbJulia-bb))
+#print("\n")
 
     
 isapprox(bbJulia,bb,rtol=0.1e-7::Float64,atol=0.0::Float64)&&

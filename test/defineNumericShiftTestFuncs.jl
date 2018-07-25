@@ -549,10 +549,10 @@ sameSpan(hNewJulia,hNewMatlab)&&
 
 
 ####### uncomment to display the output in terminal ########
- show(IOContext(STDOUT, :compact=>false), "text/plain", qNewJulia)
- show(IOContext(STDOUT, :compact=>false), "text/plain", qNewMatlab)
-display(hNewJulia)
-display(hNewMatlab)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewJulia)
+# show(IOContext(STDOUT, :compact=>false), "text/plain", qNewMatlab)
+#display(hNewJulia)
+#display(hNewMatlab)
 
     
     

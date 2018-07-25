@@ -13,10 +13,10 @@ include("AMA/AMAalg.jl")
 include("AMA/checkSpanning.jl")
 include("AMA/deleteCols.jl")
 include("AMA/deleteRows.jl")
-include("AMA/ccall/callSparseAim.jl")
+include("AMA/callSparseAim.jl")
 include("AMA/checkAMA.jl")
 
 # Export all functions
-export exactShift!, numericShift!, shiftRight!, buildA!, augmentQ!, eigenSys!, reducedForm, AMAalg, sameSpan, deleteCols, deleteRows, checkAMA
+export exactShift!, numericShift!, shiftRight!, buildA!, augmentQ!, eigenSys!, reducedForm, AMAalg, sameSpan, deleteCols, deleteRows, callSparseAim, checkAMA
 
 end # module
