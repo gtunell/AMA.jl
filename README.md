@@ -67,13 +67,13 @@ To execute the algorithm with julia:
 AMAalg(h, neq, nlag, nlead, condn, upperbnd)
 ```
 *Note* - the above returns a tuple containing (b, rts, ia, nexact, nnumeric, lgroots, AMAcode)
-	b           Reduced form coefficient matrix.\n
-	rts         Roots returned by eig.\n
-	ia          Dimension of companion matrix.\n
-	nexact      Number of exact shift rights.\n
-	nnumeric    Number of numeric shift rights.\n
-	lgroots     Number of roots greater in modulus than upper bound.\n
-    AMAcode     Return code.\n
+	b           Reduced form coefficient matrix.<br />
+	rts         Roots returned by eig.<br />
+	ia          Dimension of companion matrix.<br />
+	nexact      Number of exact shift rights.<br />
+	nnumeric    Number of numeric shift rights.<br />
+	lgroots     Number of roots greater in modulus than upper bound.<br />
+    AMAcode     Return code.<br />
 
 To execute the algorithm with C/Fortran:
 
@@ -81,10 +81,10 @@ To execute the algorithm with C/Fortran:
 callSparseAim(h, nleads, nlags)
 ```
 
-*Note* - the above returns a tuple containing (h, b, q, AMAcode)\n
-    h           The original h matrix after computations.\n
-	b           Reduced form coefficient matrix.\n
-    q           Asymptotic constraints.\n
+*Note* - the above returns a tuple containing (h, b, q, AMAcode)<br />
+    h           The original h matrix after computations.<br />
+	b           Reduced form coefficient matrix.<br />
+    q           Asymptotic constraints.<br />
 	AMAcode     Return code.
 
 ## More
