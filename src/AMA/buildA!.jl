@@ -53,6 +53,6 @@ function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64)
     end
     ia = length(js)
     
-    return (aa::Array{Float64,2}, ia::Int64, js::Array{Int64,2})
+    return (aa::Array{Float64,2}, ia::Int64, Int64.(js)::Array{Int64,2})
     
 end # buildA

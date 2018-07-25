@@ -639,6 +639,7 @@ close(file)
 
 file = matopen("./matDir/"*"amaAlgTestMatshabitmodTrue.mat")
 hh=read(file,"hh")
+checkH=read(file,"hh")
 hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
 close(file)
 
