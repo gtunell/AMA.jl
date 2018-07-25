@@ -123,6 +123,26 @@ include("defineAMAalgTestFuncs.jl")
 @test AMAalgTests.habitmodFalse()
 end
 
+include("defineCcallTestFuncs.jl")
+@testset "test ccall" begin
+    @test CcallTests.firmvalueFalse()
+    @test CcallTests.firmvalue3Leads2LagsFalse()
+    @test CcallTests.example7False()
+    @test CcallTests.oneEquationNoLeadFalse()
+    @test CcallTests.reliablePaperExmplFalse()
+    @test CcallTests.athanFalse()
+    @test CcallTests.habitmodFalse()
+
+    @test CcallTests.firmvalueTrue()
+    @test CcallTests.firmvalue3Leads2LagsTrue()
+    @test CcallTests.example7True()
+    @test CcallTests.oneEquationNoLeadTrue()
+    @test CcallTests.reliablePaperExmplTrue()
+    @test CcallTests.athanTrue()
+    @test CcallTests.habitmodTrue()  
+end
+
+
 end #outer
 
 
