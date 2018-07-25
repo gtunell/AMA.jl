@@ -13,23 +13,23 @@
 
 To install AMA, use the package manager by typing:
 
-'''Julia
+'''julia
 Pkg.add("AMA")
 '''
 
 ## Usage
 
-There is fast and slightly faster way to use this algorithm to solve linear rational expectations models which we outline below. The former calls a Julia language implementation and the latter calls a C/Fortran implementation. To begin,
+There is fast and slightly faster way to use this algorithm to solve linear rational expectations models which we outline below. The former calls a julia language implementation and the latter calls a C/Fortran implementation. To begin,
 
 Load the module:
 
-'''Julia
+'''julia
 using AMA
 '''
 
 Declare the linear models to solve as:
 
-'''Julia
+'''julia
 h = [0.  0.  0.  0.  -1.1  0.  0.  0.  1.  1.  0.  0.;
      0.  -0.4  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.;
      0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
@@ -38,32 +38,32 @@ h = [0.  0.  0.  0.  -1.1  0.  0.  0.  1.  1.  0.  0.;
 
 Set number of equations:
 
-'''Julia
+'''julia
 neq = 4
 '''
 
 Set number of lags and leads:
 
-'''Julia
+'''julia
 nlags = 1
 nleads = 1
 '''
 
 Set a tolerance to calculate numeric shift and reduced form:
 
-'''Julia
+'''julia
 condn = 0.0000000001
 '''
 
 Finally, give an inclusive upper bound for modulus of roots allows in reduced form:
 
-'''Julia
+'''julia
 upperbnd = 1 + condn
 '''
 
-To execute the algorithm with Julia: 
+To execute the algorithm with julia: 
 
-'''Julia
+'''julia
 AMAalg(h, neq, nlag, nlead, condn, upperbnd)
 '''
 *note* - the above returns a tuple containing (b, rts, ia, nexact, nnumeric, lgroots, AMAcode)
@@ -77,7 +77,7 @@ AMAalg(h, neq, nlag, nlead, condn, upperbnd)
 
 To execute the algorithm with C/Fortran:
 
-'''Julia
+'''julia
 callSparseAim(h, nleads, nlags)
 '''
 
@@ -89,4 +89,4 @@ callSparseAim(h, nleads, nlags)
 
 ## More
 
-For more information and an indepth analysis of the algorithm, please read the full Economic paper available [online](https://www.federalreserve.gov/pubs/feds/2010/201013/201013pap.pdf) written by [Gary S. Anderson](https://github.com/es335mathwiz).
+For more information and an indepth analysis of the algorithm, please read the [full Economic paper](https://www.federalreserve.gov/pubs/feds/2010/201013/201013pap.pdf) written by [Gary S. Anderson](https://github.com/es335mathwiz).
