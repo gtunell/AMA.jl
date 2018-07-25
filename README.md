@@ -82,10 +82,12 @@ callSparseAim(h, nleads, nlags)
 ```
 
 *Note* - the above returns a tuple containing (h, b, q, AMAcode)<br />
-    h           The original h matrix after computations.<br />
-	b           Reduced form coefficient matrix.<br />
-    q           Asymptotic constraints.<br />
-	AMAcode     Return code.
+<ul>
+  <li>  h           The original h matrix after computations.<br /> </li>
+  <li>	b           Reduced form coefficient matrix.<br /> </li>
+  <li>  q           Asymptotic constraints.<br />  </li>
+  <li>	AMAcode     Return code. </li>
+</ul>
 
 ## More
 
