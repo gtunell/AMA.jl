@@ -27,7 +27,7 @@ Load the module:
 using AMA
 ```
 
-Declare the linear models to solve as:
+Declare the linear models to solve such as:
 
 ```julia
 h = [0.  0.  0.  0.  -1.1  0.  0.  0.  1.  1.  0.  0.;
@@ -55,7 +55,7 @@ Set a tolerance to calculate numeric shift and reduced form:
 condn = 0.0000000001
 ```
 
-Finally, give an inclusive upper bound for modulus of roots allows in reduced form:
+Finally, give an inclusive upper bound for modulus of roots allowed in reduced form:
 
 ```julia
 upperbnd = 1 + condn
