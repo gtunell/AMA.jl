@@ -13,9 +13,9 @@
 
 To install AMA, use the package manager by typing:
 
-'''julia
+```julia
 Pkg.add("AMA")
-'''
+```
 
 ## Usage
 
@@ -23,49 +23,49 @@ There is fast and slightly faster way to use this algorithm to solve linear rati
 
 Load the module:
 
-'''julia
+```julia
 using AMA
-'''
+```
 
 Declare the linear models to solve as:
 
-'''julia
+```julia
 h = [0.  0.  0.  0.  -1.1  0.  0.  0.  1.  1.  0.  0.;
      0.  -0.4  0.  0.  0.  1.  -1.  0.  0.  0.  0.  0.;
      0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.;
      0.  0.  0.  -1.  0.  0.  0.  1.  0.  0.  0.  0.]::Array{Float64,2}
-'''
+```
 
 Set number of equations:
 
-'''julia
+```julia
 neq = 4
-'''
+```
 
 Set number of lags and leads:
 
-'''julia
+```julia
 nlags = 1
 nleads = 1
-'''
+```
 
 Set a tolerance to calculate numeric shift and reduced form:
 
-'''julia
+```julia
 condn = 0.0000000001
-'''
+```
 
 Finally, give an inclusive upper bound for modulus of roots allows in reduced form:
 
-'''julia
+```julia
 upperbnd = 1 + condn
-'''
+```
 
 To execute the algorithm with julia: 
 
-'''julia
+```julia
 AMAalg(h, neq, nlag, nlead, condn, upperbnd)
-'''
+```
 *note* - the above returns a tuple containing (b, rts, ia, nexact, nnumeric, lgroots, AMAcode)
 	b           Reduced form coefficient matrix.
 	rts         Roots returned by eig.
@@ -77,9 +77,9 @@ AMAalg(h, neq, nlag, nlead, condn, upperbnd)
 
 To execute the algorithm with C/Fortran:
 
-'''julia
+```julia
 callSparseAim(h, nleads, nlags)
-'''
+```
 
 *note* - the above returns a tuple containing (h, b, q, AMAcode)
     h           The original h matrix after computations.
