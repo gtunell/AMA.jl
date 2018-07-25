@@ -66,7 +66,7 @@ To execute the algorithm with julia:
 ```julia
 AMAalg(h, neq, nlag, nlead, condn, upperbnd)
 ```
-*Note* - the above returns a tuple containing (b, rts, ia, nexact, nnumeric, lgroots, AMAcode)
+*Note* - the above returns the tuple (b, rts, ia, nexact, nnumeric, lgroots, AMAcode)
 <ul>
   <li>	b         -  Reduced form coefficient matrix.<br />                      </li>
   <li>	rts       -  Roots returned by eig.<br />                                </li>
@@ -83,7 +83,7 @@ To execute the algorithm with C/Fortran:
 callSparseAim(h, nleads, nlags)
 ```
 
-*Note* - the above returns a tuple containing (h, b, q, AMAcode)<br />
+*Note* - the above returns the tuple (h, b, q, AMAcode)<br />
 <ul>
   <li>  h         -  The original h matrix after computations.<br />  </li>
   <li>	b         -  Reduced form coefficient matrix.<br />           </li>
