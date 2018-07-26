@@ -104,8 +104,8 @@ include("defineReducedFormTestFuncs.jl")
 @test ReducedFormTests.habitmodTrue()
 end
 
-tic();
 include("defineAMAalgTestFuncs.jl")
+tic();
 @testset "test AMAalg" begin
 @test AMAalgTests.firmvalueTrue()
 @test AMAalgTests.firmvalue3Leads2LagsTrue()
@@ -122,12 +122,13 @@ include("defineAMAalgTestFuncs.jl")
 @test AMAalgTests.reliablePaperExmplFalse()
 @test AMAalgTests.athanFalse()
 @test AMAalgTests.habitmodFalse()
+print("Julia implementation ran for ");toc();
 end
-toc();
 
-tic();
+
 include("defineCcallTestFuncs.jl")
 @testset "test ccall" begin
+    tic();
     @test CcallTests.firmvalueFalse()
     @test CcallTests.firmvalue3Leads2LagsFalse()
     @test CcallTests.example7False()
@@ -142,9 +143,10 @@ include("defineCcallTestFuncs.jl")
     @test CcallTests.oneEquationNoLeadTrue()
     @test CcallTests.reliablePaperExmplTrue()
     @test CcallTests.athanTrue()
-    @test CcallTests.habitmodTrue()  
+    @test CcallTests.habitmodTrue()
+    print("C/Fortran implementation ran for ");toc();
 end
-toc();
+
 
 end #outer
 
