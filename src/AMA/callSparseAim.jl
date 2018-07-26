@@ -18,7 +18,9 @@ function callSparseAim( hh, leads, lags )
     # use the library libSPARSEAMA to call c function ...
     # libSPARSEAMA is a shared library that combines sparseAMA
     # and LAPACK. LAPACK must be compiled with -fPIC.
-    lib = Libdl.dlopen("../deps/libSPARSEAMA")
+    Libdl.dlopen("../deps/libopenblas64_")
+    Libdl.dlopen("../deps/libarpack.so.2.0.0")
+    lib = Libdl.dlopen("../deps/tmp/libSPARSEAMA")
     sym = Libdl.dlsym(lib, :callSparseAim)
     ccall(sym, Void,
           (  Ptr{Float64}, Int32, Int32, Int32, Int32,
