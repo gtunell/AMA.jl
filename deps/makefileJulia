@@ -21,7 +21,7 @@ allObjs= $(allFortObjs) $(allCObjs)
 
 
 shared: clean $(allObjs) 
-	gfortran -shared $(allObjs) -fdefault-integer-8  \
+	gfortran -shared $(allObjs) $(allLibs) \
 	 -o libSPARSEAMA.so 	
 
 clean: 
