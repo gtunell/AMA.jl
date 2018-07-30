@@ -15,6 +15,6 @@ for (_, _, files) in walkdir(joinpath(dirname(@__FILE__), "AMA"))
 end
 
 # Export all functions
-export exactShift!, numericShift!, shiftRight!, buildA!, augmentQ!, eigenSys!, reducedForm, AMAalg, sameSpan, deleteCols, deleteRows, callSparseAim, checkAMA
+export exactShift!, numericShift!, shiftRight!, buildA!, augmentQ!, eigenSys!, reducedForm, AMAalg, sameSpan, deleteCols, deleteRows, callSparseAim, checkAMA, AMAerr
 
 end # module
