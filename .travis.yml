@@ -43,9 +43,10 @@ before_install:
       brew update; rm '/usr/local/include/c++'; brew link --overwrite gcc; brew install gcc;
     fi
 
-install: if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
-	   ./deps/julia-make.sh;
-	 fi
+install: 
+  -if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
+    ./deps/julia-make.sh;
+   fi
 
 ## uncomment the following lines to override the default test script
 script:
