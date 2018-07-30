@@ -44,7 +44,7 @@ before_install:
     fi
 
 install: 
-  -if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
+   if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
     ./deps/julia-make.sh;
    fi
 
