@@ -1,5 +1,5 @@
 if is_linux()
-    Pkg.add("MAT");
+    Pkg.add("MAT")
 elseif is_apple()
     run('brew tap homebrew/science')
     run('brew install hdf5')
