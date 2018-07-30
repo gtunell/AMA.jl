@@ -1,6 +1,4 @@
 #!/usr/bin/env sh
 cd ./deps/
-ls /usr/lib
-ls /usr/local/lib
-ls ~/lib
+ls /Users/travis/.julia/v0.6/
 make -f makefileJulia
