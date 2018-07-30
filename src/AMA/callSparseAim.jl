@@ -21,9 +21,10 @@ function callSparseAim( hh, leads, lags )
     #Libdl.push!(Libdl.DL_LOAD_PATH, ".")
     #Libdl.push!(Libdl.DL_LOAD_PATH, "./deps")
     #Libdl.push!(Libdl.DL_LOAD_PATH, "../deps")
-    display(pwd())
-    lib = Libdl.dlopen(pwd() * "/../deps/libSPARSEAMA")
-    sym = Libdl.dlsym(lib, :callSparseAim)
+    #lib = Libdl.dlopen(pwd() * "/../deps/libSPARSEAMA")
+ 
+    #sym = Libdl.dlsym(lib, :callSparseAim)
+    #include("../deps/build.jl")
     ccall(sym, Void,
           (  Ptr{Float64}, Int32, Int32, Int32, Int32,
           Int32, Int32, Int32,
