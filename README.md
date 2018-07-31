@@ -64,7 +64,8 @@ upperbnd = 1 + condn
 To execute the algorithm with julia: 
 
 ```julia
-AMAalg(h, neq, nlag, nlead, condn, upperbnd)
+(b, rts, ia, nexact, nnumeric, lgroots, AMAcode) =
+     AMAalg(h, neq, nlag, nlead, condn, upperbnd)
 ```
 *Note* - the above returns the tuple (b, rts, ia, nexact, nnumeric, lgroots, AMAcode)
 <ul>
@@ -80,7 +81,8 @@ AMAalg(h, neq, nlag, nlead, condn, upperbnd)
 To execute the algorithm with C/Fortran:
 
 ```julia
-callSparseAim(h, nleads, nlags)
+(h, b, q, AMAcode) = 
+     callSparseAim(h, nleads, nlags)
 ```
 
 *Note* - the above returns the tuple (h, b, q, AMAcode)<br />
