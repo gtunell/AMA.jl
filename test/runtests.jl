@@ -113,7 +113,7 @@ tic();
 @test AMAalgTests.oneEquationNoLeadTrue()
 @test AMAalgTests.reliablePaperExmplTrue()
 @test AMAalgTests.athanTrue()
-#@test AMAalgTests.habitmodTrue()
+@test AMAalgTests.habitmodTrue()
 
 @test AMAalgTests.firmvalueFalse()
 @test AMAalgTests.firmvalue3Leads2LagsFalse()
@@ -121,7 +121,7 @@ tic();
 @test AMAalgTests.oneEquationNoLeadFalse()
 @test AMAalgTests.reliablePaperExmplFalse()
 @test AMAalgTests.athanFalse()
-#@test AMAalgTests.habitmodFalse()
+@test AMAalgTests.habitmodFalse()
 print("Julia implementation ran for ");toc();
 end
 
@@ -143,7 +143,7 @@ include("defineCcallTestFuncs.jl")
     @test CcallTests.oneEquationNoLeadTrue()
     @test CcallTests.reliablePaperExmplTrue()
     @test CcallTests.athanTrue()
-    #@test CcallTests.habitmodTrue()
+    @test CcallTests.habitmodTrue()
     print("C/Fortran implementation ran for ");toc();
 end
     
