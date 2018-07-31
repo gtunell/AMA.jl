@@ -146,7 +146,18 @@ include("defineCcallTestFuncs.jl")
     @test CcallTests.habitmodTrue()
     print("C/Fortran implementation ran for ");toc();
 end
-
+    
+include("defineAMAerrTestFuncs.jl")
+@testset "test AMAerr" begin
+    @test AMAerrTests.noErrors()
+    @test AMAerrTests.tooManyRoots()
+    @test AMAerrTests.tooFewRoots()
+    @test AMAerrTests.tooManyExactShifts()
+    @test AMAerrTests.tooManyNumericShifts()
+    @test AMAerrTests.spurious()
+    
+end
+    
 
 end #outer
 
