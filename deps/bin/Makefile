@@ -5,7 +5,7 @@ FFLAGS= -shared -fPIC -c -O2
 CC= gcc
 CFLAGS= -shared -fPIC -c -O2
 
-linuxLibs = lapack_linux/liblapack.a lapack_linux/librefblas.a
+#linuxLibs = lapack_linux/liblapack.a lapack_linux/librefblas.a
 osxLibs = lapack_OSX/liblapack.a lapack_OSX/librefblas.a
 
 allCObjs= callSparseAim.o sparseAim.o sparskit2.o 

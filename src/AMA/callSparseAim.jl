@@ -1,3 +1,6 @@
+import Base.LinAlg.BLAS.@blasfunc
+importall Base.LinAlg
+importall Base.LinAlg.BLAS
 """
     callSParseAim(hh, leads, lags)
 
@@ -20,6 +23,8 @@ function callSparseAim( hh, leads, lags )
     # and LAPACK. LAPACK must be compiled with -fPIC.
     # lib = Libdl.dlopen(pwd() * "/../deps/libSPARSEAMA")
     # sym = Libdl.dlsym(lib, :callSparseAim)
+    push!(Libdl.DL_LOAD_PATH, Base.libblas_name)
+Libdl.dlopen(Base.libblas_name)
     ccall(sym, Void,
           (  Ptr{Float64}, Int32, Int32, Int32, Int32,
           Int32, Int32, Int32,
