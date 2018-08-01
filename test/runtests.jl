@@ -114,15 +114,9 @@ end
 test_path = joinpath(dirname(@__FILE__), "defineAMAalgTestFuncs.jl")
 include(test_path)
 @testset "test AMAalg" begin
-    tic();
-    @test AMAalgTests.firmvalueTrue()
-    @test AMAalgTests.firmvalue3Leads2LagsTrue()
-    @test AMAalgTests.example7True()
-    @test AMAalgTests.oneEquationNoLeadTrue()
-    @test AMAalgTests.reliablePaperExmplTrue()
-    @test AMAalgTests.athanTrue()
-    @test AMAalgTests.habitmodTrue()
 
+    tic(); # clock speed
+    
     @test AMAalgTests.firmvalueFalse()
     @test AMAalgTests.firmvalue3Leads2LagsFalse()
     @test AMAalgTests.example7False()
@@ -130,7 +124,17 @@ include(test_path)
     @test AMAalgTests.reliablePaperExmplFalse()
     @test AMAalgTests.athanFalse()
     @test AMAalgTests.habitmodFalse()
-    print("Julia implementation ran for ");toc();
+
+    @test AMAalgTests.firmvalueTrue()
+    @test AMAalgTests.firmvalue3Leads2LagsTrue()
+    @test AMAalgTests.example7True()
+    @test AMAalgTests.oneEquationNoLeadTrue()
+    @test AMAalgTests.reliablePaperExmplTrue()
+    @test AMAalgTests.athanTrue()
+    @test AMAalgTests.habitmodTrue()
+    print("Julia implementation ran for ");
+
+    toc(); # end clock 
 end
 
 test_path = joinpath(dirname(@__FILE__), "defineCcallTestFuncs.jl")
