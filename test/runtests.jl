@@ -1,4 +1,8 @@
+script = joinpath(dirname(@__FILE__), "..", "deps", "julia-make.sh") 
+run(`$script`)
+
 using Base.Test
+
 const AMA_path = joinpath(dirname(@__FILE__), "..", "src", "AMA.jl")
 include(AMA_path)
 
