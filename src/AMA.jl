@@ -4,7 +4,8 @@ module AMA
 # http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
 
 # Set-up for callSparseAim
-const lib = Libdl.dlopen(normpath(joinpath(dirname(@__FILE__), "..", "deps", "libSPARSEAMA")))
+# const lib = Libdl.dlopen(normpath(joinpath(dirname(@__FILE__), "..", "deps", "libSPARSEAMA")))
+const lib = Libdl.dlopen(normpath(joinpath(dirname(@__FILE__), "libSPARSEAMA")))
 sym = Libdl.dlsym(lib, :callSparseAim)
 
 # Include all files    
