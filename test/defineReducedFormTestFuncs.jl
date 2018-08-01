@@ -1,8 +1,8 @@
 module ReducedFormTests
 
-include("../src/AMA.jl")
+# include("../src/AMA.jl")
 # test reducedForm
-using .AMA, MAT
+using ..AMA, MAT
 #tweaked= True
 # test reducedForm firmvalue example
 function firmvalueTrue()::Bool
@@ -12,12 +12,12 @@ neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsfirmvalueTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsfirmvalueTrue.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsfirmvalueTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsfirmvalueTrue.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -46,12 +46,12 @@ neq=4::Int64;nlag=2::Int64;nlead=3::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsfirmvalue3Leads2LagsTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsfirmvalue3Leads2LagsTrue.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsfirmvalue3Leads2LagsTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsfirmvalue3Leads2LagsTrue.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -80,12 +80,12 @@ neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsexample7True.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsexample7True.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsexample7True.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsexample7True.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -114,12 +114,12 @@ neq=1::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsoneEquationNoLeadTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsoneEquationNoLeadTrue.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsoneEquationNoLeadTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsoneEquationNoLeadTrue.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -148,12 +148,12 @@ neq=5::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsreliablePaperExmplTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsreliablePaperExmplTrue.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsreliablePaperExmplTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsreliablePaperExmplTrue.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -182,12 +182,12 @@ neq=9::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsathanTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsathanTrue.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsathanTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsathanTrue.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -216,12 +216,12 @@ neq=12::Int64;nlag=4::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatshabitmodTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatshabitmodTrue.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatshabitmodTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatshabitmodTrue.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -250,12 +250,12 @@ neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsfirmvalueFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsfirmvalueFalse.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsfirmvalueFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsfirmvalueFalse.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -284,12 +284,12 @@ neq=4::Int64;nlag=2::Int64;nlead=3::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsfirmvalue3Leads2LagsFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsfirmvalue3Leads2LagsFalse.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsfirmvalue3Leads2LagsFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsfirmvalue3Leads2LagsFalse.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -318,12 +318,12 @@ neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsexample7False.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsexample7False.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsexample7False.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsexample7False.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -352,12 +352,12 @@ neq=1::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsoneEquationNoLeadFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsoneEquationNoLeadFalse.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsoneEquationNoLeadFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsoneEquationNoLeadFalse.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -386,12 +386,12 @@ neq=5::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsreliablePaperExmplFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsreliablePaperExmplFalse.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsreliablePaperExmplFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsreliablePaperExmplFalse.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -420,12 +420,12 @@ neq=9::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatsathanFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsathanFalse.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatsathanFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatsathanFalse.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)
@@ -454,12 +454,12 @@ neq=12::Int64;nlag=4::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 
-file = matopen("./matDir/"*"reducedFormTestMatshabitmodFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatshabitmodFalse.mat")
 bb=read(file,"bb")
 bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
 close(file)
 
-file = matopen("./matDir/"*"reducedFormTestMatshabitmodFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"reducedFormTestMatshabitmodFalse.mat")
 qFull=read(file,"qFinal")
 qFull=if(typeof(qFull)==(Array{Float64,2})) qFull else hcat(qFull) end
 close(file)

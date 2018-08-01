@@ -1,7 +1,9 @@
 using Base.Test
-include("../src/AMA.jl")
+const AMA_path = joinpath(dirname(@__FILE__), "..", "src", "AMA.jl")
+include(AMA_path)
 
-include("defineShiftRightTestFuncs.jl")
+test_path = joinpath(dirname(@__FILE__), "defineShiftRightTestFuncs.jl")
+include(test_path)
 @testset "outer"  begin# an outer so that it does't quit on first fail
 @testset "test shiftRight" begin
 @test ShiftRightTests.firmvalue()
@@ -13,7 +15,8 @@ include("defineShiftRightTestFuncs.jl")
 @test ShiftRightTests.habitmod()
 end
 
-include("defineExactShiftTestFuncs.jl")
+test_path = joinpath(dirname(@__FILE__), "defineExactShiftTestFuncs.jl")
+include(test_path)  
 @testset "test exactShift" begin
 @test ExactShiftTests.firmvalue()
 @test ExactShiftTests.firmvalue3Leads2Lags()
@@ -24,7 +27,8 @@ include("defineExactShiftTestFuncs.jl")
 @test ExactShiftTests.habitmod()
 end
 
-include("defineNumericShiftTestFuncs.jl")
+test_path = joinpath(dirname(@__FILE__), "defineNumericShiftTestFuncs.jl")
+include(test_path)
 @testset "test numericShift" begin
 @test NumericShiftTests.firmvalueTrue()
 @test NumericShiftTests.firmvalue3Leads2LagsTrue()
@@ -43,7 +47,8 @@ include("defineNumericShiftTestFuncs.jl")
 @test NumericShiftTests.habitmodFalse()
 end
 
-include("defineBuildATestFuncs.jl")
+test_path = joinpath(dirname(@__FILE__), "defineBuildATestFuncs.jl")
+include(test_path)
 @testset "test buildA" begin
 @test BuildATests.firmvalueFalse()
 @test BuildATests.firmvalue3Leads2LagsFalse()
@@ -62,7 +67,8 @@ include("defineBuildATestFuncs.jl")
 @test BuildATests.habitmodTrue()
 end
 
-include("defineEigenSysTestFuncs.jl")
+test_path = joinpath(dirname(@__FILE__), "defineEigenSysTestFuncs.jl")
+include(test_path)
 @testset "test eigenSys" begin
 @test EigenSysTests.firmvalue()
 @test EigenSysTests.firmvalue3Leads2Lags()
@@ -73,8 +79,8 @@ include("defineEigenSysTestFuncs.jl")
 @test EigenSysTests.habitmod()
 end
 
-
-include("defineAugmentQTestFuncs.jl")
+test_path = joinpath(dirname(@__FILE__), "defineAugmentQTestFuncs.jl")
+include(test_path)
 @testset "test augmentQ" begin
 @test AugmentQTests.firmvalue()
 @test AugmentQTests.firmvalue3Leads2Lags()
@@ -85,7 +91,8 @@ include("defineAugmentQTestFuncs.jl")
 @test AugmentQTests.habitmod()
 end
 
-include("defineReducedFormTestFuncs.jl")
+test_path = joinpath(dirname(@__FILE__), "defineReducedFormTestFuncs.jl")
+include(test_path)
 @testset "test reducedForm" begin
 @test ReducedFormTests.firmvalueFalse()
 @test ReducedFormTests.firmvalue3Leads2LagsFalse()
@@ -103,30 +110,31 @@ include("defineReducedFormTestFuncs.jl")
 @test ReducedFormTests.athanTrue()
 @test ReducedFormTests.habitmodTrue()
 end
-
-include("defineAMAalgTestFuncs.jl")
-tic();
+    
+test_path = joinpath(dirname(@__FILE__), "defineAMAalgTestFuncs.jl")
+include(test_path)
 @testset "test AMAalg" begin
-@test AMAalgTests.firmvalueTrue()
-@test AMAalgTests.firmvalue3Leads2LagsTrue()
-@test AMAalgTests.example7True()
-@test AMAalgTests.oneEquationNoLeadTrue()
-@test AMAalgTests.reliablePaperExmplTrue()
-@test AMAalgTests.athanTrue()
-@test AMAalgTests.habitmodTrue()
+    tic();
+    @test AMAalgTests.firmvalueTrue()
+    @test AMAalgTests.firmvalue3Leads2LagsTrue()
+    @test AMAalgTests.example7True()
+    @test AMAalgTests.oneEquationNoLeadTrue()
+    @test AMAalgTests.reliablePaperExmplTrue()
+    @test AMAalgTests.athanTrue()
+    @test AMAalgTests.habitmodTrue()
 
-@test AMAalgTests.firmvalueFalse()
-@test AMAalgTests.firmvalue3Leads2LagsFalse()
-@test AMAalgTests.example7False()
-@test AMAalgTests.oneEquationNoLeadFalse()
-@test AMAalgTests.reliablePaperExmplFalse()
-@test AMAalgTests.athanFalse()
-@test AMAalgTests.habitmodFalse()
-print("Julia implementation ran for ");toc();
+    @test AMAalgTests.firmvalueFalse()
+    @test AMAalgTests.firmvalue3Leads2LagsFalse()
+    @test AMAalgTests.example7False()
+    @test AMAalgTests.oneEquationNoLeadFalse()
+    @test AMAalgTests.reliablePaperExmplFalse()
+    @test AMAalgTests.athanFalse()
+    @test AMAalgTests.habitmodFalse()
+    print("Julia implementation ran for ");toc();
 end
 
-
-include("defineCcallTestFuncs.jl")
+test_path = joinpath(dirname(@__FILE__), "defineCcallTestFuncs.jl")
+include(test_path)
 @testset "test ccall" begin
     tic();
     @test CcallTests.firmvalueFalse()
@@ -147,7 +155,8 @@ include("defineCcallTestFuncs.jl")
     print("C/Fortran implementation ran for ");toc();
 end
     
-include("defineAMAerrTestFuncs.jl")
+test_path = joinpath(dirname(@__FILE__), "defineAMAerrTestFuncs.jl")
+include(test_path)  
 @testset "test AMAerr" begin
     @test AMAerrTests.noErrors()
     @test AMAerrTests.tooManyRoots()

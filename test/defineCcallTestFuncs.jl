@@ -1,23 +1,23 @@
 module CcallTests
 
- include("../src/AMA.jl")
+# include("../src/AMA.jl")
 # test ccall
-using .AMA, MAT
+using ..AMA, MAT
 
 # Original Tests
 function firmvalueFalse()::Bool
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalueFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalueFalse.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalueFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalueFalse.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalueFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalueFalse.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -32,17 +32,17 @@ end
 
 function firmvalue3Leads2LagsFalse()::Bool
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsFalse.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsFalse.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsFalse.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -57,17 +57,17 @@ end
 
 function example7False()
   
-    file = matopen("./matDir/"*"amaAlgTestMatsexample7False.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsexample7False.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsexample7False.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsexample7False.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsexample7False.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsexample7False.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -82,17 +82,17 @@ end
 
 function oneEquationNoLeadFalse()
     
-    file = matopen("./matDir/"*"amaAlgTestMatsoneEquationNoLeadFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsoneEquationNoLeadFalse.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsoneEquationNoLeadFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsoneEquationNoLeadFalse.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsoneEquationNoLeadFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsoneEquationNoLeadFalse.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -107,17 +107,17 @@ end
 
 function reliablePaperExmplFalse()
     
-    file = matopen("./matDir/"*"amaAlgTestMatsreliablePaperExmplFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsreliablePaperExmplFalse.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsreliablePaperExmplFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsreliablePaperExmplFalse.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsreliablePaperExmplFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsreliablePaperExmplFalse.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -133,17 +133,17 @@ end
 
 function athanFalse()
 
-    file = matopen("./matDir/"*"amaAlgTestMatsathanFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsathanFalse.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsathanFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsathanFalse.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsathanFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsathanFalse.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -158,17 +158,17 @@ end
 
 function habitmodFalse()
 
-    file = matopen("./matDir/"*"amaAlgTestMatshabitmodFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatshabitmodFalse.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatshabitmodFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatshabitmodFalse.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatshabitmodFalse.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatshabitmodFalse.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -185,17 +185,17 @@ end
 # Tweaked Tests
 function firmvalueTrue()::Bool
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalueTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalueTrue.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalueTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalueTrue.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalueTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalueTrue.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -211,17 +211,17 @@ end
 
 function firmvalue3Leads2LagsTrue()::Bool
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsTrue.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsTrue.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsfirmvalue3Leads2LagsTrue.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -236,17 +236,17 @@ end
 
 function example7True()
   
-    file = matopen("./matDir/"*"amaAlgTestMatsexample7True.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsexample7True.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsexample7True.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsexample7True.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsexample7True.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsexample7True.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -261,17 +261,17 @@ end
 
 function oneEquationNoLeadTrue()
     
-    file = matopen("./matDir/"*"amaAlgTestMatsoneEquationNoLeadTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsoneEquationNoLeadTrue.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsoneEquationNoLeadTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsoneEquationNoLeadTrue.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsoneEquationNoLeadTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsoneEquationNoLeadTrue.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -286,17 +286,17 @@ end
 
 function reliablePaperExmplTrue()
     
-    file = matopen("./matDir/"*"amaAlgTestMatsreliablePaperExmplTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsreliablePaperExmplTrue.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsreliablePaperExmplTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsreliablePaperExmplTrue.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsreliablePaperExmplTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsreliablePaperExmplTrue.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -313,17 +313,17 @@ end
 
 function athanTrue()
 
-    file = matopen("./matDir/"*"amaAlgTestMatsathanTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsathanTrue.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsathanTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsathanTrue.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatsathanTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatsathanTrue.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
@@ -338,17 +338,17 @@ end
 
 function habitmodTrue()
 
-    file = matopen("./matDir/"*"amaAlgTestMatshabitmodTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatshabitmodTrue.mat")
     bb=read(file,"bb")
     bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatshabitmodTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatshabitmodTrue.mat")
     rts=read(file,"rts")
     rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
     close(file)
 
-    file = matopen("./matDir/"*"amaAlgTestMatshabitmodTrue.mat")
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatshabitmodTrue.mat")
     hh=read(file,"hh")
     hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
     close(file)
