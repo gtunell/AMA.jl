@@ -39,9 +39,9 @@ addons:
      - gcc
 
 before_install:
-#- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-#     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; brew upgrade;
-#  fi
+- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+     brew upgrade;
+  fi
 
 #install: 
 #   if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
@@ -59,6 +59,6 @@ script:
 - julia -e 'Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true)'
 
 after_success:
-- if [ "$TRAVIS_JULIA_VERSION" != "nightly" ]; then
-      julia -e 'cd(Pkg.dir("AMA")); using Coverage; amaRes = process_folder(); Coveralls.submit(amaRes); Codecov.submit(amaRes)';
-   fi
+    julia -e 'cd(Pkg.dir("AMA")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
+    julia -e 'cd(Pkg.dir("AMA")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+
