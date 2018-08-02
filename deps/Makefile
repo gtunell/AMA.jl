@@ -18,4 +18,4 @@ shared: clean
 endif
 
 clean: 
-	rm libSPARSEAMA.so
+	rm -f libSPARSEAMA.*  

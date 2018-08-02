@@ -1,5 +1,6 @@
-script = joinpath(dirname(@__FILE__), "..", "deps", "julia-make.sh") 
-run(`$script`)
+path = joinpath(dirname(@__FILE__), "..", "deps")
+cd("$path")
+run(`./julia-make.sh`)
 
 using Base.Test
 
