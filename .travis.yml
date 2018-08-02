@@ -38,24 +38,14 @@ addons:
      - gfortran
      - gcc
 
-#before_install:
-#- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-#     brew upgrade;
-#  fi
-
-#install: 
-#   if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
-#    ./deps/julia-make.sh;
-#   fi
-
 ## uncomment the following lines to override the default test script
 script:
 - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-#- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
-#     julia -e 'Pkg.add("MAT")'; 
-#  elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-#     brew tap homebrew/science; brew install hdf5; julia -e 'Pkg.add("HDF5"); Pkg.add("MAT")';
-#  fi
+- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
+     julia -e 'Pkg.add("MAT")'; 
+  elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+     brew tap homebrew/science; brew install hdf5; julia -e 'Pkg.add("HDF5"); Pkg.add("MAT")';
+  fi
 - julia -e 'Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true)'
 
 after_success:
