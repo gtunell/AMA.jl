@@ -46,7 +46,7 @@ script:
   elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
      brew tap homebrew/science; brew install hdf5; julia -e 'Pkg.add("HDF5"); Pkg.add("MAT")';
   fi
-- julia -e 'Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true)'
+- julia -e 'Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
 
 after_success:
     julia -e 'cd(Pkg.dir("AMA")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
