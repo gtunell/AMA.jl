@@ -39,9 +39,9 @@ addons:
      - gcc
 
 before_install:
-- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; brew upgrade;
-  fi
+#- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+#     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; brew upgrade;
+#  fi
 
 #install: 
 #   if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
