@@ -56,7 +56,7 @@ script:
   elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
      brew tap homebrew/science; brew install hdf5; julia -e 'Pkg.add("HDF5"); Pkg.add("MAT")';
   fi
-- julia -e 'Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
+- julia -e 'Pkg.clone(pwd()); Pkg.build("AMA"); Pkg.test("AMA"; coverage=true)'
 
 after_success:
 - if [ "$TRAVIS_JULIA_VERSION" != "nightly" ]; then
