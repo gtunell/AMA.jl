@@ -1,7 +1,7 @@
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
-deps/*.o
+deps/bin/*.o
 tmp/
 src/AMA/ccall/
 src/ccallGithub/

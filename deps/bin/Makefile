@@ -1,10 +1,10 @@
 default: shared
 
 FC= gfortran
-FFLAGS= -shared -fPIC -c -O2
+FFLAGS= -fPIC -c -O2
 CC= gcc
-CFLAGS= -shared -fPIC -c -O2
-
+CFLAGS= -fPIC -c -O2
+ 
 linuxLibs = lapack_linux/liblapack.a lapack_linux/librefblas.a
 osxLibs = lapack_OSX/liblapack.a lapack_OSX/librefblas.a
 
