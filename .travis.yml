@@ -38,10 +38,10 @@ addons:
      - gfortran
      - gcc
 
-before_install:
-- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-     brew upgrade;
-  fi
+#before_install:
+#- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+#     brew upgrade;
+#  fi
 
 #install: 
 #   if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
