@@ -38,6 +38,11 @@ addons:
      - gfortran
      - gcc
 
+before_install:
+- if [ "${TRAVIS_OS_NAME" = "osx" ]; then
+     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; brew install gcc;
+  fi
+
 #install: 
 #   if [ "${TRAVIS_OS_NAME}" = "linux" ]; then 
 #    ./deps/julia-make.sh;
