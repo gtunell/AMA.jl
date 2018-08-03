@@ -17,7 +17,7 @@ allObjs= $(allCObjs) $(allFortObjs)
 
 ifeq ($(shell uname), Linux)
 shared: clean $(allObjs)
-	$(FC) -shared $(allObjs) $(linuxLibs)  \
+	$(FC) -shared $(allObjs) $(linuxLibs) -llapack  \
 	 -o libSPARSEAMA.so
 endif
 
