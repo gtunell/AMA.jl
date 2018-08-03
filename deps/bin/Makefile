@@ -4,7 +4,7 @@ FC= gfortran
 FFLAGS= -fPIC -c -O2
 CC= gcc
 CFLAGS= -fPIC -c -O2 
-linuxLibs = lapack_linux/liblapack.a lapack_linux/librefblas.a
+#linuxLibs = lapack_linux/liblapack.a lapack_linux/librefblas.a
 osxLibs = lapack_osx/liblapack.a lapack_osx/librefblas.a
 
 allCObjs= callSparseAim.o sparseAim.o sparskit2.o 
