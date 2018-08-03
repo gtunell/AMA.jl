@@ -39,7 +39,7 @@ addons:
      - gcc
 
 before_install:
-- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
+- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
     brew install gcc;
   fi
 
