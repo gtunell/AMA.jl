@@ -3,22 +3,18 @@ __precompile__()
 module AMA
 # http://www.stochasticlifestyle.com/finalizing-julia-package-documentation-testing-coverage-publishing/
 
-# Include relevant files
-include("AMA/exactShift!.jl")
-include("AMA/numericShift!.jl")
-include("AMA/shiftRight!.jl")
-include("AMA/buildA!.jl")
-include("AMA/augmentQ!.jl")
-include("AMA/eigenSys!.jl")
-include("AMA/reducedForm.jl")
-include("AMA/AMAalg.jl")
-include("AMA/checkSpanning.jl")
-include("AMA/deleteCols.jl")
-include("AMA/deleteRows.jl")
-include("AMA/callSparseAim.jl")
-include("AMA/checkAMA.jl")
+# Set-up for callSparseAim
+const lib = Libdl.dlopen(normpath(joinpath(dirname(@__FILE__), "..", "deps", "libSPARSEAMA")))
+sym = Libdl.dlsym(lib, :callSparseAim)
+
+# Include all files    
+for (_, _, files) in walkdir(joinpath(dirname(@__FILE__), "AMA"))
+    for file in files
+        include(joinpath("AMA", file))
+    end
+end
 
 # Export all functions
-export exactShift!, numericShift!, shiftRight!, buildA!, augmentQ!, eigenSys!, reducedForm, AMAalg, sameSpan, deleteCols, deleteRows, callSparseAim, checkAMA
+export exactShift!, numericShift!, shiftRight!, buildA!, augmentQ!, eigenSys!, reducedForm, AMAalg, sameSpan, deleteCols, deleteRows, callSparseAim, checkAMA, AMAerr
 
 end # module

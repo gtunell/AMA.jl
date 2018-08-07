@@ -1,7 +1,7 @@
 module NumericShiftTests
 
-include("../src/AMA.jl")
-using .AMA, MAT
+#include("../src/AMA.jl")
+using ..AMA, MAT
 
 
 #tweaked= False
@@ -15,17 +15,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,4,8)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalueFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalueFalse.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalueFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalueFalse.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalueFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalueFalse.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -54,17 +54,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,12,20)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsFalse.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsFalse.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsFalse.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -93,17 +93,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,4,8)
 
-file = matopen("./matDir/"*"numericShiftTestMatsexample7False.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsexample7False.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsexample7False.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsexample7False.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsexample7False.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsexample7False.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -132,17 +132,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,1,2)
 
-file = matopen("./matDir/"*"numericShiftTestMatsoneEquationNoLeadFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsoneEquationNoLeadFalse.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsoneEquationNoLeadFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsoneEquationNoLeadFalse.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsoneEquationNoLeadFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsoneEquationNoLeadFalse.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -171,17 +171,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,5,10)
 
-file = matopen("./matDir/"*"numericShiftTestMatsreliablePaperExmplFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsreliablePaperExmplFalse.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsreliablePaperExmplFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsreliablePaperExmplFalse.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsreliablePaperExmplFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsreliablePaperExmplFalse.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -210,17 +210,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,9,18)
 
-file = matopen("./matDir/"*"numericShiftTestMatsathanFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsathanFalse.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsathanFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsathanFalse.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsathanFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsathanFalse.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -249,17 +249,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,12,60)
 
-file = matopen("./matDir/"*"numericShiftTestMatshabitmodFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatshabitmodFalse.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatshabitmodFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatshabitmodFalse.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatshabitmodFalse.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatshabitmodFalse.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -289,17 +289,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,4,8)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalueTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalueTrue.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalueTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalueTrue.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalueTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalueTrue.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -328,17 +328,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,12,20)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsTrue.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsTrue.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsfirmvalue3Leads2LagsTrue.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -367,17 +367,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,4,8)
 
-file = matopen("./matDir/"*"numericShiftTestMatsexample7True.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsexample7True.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsexample7True.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsexample7True.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsexample7True.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsexample7True.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -406,17 +406,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,1,2)
 
-file = matopen("./matDir/"*"numericShiftTestMatsoneEquationNoLeadTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsoneEquationNoLeadTrue.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsoneEquationNoLeadTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsoneEquationNoLeadTrue.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsoneEquationNoLeadTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsoneEquationNoLeadTrue.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -445,17 +445,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,5,10)
 
-file = matopen("./matDir/"*"numericShiftTestMatsreliablePaperExmplTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsreliablePaperExmplTrue.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsreliablePaperExmplTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsreliablePaperExmplTrue.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsreliablePaperExmplTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsreliablePaperExmplTrue.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -484,17 +484,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,9,18)
 
-file = matopen("./matDir/"*"numericShiftTestMatsathanTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsathanTrue.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsathanTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsathanTrue.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatsathanTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatsathanTrue.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)
@@ -523,17 +523,17 @@ qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
 qq=zeros(Float64,12,60)
 
-file = matopen("./matDir/"*"numericShiftTestMatshabitmodTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatshabitmodTrue.mat")
 hhIn=read(file,"hh")
 hhIn=if(typeof(hhIn)==(Array{Float64,2})) hhIn else hcat(hhIn) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatshabitmodTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatshabitmodTrue.mat")
 hNewMatlab=read(file,"hNewFull")
 hNewMatlab=if(typeof(hNewMatlab)==(Array{Float64,2})) hNewMatlab else hcat(hNewMatlab) end
 close(file)
 
-file = matopen("./matDir/"*"numericShiftTestMatshabitmodTrue.mat")
+file = matopen(dirname(@__FILE__)*"/matDir/"*"numericShiftTestMatshabitmodTrue.mat")
 qNewMatlab=read(file,"qNewFull")
 qNewMatlab=if(typeof(qNewMatlab)==(Array{Float64,2})) qNewMatlab else hcat(qNewMatlab) end
 close(file)

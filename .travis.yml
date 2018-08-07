@@ -37,6 +37,13 @@ addons:
      packages:
      - gfortran
      - gcc
+     - liblapack-dev
+
+before_install:
+- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+    brew install gcc;
+    brew link --overwrite gcc;
+  fi
 
 ## uncomment the following lines to override the default test script
 script:
@@ -49,6 +56,6 @@ script:
 - julia -e 'Pkg.clone(pwd()); Pkg.test("AMA"; coverage=true)'
 
 after_success:
-- if [ "$TRAVIS_JULIA_VERSION" != "nightly" ]; then
-      julia -e 'cd(Pkg.dir("AMA")); using Coverage; amaRes = process_folder(); Coveralls.submit(amaRes); Codecov.submit(amaRes)';
-   fi
+    julia -e 'cd(Pkg.dir("AMA")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
+    julia -e 'cd(Pkg.dir("AMA")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+
