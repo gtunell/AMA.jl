@@ -1,6 +1,7 @@
 #+OPTIONS: toc:nil
 
-#+BEGIN_SRC matlab :results value table :exports results :session 
+\section{No Errors}
+#+BEGIN_SRC matlab :results value table :exports both :session 
 addpath('../../../SPSolve')
 load('amaAlgTestMatsfirmvalueFalse.mat')
 ans=hh
@@ -13,7 +14,7 @@ ans=hh
 
 
 
-#+BEGIN_SRC matlab :results value table :exports results :session
+#+BEGIN_SRC matlab :results value table :exports both :session
 [bnow,rtsnow,ia,nexact,nnumeric,lgroots,AMAcode] = ...
                         SPAmalg(hh,4,1,1,1.0e-8,1.0+1.0e-8);
 ans=bnow
@@ -25,9 +26,121 @@ ans=bnow
 | 0 |       0 | 0 | 0 |
 | 0 |       0 | 0 | 1 |
 
-#+BEGIN_SRC matlab :results value table :session
-ans=path
+#+BEGIN_SRC matlab :results value table :exports both :session
+SPAMAerr(AMAcode)
 #+END_SRC
 
 #+RESULTS:
-| ../../../SPSolve:/msu/home/m1gsa00/.matlab/R2016a:/msu/home/m1gsa00/matlab:/opt/MATLAB/R2016a/toolbox/matlab/general:/opt/MATLAB/R2016a/toolbox/matlab/polyfun:/opt/MATLAB/R2016a/toolbox/matlab/specfun:/opt/MATLAB/R2016a/toolbox/matlab/elfun:/opt/MATLAB/R2016a/toolbox/matlab/elmat:/opt/MATLAB/R2016a/toolbox/matlab/mvm:/opt/MATLAB/R2016a/toolbox/matlab/randfun:/opt/MATLAB/R2016a/toolbox/matlab/funfun:/opt/MATLAB/R2016a/toolbox/matlab/sparfun:/opt/MATLAB/R2016a/toolbox/matlab/datafun:/opt/MATLAB/R2016a/toolbox/matlab/timefun:/opt/MATLAB/R2016a/toolbox/matlab/matfun:/opt/MATLAB/R2016a/toolbox/matlab/lang:/opt/MATLAB/R2016a/toolbox/matlab/datatypes:/opt/MATLAB/R2016a/toolbox/matlab/iofun:/opt/MATLAB/R2016a/toolbox/matlab/strfun:/opt/MATLAB/R2016a/toolbox/matlab/ops:/opt/MATLAB/R2016a/toolbox/matlab/depfun:/opt/MATLAB/R2016a/toolbox/matlab/mapreduceio:/opt/MATLAB/R2016a/toolbox/matlab/testframework/parallel:/opt/MATLAB/R2016a/toolbox/matlab/winfun:/opt/MATLAB/R2016a/toolbox/matlab/winfun/NET:/opt/MATLAB/R2016a/toolbox/matlab/demos:/opt/MATLAB/R2016a/toolbox/matlab/graphfun:/opt/MATLAB/R2016a/toolbox/matlab/testframework/performance:/opt/MATLAB/R2016a/toolbox/matlab/icons:/opt/MATLAB/R2016a/toolbox/matlab/graph2d:/opt/MATLAB/R2016a/toolbox/matlab/graph3d:/opt/MATLAB/R2016a/toolbox/matlab/graphics:/opt/MATLAB/R2016a/toolbox/matlab/graphics/obsolete:/opt/MATLAB/R2016a/toolbox/matlab/plottools:/opt/MATLAB/R2016a/toolbox/matlab/scribe:/opt/MATLAB/R2016a/toolbox/matlab/scribe/obsolete:/opt/MATLAB/R2016a/toolbox/matlab/specgraph:/opt/MATLAB/R2016a/toolbox/matlab/uitools:/opt/MATLAB/R2016a/toolbox/matlab/uitools/obsolete:/opt/MATLAB/R2016a/toolbox/matlab/findfiles:/opt/MATLAB/R2016a/toolbox/matlab/testframework/measurement:/opt/MATLAB/R2016a/toolbox/matlab/helptools:/opt/MATLAB/R2016a/toolbox/matlab/optimfun:/opt/MATLAB/R2016a/toolbox/matlab/datastoreio:/opt/MATLAB/R2016a/toolbox/matlab/testframework/core:/opt/MATLAB/R2016a/toolbox/matlab/testframework/obsolete:/opt/MATLAB/R2016a/toolbox/matlab/verctrl:/opt/MATLAB/R2016a/toolbox/matlab/testframework/ext:/opt/MATLAB/R2016a/toolbox/matlab/guide:/opt/MATLAB/R2016a/toolbox/local:/opt/MATLAB/R2016a/toolbox/matlab/hardware/stubs:/opt/MATLAB/R2016a/toolbox/matlab/datamanager:/opt/MATLAB/R2016a/toolbox/matlab/images:/opt/MATLAB/R2016a/toolbox/matlab/codetools:/opt/MATLAB/R2016a/toolbox/matlab/codetools/embeddedoutputs:/opt/MATLAB/R2016a/toolbox/stats/mlearnapp:/opt/MATLAB/R2016a/toolbox/curvefit/curvefitdemos:/opt/MATLAB/R2016a/toolbox/shared/instrument:/opt/MATLAB/R2016a/toolbox/distcomp/pctdemos:/opt/MATLAB/R2016a/toolbox/compiler/compilerdemos:/opt/MATLAB/R2016a/toolbox/shared/hotpluglib:/opt/MATLAB/R2016a/toolbox/shared/testmeaslib/graphics:/opt/MATLAB/R2016a/toolbox/simulink/slexportprevious:/opt/MATLAB/R2016a/toolbox/shared/siglib:/opt/MATLAB/R2016a/toolbox/matlab/toolbox_packaging:/opt/MATLAB/R2016a/toolbox/matlab/system/editor:/opt/MATLAB/R2016a/toolbox/signal/signalanalyzer:/opt/MATLAB/R2016a/toolbox/symbolic/symbolic:/opt/MATLAB/R2016a/toolbox/shared/hwconnectinstaller:/opt/MATLAB/R2016a/toolbox/coder/trace:/opt/MATLAB/R2016a/toolbox/shared/controllib/engine:/opt/MATLAB/R2016a/toolbox/shared/controllib/engine/numerics:/opt/MATLAB/R2016a/toolbox/shared/controllib/engine/options:/opt/MATLAB/R2016a/toolbox/shared/controllib/engine/optim:/opt/MATLAB/R2016a/toolbox/shared/controllib/engine/blocks:/opt/MATLAB/R2016a/toolbox/econ/econ:/opt/MATLAB/R2016a/toolbox/fininst/fininst:/opt/MATLAB/R2016a/toolbox/matlab/external/engines/engine_api:/opt/MATLAB/R2016a/toolbox/matlab/spf/matlabhost:/opt/MATLAB/R2016a/toolbox/robust/rctdemos:/opt/MATLAB/R2016a/toolbox/optim/optim:/opt/MATLAB/R2016a/toolbox/optim:/opt/MATLAB/R2016a/toolbox/shared/simulation_data_repository:/opt/MATLAB/R2016a/toolbox/optim/optimdemos:/opt/MATLAB/R2016a/toolbox/matlab/spf/matlabservices:/opt/MATLAB/R2016a/toolbox/shared/simulink:/opt/MATLAB/R2016a/toolbox/distcomp/mapreduce:/opt/MATLAB/R2016a/toolbox/matlab/apps:/opt/MATLAB/R2016a/toolbox/matlab/webcam:/opt/MATLAB/R2016a/toolbox/matlab/appdesigner/appdesigner:/opt/MATLAB/R2016a/toolbox/control/ctrldemos:/opt/MATLAB/R2016a/toolbox/shared/asynciolib:/opt/MATLAB/R2016a/toolbox/matlab/supportpackagemanagement:/opt/MATLAB/R2016a/toolbox/symbolic/symbolicdemos:/opt/MATLAB/R2016a/toolbox/shared/cmlink/api:/opt/MATLAB/R2016a/toolbox/javabuilder/javabuilder:/opt/MATLAB/R2016a/toolbox/control/control:/opt/MATLAB/R2016a/toolbox/control/ctrlmodels:/opt/MATLAB/R2016a/toolbox/control/ctrlanalysis:/opt/MATLAB/R2016a/toolbox/control/ctrldesign:/opt/MATLAB/R2016a/toolbox/control/ctrlplots:/opt/MATLAB/R2016a/toolbox/control/ctrlguis:/opt/MATLAB/R2016a/toolbox/control/ctrlobsolete:/opt/MATLAB/R2016a/toolbox/control/ctrlutil:/opt/MATLAB/R2016a/toolbox/shared/mldatx:/opt/MATLAB/R2016a/help/toolbox/robust/examples:/opt/MATLAB/R2016a/toolbox/matlab/connector/connector:/opt/MATLAB/R2016a/toolbox/shared/mlreportgen/dom:/opt/MATLAB/R2016a/toolbox/shared/mlreportgen/dom/dom:/opt/MATLAB/R2016a/toolbox/shared/mlreportgen/dom/dom/help:/opt/MATLAB/R2016a/toolbox/matlab/external/engines/python:/opt/MATLAB/R2016a/toolbox/finance/findemos:/opt/MATLAB/R2016a/toolbox/fininst/fininstdemos:/opt/MATLAB/R2016a/help/toolbox/control/examples:/opt/MATLAB/R2016a/toolbox/matlab/system:/opt/MATLAB/R2016a/toolbox/shared/hadoopserializer:/opt/MATLAB/R2016a/toolbox/compiler/mlhadoop:/opt/MATLAB/R2016a/toolbox/shared/multimedia:/opt/MATLAB/R2016a/toolbox/shared/sdi:/opt/MATLAB/R2016a/toolbox/shared/testmeaslib/general:/opt/MATLAB/R2016a/toolbox/compiler/java:/opt/MATLAB/R2016a/toolbox/shared/deviceplugindetection:/opt/MATLAB/R2016a/toolbox/robust/robust:/opt/MATLAB/R2016a/toolbox/robust/rctlmi:/opt/MATLAB/R2016a/toolbox/robust/rctutil:/opt/MATLAB/R2016a/toolbox/robust/rctobsolete/robust:/opt/MATLAB/R2016a/toolbox/robust/rctobsolete/lmi:/opt/MATLAB/R2016a/toolbox/robust/rctobsolete/mutools/commands:/opt/MATLAB/R2016a/toolbox/robust/rctobsolete/mutools/subs:/opt/MATLAB/R2016a/toolbox/matlab/external/interfaces/webservices/wsdl:/opt/MATLAB/R2016a/toolbox/shared/slcontrollib:/opt/MATLAB/R2016a/toolbox/shared/controllib/requirements:/opt/MATLAB/R2016a/toolbox/stats/gpu:/opt/MATLAB/R2016a/toolbox/matlab/configtools:/opt/MATLAB/R2016a/toolbox/shared/advisor:/opt/MATLAB/R2016a/toolbox/distcomp:/opt/MATLAB/R2016a/toolbox/distcomp/distcomp:/opt/MATLAB/R2016a/toolbox/distcomp/user:/opt/MATLAB/R2016a/toolbox/distcomp/mpi:/opt/MATLAB/R2016a/toolbox/distcomp/parallel:/opt/MATLAB/R2016a/toolbox/distcomp/parallel/util:/opt/MATLAB/R2016a/toolbox/distcomp/lang:/opt/MATLAB/R2016a/toolbox/distcomp/cluster:/opt/MATLAB/R2016a/toolbox/distcomp/gpu:/opt/MATLAB/R2016a/toolbox/distcomp/array:/opt/MATLAB/R2016a/toolbox/shared/networklib:/opt/MATLAB/R2016a/toolbox/matlab/addons_product:/opt/MATLAB/R2016a/toolbox/compiler:/opt/MATLAB/R2016a/toolbox/coder/foundation/passmanager:/opt/MATLAB/R2016a/toolbox/shared/controllib/general:/opt/MATLAB/R2016a/toolbox/stats/stats:/opt/MATLAB/R2016a/toolbox/stats/classreg:/opt/MATLAB/R2016a/toolbox/stats/clustering:/opt/MATLAB/R2016a/toolbox/shared/measure:/opt/MATLAB/R2016a/toolbox/shared/cgxe/cgxe:/opt/MATLAB/R2016a/toolbox/matlab/timeseries:/opt/MATLAB/R2016a/toolbox/matlab/hds:/opt/MATLAB/R2016a/toolbox/shared/hwconnectinstaller/common:/opt/MATLAB/R2016a/toolbox/shared/comparisons:/opt/MATLAB/R2016a/toolbox/globaloptim/globaloptimdemos:/opt/MATLAB/R2016a/toolbox/shared/diagnostic:/opt/MATLAB/R2016a/toolbox/shared/statslib:/opt/MATLAB/R2016a/toolbox/shared/statslib/sensitivity:/opt/MATLAB/R2016a/toolbox/shared/sl_coverage_configset:/opt/MATLAB/R2016a/toolbox/signal/signal:/opt/MATLAB/R2016a/toolbox/signal/sigtools:/opt/MATLAB/R2016a/toolbox/signal/sptoolgui:/opt/MATLAB/R2016a/toolbox/shared/spreadsheet:/opt/MATLAB/R2016a/toolbox/signal/sigdemos:/opt/MATLAB/R2016a/toolbox/shared/appdes/services:/opt/MATLAB/R2016a/toolbox/matlab/audiovideo:/opt/MATLAB/R2016a/toolbox/compiler_sdk:/opt/MATLAB/R2016a/toolbox/shared/maputils:/opt/MATLAB/R2016a/toolbox/shared/configset:/opt/MATLAB/R2016a/toolbox/compiler_sdk/java:/opt/MATLAB/R2016a/toolbox/shared/mlreportgen/ppt:/opt/MATLAB/R2016a/toolbox/shared/mlreportgen/ppt/ppt:/opt/MATLAB/R2016a/toolbox/shared/mlreportgen/ppt/ppt/help:/opt/MATLAB/R2016a/toolbox/matlab/toolstrip:/opt/MATLAB/R2016a/toolbox/database/dbdemos:/opt/MATLAB/R2016a/toolbox/shared/sl_async_streaming:/opt/MATLAB/R2016a/toolbox/matlab/external/interfaces/webservices/restful:/opt/MATLAB/R2016a/toolbox/matlab/external/interfaces:/opt/MATLAB/R2016a/toolbox/matlab/external/interfaces/webservices:/opt/MATLAB/R2016a/toolbox/matlab/addons_toolbox:/opt/MATLAB/R2016a/toolbox/shared/controllib/graphics:/opt/MATLAB/R2016a/toolbox/shared/controllib/graphics/utils:/opt/MATLAB/R2016a/toolbox/shared/controllib/graphics/plotoptions:/opt/MATLAB/R2016a/toolbox/shared/rptgen:/opt/MATLAB/R2016a/toolbox/matlab/imagesci:/opt/MATLAB/R2016a/toolbox/shared/spcuilib:/opt/MATLAB/R2016a/toolbox/matlab/uicomponents/uicomponents:/opt/MATLAB/R2016a/toolbox/matlab/uicomponents/uicomponents/pending:/opt/MATLAB/R2016a/toolbox/matlab/uicomponents/uicomponents/graphics:/opt/MATLAB/R2016a/toolbox/shared/dastudio:/opt/MATLAB/R2016a/toolbox/ident/iddemos:/opt/MATLAB/R2016a/toolbox/ident/iddemos/examples:/opt/MATLAB/R2016a/toolbox/shared/curvefitlib:/opt/MATLAB/R2016a/toolbox/datafeed/datafeed:/opt/MATLAB/R2016a/toolbox/datafeed/datafeeddemos:/opt/MATLAB/R2016a/toolbox/datafeed/dfgui:/opt/MATLAB/R2016a/toolbox/shared/m3i:/opt/MATLAB/R2016a/toolbox/coder/codedescriptor_core:/opt/MATLAB/R2016a/toolbox/matlab/addons:/opt/MATLAB/R2016a/toolbox/matlab/addons/cef:/opt/MATLAB/R2016a/toolbox/matlab/addons/fallbackmanager:/opt/MATLAB/R2016a/toolbox/econ/econdemos:/opt/MATLAB/R2016a/toolbox/finance/finance:/opt/MATLAB/R2016a/toolbox/finance/calendar:/opt/MATLAB/R2016a/toolbox/finance/finsupport:/opt/MATLAB/R2016a/toolbox/finance/ftseries:/opt/MATLAB/R2016a/toolbox/matlab/uitools/uicomponents/components:/opt/MATLAB/R2016a/toolbox/matlab/networklib:/opt/MATLAB/R2016a/toolbox/matlab/toolboxmanagement/matlab_api:/opt/MATLAB/R2016a/toolbox/ident/ident:/opt/MATLAB/R2016a/toolbox/ident/nlident:/opt/MATLAB/R2016a/toolbox/ident/idobsolete:/opt/MATLAB/R2016a/toolbox/ident/idguis:/opt/MATLAB/R2016a/toolbox/ident/idutils:/opt/MATLAB/R2016a/toolbox/ident/idrecursive:/opt/MATLAB/R2016a/toolbox/ident/idhelp:/opt/MATLAB/R2016a/toolbox/database/database:/opt/MATLAB/R2016a/toolbox/database/vqb:/opt/MATLAB/R2016a/toolbox/shared/filterdesignlib:/opt/MATLAB/R2016a/toolbox/matlab/external/interfaces/python:/opt/MATLAB/R2016a/toolbox/shared/optimlib:/opt/MATLAB/R2016a/toolbox/hdlcoder/hdllib/ml_lib:/opt/MATLAB/R2016a/toolbox/simulink/simulink_data_dictionary/sldd:/opt/MATLAB/R2016a/toolbox/globaloptim:/opt/MATLAB/R2016a/toolbox/globaloptim/globaloptim:/opt/MATLAB/R2016a/toolbox/curvefit/curvefit:/opt/MATLAB/R2016a/toolbox/curvefit/splines:/opt/MATLAB/R2016a/toolbox/curvefit/sftoolgui:/opt/MATLAB/R2016a/toolbox/stats/statsdemos:/opt/MATLAB/R2016a/toolbox/matlab/addons_zip:/opt/MATLAB/R2016a/toolbox/matlab/cefclient:/opt/MATLAB/R2016a/toolbox/shared/coder/coder |
+| AMA: unique solution. |
+
+
+
+\section{Too Many Big Roots}
+#+BEGIN_SRC matlab :results value table :exports both :session 
+hhE3=hh;hhE3(2,2)=4;
+ans=hhE3
+#+END_SRC
+#+RESULTS:
+| 0 | 0 | 0 |  0 | -1.1 | 0 |  0 | 0 | 1 | 1 | 0 | 0 |
+| 0 | 4 | 0 |  0 |    0 | 1 | -1 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 |  0 |    0 | 0 |  1 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | -1 |    0 | 0 |  0 | 1 | 0 | 0 | 0 | 0 |
+
+
+
+#+BEGIN_SRC matlab :results value table :exports both :session
+[bnow,rtsnow,ia,nexact,nnumeric,lgroots,AMAcode] = ...
+                        SPAmalg(hhE3,4,1,1,1.0e-8,1.0+1.0e-8);
+SPAMAerr(AMAcode)
+#+END_SRC
+
+#+RESULTS:
+| AMA: too many big roots. |
+
+
+
+
+
+\section{Too Few Big Roots}
+#+BEGIN_SRC matlab :results value table :exports both :session 
+hhE4=hh;hhE4(1,5)=-.9;
+ans=hhE4
+#+END_SRC
+#+RESULTS:
+| 0 |    0 | 0 |  0 | -0.9 | 0 |  0 | 0 | 1 | 1 | 0 | 0 |
+| 0 | -0.4 | 0 |  0 |    0 | 1 | -1 | 0 | 0 | 0 | 0 | 0 |
+| 0 |    0 | 0 |  0 |    0 | 0 |  1 | 0 | 0 | 0 | 0 | 0 |
+| 0 |    0 | 0 | -1 |    0 | 0 |  0 | 1 | 0 | 0 | 0 | 0 |
+
+
+
+#+BEGIN_SRC matlab :results value table :exports both :session
+[bnow,rtsnow,ia,nexact,nnumeric,lgroots,AMAcode] = ...
+                        SPAmalg(hhE4,4,1,1,1.0e-8,1.0+1.0e-8);
+SPAMAerr(AMAcode)
+#+END_SRC
+
+#+RESULTS:
+| AMA: too few big roots. |
+
+
+\section{Too Many Exact Shift Rights}
+#+BEGIN_SRC matlab :results value table :exports both :session 
+hhE61=hh;hhE61(1,[5,9,10])=0;
+ans=hhE61
+#+END_SRC
+#+RESULTS:
+| 0 |    0 | 0 |  0 | 0 | 0 |  0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | -0.4 | 0 |  0 | 0 | 1 | -1 | 0 | 0 | 0 | 0 | 0 |
+| 0 |    0 | 0 |  0 | 0 | 0 |  1 | 0 | 0 | 0 | 0 | 0 |
+| 0 |    0 | 0 | -1 | 0 | 0 |  0 | 1 | 0 | 0 | 0 | 0 |
+
+
+
+#+BEGIN_SRC matlab :results value table :exports both :session
+[bnow,rtsnow,ia,nexact,nnumeric,lgroots,AMAcode] = ...
+                        SPAmalg(hhE61,4,1,1,1.0e-8,1.0+1.0e-8);
+SPAMAerr(AMAcode)
+#+END_SRC
+
+#+RESULTS:
+| AMA: too many exact shiftrights. |
+
+
+
+
+\section{Too Many Numeric Shift Rights}
+#+BEGIN_SRC matlab :results value table :exports both :session 
+load('firmValueTooManyNumeric.mat')
+ans=Expression1
+#+END_SRC
+#+RESULTS:
+| 0 | 0 | 0 |  0 | -2.2 | 0 | 0 | 0 | 2 | 2 | 0 | 0 |
+| 0 | 0 | 0 |  0 | -1.1 | 0 | 0 | 0 | 1 | 1 | 0 | 0 |
+| 0 | 0 | 0 |  0 | -1.1 | 0 | 1 | 0 | 1 | 1 | 0 | 0 |
+| 0 | 0 | 0 | -1 | -1.1 | 0 | 0 | 1 | 1 | 1 | 0 | 0 |
+
+
+
+#+BEGIN_SRC matlab :results value table :exports both :session
+[bnow,rtsnow,ia,nexact,nnumeric,lgroots,AMAcode] = ...
+                        SPAmalg(Expression1,4,1,1,1.0e-8,1.0+1.0e-8);
+SPAMAerr(AMAcode)
+#+END_SRC
+
+#+RESULTS:
+| AMA: too many numeric shiftrights. |
+
+
+
+
+
+\section{Spurious AMAcode}
+
+
+#+BEGIN_SRC matlab :results value table :exports both :session
+SPAMAerr(975)
+#+END_SRC
+
+#+RESULTS:
+| AMAerr: return code not properly specified |

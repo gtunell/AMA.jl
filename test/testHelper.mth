@@ -41,7 +41,8 @@ MEvaluate["addpath "<>$theGitDir<>"/SPSolve"]
 
 parseModel[aDir_String,aModel_String]:=
 Module[{},
-MEvaluate["[parserRetCode,param,np,modname,neq,nlag,nlead,eqname,eqtype,endog,delay,vtype]=SPParser('"<>aDir<>"','"<>aModel<>"');"];
+MEvaluate[
+"[parserRetCode,param,np,modname,neq,nlag,nlead,eqname,eqtype,endog,delay,vtype]=SPParser('"<>aDir<>"','"<>aModel<>"');"];
 {neq,nlag,nlead}=MGet[{"neq","nlag","nlead"}];
 Round[{neq,nlag,nlead}]]
 
@@ -125,6 +126,18 @@ end;
 "}]];
 SetOptions["stdout", System`PageWidth -> oldPW];
 ]
+
+
+genTooManyNumericShiftTestMatrices[aDir_String,aModel_String,params_String,
+opts:OptionsPattern[]]:=
+Module[{oldPW=System`PageWidth/.Options["stdout"],
+AMAMatrices=aModel<>"_AMA_matrices"},
+{modDims,allH}=
+getHDims[aDir,aModel,params,"makeTooManyNumeric"->True]
+]
+
+
+
 
 Options[genNumericShiftTestMatrices]={"doMult"->True}
 genNumericShiftTestMatrices[aDir_String,aModel_String,params_String,
@@ -503,19 +516,29 @@ makeContribMat[row_Integer,neq_Integer]:=
 With[{zMat=ConstantArray[0,{neq,neq}],ones=ConstantArray[1,{neq}]},
 Transpose[ReplacePart[zMat,row->ones]]]
 
-Options[getHDims]={"doMult"->True}
+forPageWidth=System`PageWidth/.Options["stdout"]
+
+
+Options[getHDims]={"doMult"->True,"makeTooManyNumeric"->False}
 getHDims[aDir_String,aModel_String,params_String,OptionsPattern[]]:=
-Module[{oldPW=System`PageWidth/.Options["stdout"],
+Module[{oldPW=forPageWidth,
 modDims=parseModel[aDir,aModel],
 AMAMatrices=aModel<>"_AMA_matrices"},
-Print["#tweaked="OptionValue["doMult"]];
 MEvaluate[params];
 MEvaluate[AMAMatrices];
 {gg,hh}=myMGet[{"cofg","cofh"}];
 hhLeft=hh[[All,Range[neq*(nlag+1)]]];
 gPart=gg+hhLeft;
 allH=ArrayFlatten[{{gPart,hh[[All,Range[neq*(nlag+1)+1,neq*(nlag+nlead+1)]]]}}];
-{modDims,If[OptionValue["doMult"],tweakHMats[allH].allH,allH]}]
+doTweak=tweakHMats[allH].allH;
+doTooMany=
+With[{toRidOneRow=ReplacePart[IdentityMatrix[Length[allH]],2*{1,1}->0]},
+tweakHMats[toRidOneRow.allH].toRidOneRow.allH];
+Print[{"huh",doTweak,doTooMany,allH}];
+theRes=If[OptionValue["makeTooManyNumeric"],
+doTooMany,
+If[OptionValue["doMult"],doTweak,allH]];
+{modDims,theRes}]
 
 adjustDepth[xx:(_?VectorQ|_?MatrixQ)]:=If[Depth[xx]==2,{xx},xx];
 adjustDepth[xx_]:=xx
@@ -552,6 +575,12 @@ generator["./","habitmod","habitmodParams",opts];
 ]
 (*
 
+trigger too many numeric shifts
+
+MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/firmValue"];
+{dims,hmatTMN}=genTooManyNumericShiftTestMatrices["./","firmvalue","firmparms"];
+Export["matDir/firmValueTooManyNumeric.mat",hmatTMN]
+
 
 genAllTests[genShiftRightTestMatrices]
 genAllTests[genExactShiftTestMatrices]
@@ -578,10 +607,15 @@ genAllTests[genBuildATestMatrices,"doMult"->False]
 
 (*
 fix habitmod matrices
-MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveHabitmod"];
 (*matrices for exactshifts*)
-genAMAalgTestMatrices["./","habitmod","habitmodParams",opts];
-{zfhf,tm,ljs,levs,qmat,bmat,smat,s0inv}=numericAMA[allH,4,0];
+MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveHabitmod"];
+genAMAalgTestMatrices["./","habitmod","habitmodParams","doMult"->False];
+allHf=MGet["hh"];
+{zfhff,tmf,ljsf,levsf,qmatf,bmatf,smatf,s0invf}=numericAMA[allHf,4,0];
+MEvaluate["cd "<>$theGitDir<>"AMA.jl/test/modelez/spSolveHabitmod"];
+genAMAalgTestMatrices["./","habitmod","habitmodParams","doMult"->True];
+allHt=MGet["hh"];
+{zfhft,tmt,ljst,levst,qmatt,bmatt,smatt,s0invt}=numericAMA[allHt,4,0];
 
 bb rts ia nex nnum lgrts amacode
 
