@@ -618,7 +618,6 @@ nnumJulia==nnum&&
 iaJulia==ia
 end;
 
-#=
 #tweaked= True
 # test AMAalg habitmodTrue example
 function habitmodTrue()::Bool
@@ -672,8 +671,9 @@ nexJulia==nex&&
 nnumJulia==nnum&&
 iaJulia==ia
 end;
-=#
 
+
+#=
 #tweaked= True
 # test AMAalg habitmodTrue example
 function habitmodTrue()::Bool
@@ -719,5 +719,6 @@ function habitmodTrue()::Bool
         iaJulia==ia
     
 end;
+=#
 
 end

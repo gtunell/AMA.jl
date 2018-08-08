@@ -11,13 +11,13 @@ allCObjs= callSparseAim.o sparseAim.o sparskit2.o
 
 allFortObjs=  dgetv0.o dlaqrb.o dmout.o dnaitr.o dnapps.o dnaup2.o dnaupd.o \
 dnconv.o dneigh.o dneupd.o dngets.o dsortc.o dstatn.o dvout.o ivout.o \
-ma50ad.o 
+ma50ad.o second.o
 
 allObjs= $(allCObjs) $(allFortObjs)
 
 ifeq ($(shell uname), Linux)
 shared: clean $(allObjs)
-	$(FC) -shared $(allObjs) -llapack -lblas \
+	$(FC) -shared $(allObjs) -llapack -lblas  \
 	 -o libSPARSEAMA.so
 endif
 
