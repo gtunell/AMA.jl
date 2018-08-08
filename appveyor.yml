@@ -25,6 +25,7 @@ install:
   - set PATH=C:\Miniconda3;C:\Miniconda3\Scripts;%PATH%
 # Run installer silently, output to C:\projects\julia
   - C:\projects\julia-binary.exe /S /D=C:\projects\julia
+  - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
  
 build_script:
 # Need to convert from shallow to complete for Pkg.clone to work
