@@ -673,4 +673,46 @@ iaJulia==ia
 end;
 
 
+#tweaked= True
+# test AMAalg habitmodTrue example
+function habitmodTrue()::Array{Float64,2}
+    neq=12::Int64;nlag=4::Int64;nlead=1::Int64
+    qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatshabitmodTrue.mat")
+    bb=read(file,"bb")
+    bb=if(typeof(bb)==(Array{Float64,2})) bb else hcat(bb) end
+    
+    close(file)
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatshabitmodTrue.mat")
+    rts=read(file,"rts")
+    rts=if(typeof(rts)==(Array{Float64,2})) rts else hcat(rts) end
+    close(file)
+    file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatshabitmodTrue.mat")
+    hh=read(file,"hh")
+    checkH=read(file,"hh")
+    hh=if(typeof(hh)==(Array{Float64,2})) hh else hcat(hh) end
+    close(file)
+    ia=31::Int64
+    nex=0::Int64
+    nnum=7::Int64
+    lgrts=6::Int64
+    AMAcode=3::Int64
+    anEpsi=0.0000000001::Float64
+    (bbJulia,rtsJulia,iaJulia,nexJulia,nnumJulia,lgrtsJulia,AMAcodeJulia) =
+        AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
+    #print("\n")
+    #print(norm(bbJulia-bb))
+    #print("\n")
+    checkAMA(neq, nlag, nlead, checkH, bbJulia)
+    #file = matopen("./matDir/"*"amaAlgTestOutMatshabitmodTrue.mat","w")
+    matwrite(dirname(@__FILE__)*"/matDir/"*"amaAlgTestOutMatshabitmodTrue.mat",Dict("bbJulia"=>bbJulia,"hh"=>hh))
+
+    isapprox(bbJulia,bb,rtol=0.1e-7::Float64,atol=0.0::Float64)&&
+    isapprox(rtsJulia[1:lgrts],rts[1:lgrts],rtol=0.1e-10::Float64,atol=0.0::Float64)&&
+    iaJulia==ia&&
+    nexJulia==nex&&
+    nnumJulia==nnum&&
+    iaJulia==ia
+end;
+
 end
