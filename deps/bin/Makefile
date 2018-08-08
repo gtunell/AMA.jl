@@ -17,13 +17,13 @@ allObjs= $(allCObjs) $(allFortObjs)
 
 ifeq ($(shell uname), Linux)
 shared: clean $(allObjs)
-	$(FC) -shared $(allObjs) $(linuxLibs) -llapack  \
+	$(FC) -shared $(allObjs) -llapack  \
 	 -o libSPARSEAMA.so
 endif
 
 ifeq ($(shell uname), Darwin)
 shared: clean $(allObjs)
-	$(FC) -dynamiclib $(allObjs) $(osxLibs) -llapack  \
+	$(FC) -dynamiclib $(allObjs) -llapack  \
 	 -o libSPARSEAMA.dylib
 endif	
 
