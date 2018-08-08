@@ -8,7 +8,7 @@ matrix:
     - JULIAVERSION: "julianightlies/bin/winnt/x64/julia-latest-win64.exe"
 branches:
   only:
-    - master
+    - develop
     - /release-.*/
  
 notifications:
