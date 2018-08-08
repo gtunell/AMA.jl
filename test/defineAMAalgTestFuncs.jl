@@ -618,6 +618,7 @@ nnumJulia==nnum&&
 iaJulia==ia
 end;
 
+#=
 #tweaked= True
 # test AMAalg habitmodTrue example
 function habitmodTrue()::Bool
@@ -671,11 +672,11 @@ nexJulia==nex&&
 nnumJulia==nnum&&
 iaJulia==ia
 end;
-
+=#
 
 #tweaked= True
 # test AMAalg habitmodTrue example
-function habitmodTrue()::Array{Float64,2}
+function habitmodTrue()::Bool
     neq=12::Int64;nlag=4::Int64;nlead=1::Int64
     qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
     file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestMatshabitmodTrue.mat")
@@ -704,15 +705,19 @@ function habitmodTrue()::Array{Float64,2}
     #print(norm(bbJulia-bb))
     #print("\n")
     checkAMA(neq, nlag, nlead, checkH, bbJulia)
-    #file = matopen("./matDir/"*"amaAlgTestOutMatshabitmodTrue.mat","w")
+    #file = matopen(dirname(@__FILE__)"/matDir/"*"amaAlgTestOutMatshabitmodTrue.mat","w")
     matwrite(dirname(@__FILE__)*"/matDir/"*"amaAlgTestOutMatshabitmodTrue.mat",Dict("bbJulia"=>bbJulia,"hh"=>hh))
 
-    isapprox(bbJulia,bb,rtol=0.1e-7::Float64,atol=0.0::Float64)&&
-    isapprox(rtsJulia[1:lgrts],rts[1:lgrts],rtol=0.1e-10::Float64,atol=0.0::Float64)&&
-    iaJulia==ia&&
-    nexJulia==nex&&
-    nnumJulia==nnum&&
-    iaJulia==ia
+        file = matopen(dirname(@__FILE__)*"/matDir/"*"amaAlgTestOutMatshabitmodTrue.mat")
+        hh = read(file,"hh")
+        bbJulia = read(file,"bbJulia")
+        (qq,err) = checkAMA(12,4,1,hh,bbJulia)
+        isapprox(err, 0)&&
+        iaJulia==ia&&
+        nexJulia==nex&&
+        nnumJulia==nnum&&
+        iaJulia==ia
+    
 end;
 
 end
