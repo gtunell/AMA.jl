@@ -18,7 +18,7 @@ notifications:
     on_build_status_changed: false
 
 install:
-  - cmd: gem install gfortran
+  - cmd: npm install make -g
 # Download most recent Julia Windows binary
   - ps: (new-object net.webclient).DownloadFile(
         $("http://s3.amazonaws.com/"+$env:JULIAVERSION),
