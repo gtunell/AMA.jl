@@ -1,9 +1,16 @@
 default: shared
 
+ifeq ($(shell uname), $(filter $(shell uname), Linux Darwin))
 FC= gfortran
-FFLAGS= -fPIC -c -O2
+#FFLAGS= -fPIC -c -O2
 CC= gcc
-CFLAGS= -fPIC -c -O2 
+#CFLAGS= -fPIC -c -O2 
+else 
+FC= cl.exe
+CC= cl.exe
+endif
+FFLAGS= -fPIC -c -O2
+CFLAGS= -fPIC -c -O2
 #linuxLibs = lapack_linux/liblapack.a lapack_linux/librefblas.a
 #osxLibs = lapack_osx/liblapack.a lapack_osx/librefblas.a
 
@@ -16,7 +23,6 @@ ma50ad.o second.o
 allObjs= $(allCObjs) $(allFortObjs)
 
 
-
 ifeq ($(shell uname), Linux)
 shared: clean $(allObjs)
 	$(FC) -shared $(allObjs) -llapack -lblas  \
@@ -27,7 +33,7 @@ shared: clean $(allObjs)
 	 -o libSPARSEAMA.dylib
 else
 shared: clean $(allObjs)
-	$(FC) --shared $(allObjs) -llapack -lblas \
+	link.exe --shared $(allObjs) -llapack -lblas \
 	 -o libSPARSEAMA.dll
 endif
 
