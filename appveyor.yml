@@ -18,7 +18,7 @@ notifications:
     on_build_status_changed: false
  
 init: 
-  - cmd: set PATH=%MINGW_DIR%;%PATH%
+  - cmd: set PATH "%PATH%;c:\MinGW\bin"
 
 install:
 # Download most recent Julia Windows binary
