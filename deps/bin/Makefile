@@ -27,5 +27,11 @@ shared: clean $(allObjs)
 	 -o libSPARSEAMA.dylib
 endif	
 
+ifdef SYSTEMROOT
+shared: clean $(allObjs)
+	$(FC) --shared $(allObjs) -llapack -lblas \
+	 -o libSPARSEAMA.dll
+endif
+
 clean: 
 	rm -f *.o libSPARSEAMA.*
