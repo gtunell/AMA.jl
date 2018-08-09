@@ -11,14 +11,10 @@ WINDOWS = dll
 ifeq ($(shell uname), Linux)
 shared: clean
 	cp $(LIB).$(LINUX) .
-endif
-
-ifeq ($(shell uname), Darwin)
+else ifeq ($(shell uname), Darwin)
 shared: clean
 	cp $(LIB).$(OSX) .
-endif
-
-ifdef SYSTEMROOT
+else
 shared: clean
 	cp $(LIB).$(WINDOWS) .
 endif

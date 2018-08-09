@@ -15,19 +15,17 @@ ma50ad.o second.o
 
 allObjs= $(allCObjs) $(allFortObjs)
 
+
+
 ifeq ($(shell uname), Linux)
 shared: clean $(allObjs)
 	$(FC) -shared $(allObjs) -llapack -lblas  \
 	 -o libSPARSEAMA.so
-endif
-
-ifeq ($(shell uname), Darwin)
+else ifeq ($(shell uname), Darwin)
 shared: clean $(allObjs)
 	$(FC) -dynamiclib $(allObjs) -llapack -lblas \
 	 -o libSPARSEAMA.dylib
-endif	
-
-ifdef SYSTEMROOT
+else
 shared: clean $(allObjs)
 	$(FC) --shared $(allObjs) -llapack -lblas \
 	 -o libSPARSEAMA.dll
