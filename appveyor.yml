@@ -18,10 +18,7 @@ notifications:
     on_build_status_changed: false
 
 install:
-  - set PATH=%PATH:C:\MinGW\bin;=%
-  # Remove git's msys2 from path, since it conflicts with cygwin1.dll
-  - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
-  - ps: contrib/windows/install-cygwin.ps1	
+  - cinst mingw	
   # Download most recent Julia Windows binary
   - ps: (new-object net.webclient).DownloadFile(
         $("http://s3.amazonaws.com/"+$env:JULIAVERSION),
