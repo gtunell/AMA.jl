@@ -18,7 +18,7 @@ notifications:
     on_build_status_changed: false
 
 install:
-  - cmd: npm install make -g
+  - cmd: npm install https://github.com/gcc-mirror/gcc.git
 # Download most recent Julia Windows binary
   - ps: (new-object net.webclient).DownloadFile(
         $("http://s3.amazonaws.com/"+$env:JULIAVERSION),
