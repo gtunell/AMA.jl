@@ -18,7 +18,6 @@ notifications:
     on_build_status_changed: false
 
 install:
-  - cmd: gem update --system
   - cmd: gem install gfortran
 # Download most recent Julia Windows binary
   - ps: (new-object net.webclient).DownloadFile(
