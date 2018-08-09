@@ -18,13 +18,16 @@ notifications:
     on_build_status_changed: false
 
 install:
-  - cmd: npm install https://github.com/gcc-mirror/gcc.git
-# Download most recent Julia Windows binary
+  - set PATH=%PATH:C:\MinGW\bin;=%
+  # Remove git's msys2 from path, since it conflicts with cygwin1.dll
+  - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
+  - ps: contrib/windows/install-cygwin.ps1	
+  # Download most recent Julia Windows binary
   - ps: (new-object net.webclient).DownloadFile(
         $("http://s3.amazonaws.com/"+$env:JULIAVERSION),
         "C:\projects\julia-binary.exe")
   - set PATH=C:\Miniconda3;C:\Miniconda3\Scripts;%PATH%
-# Run installer silently, output to C:\projects\julia
+  # Run installer silently, output to C:\projects\julia
   - C:\projects\julia-binary.exe /S /D=C:\projects\julia
  
 build_script:
