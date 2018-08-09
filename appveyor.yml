@@ -18,7 +18,7 @@ notifications:
     on_build_status_changed: false
 
 install:
-  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
+  #- call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
   - cinst make	
   # Download most recent Julia Windows binary
   - ps: (new-object net.webclient).DownloadFile(
