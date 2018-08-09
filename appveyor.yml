@@ -17,10 +17,11 @@ notifications:
     on_build_failure: false
     on_build_status_changed: false
  
+init: 
+  - cmd: set PATH=%MINGW_DIR%;%PATH%
+
 install:
 # Download most recent Julia Windows binary
-  - sh: sudo apt-get update
-  - sh: sudo apt-get install gfortran
   - ps: (new-object net.webclient).DownloadFile(
         $("http://s3.amazonaws.com/"+$env:JULIAVERSION),
         "C:\projects\julia-binary.exe")
