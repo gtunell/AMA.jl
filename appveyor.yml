@@ -19,14 +19,14 @@ notifications:
  
 install:
 # Download most recent Julia Windows binary
+  - sh: sudo apt-get update
+  - sh: sudo apt-get install gfortran
   - ps: (new-object net.webclient).DownloadFile(
         $("http://s3.amazonaws.com/"+$env:JULIAVERSION),
         "C:\projects\julia-binary.exe")
   - set PATH=C:\Miniconda3;C:\Miniconda3\Scripts;%PATH%
 # Run installer silently, output to C:\projects\julia
   - C:\projects\julia-binary.exe /S /D=C:\projects\julia
-  - sh: sudo apt-get update
-  - sh: sudo apt-get install gfortran
  
 build_script:
 # Need to convert from shallow to complete for Pkg.clone to work
