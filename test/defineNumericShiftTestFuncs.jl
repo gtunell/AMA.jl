@@ -8,7 +8,6 @@ using ..AMA, MAT
 # test numericShift! firmvalue example
 function firmvalueFalse()::Bool
 
-
 neq=4::Int64;nlag=1::Int64;nlead=1::Int64
 qRows=(neq*nlead)::Int64;qCols=(neq*(nlag+nlead))::Int64
 
@@ -35,7 +34,7 @@ condn=0.0000000001::Float64
 iqNewMatlab=3
 
 nnumericMatlab=3
-
+    
 (hNewJulia,qNewJulia,iqNew,nnumeric)=numericShift!(hhIn,qq,0,qRows,qCols,neq,condn)
 sameSpan(hNewJulia,hNewMatlab)&&
 sameSpan(qNewJulia,qNewMatlab)&&

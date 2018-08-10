@@ -1,7 +1,7 @@
 """
     AMAalg(h, qcols, neq)
 
-Solve a linear perfect foresight model using the matlab eig
+Solve a linear perfect foresight model using the julia eig
 function to find the invariant subspace associated with the big
 roots.  This procedure will fail if the companion matrix is
 defective and does not have a linearly independent set of
@@ -14,8 +14,8 @@ eigenvectors associated with the big roots.
     nlag      Number of lags.
     nlead     Number of leads.
     condn     Zero tolerance used as a condition number test
-              by numeric_shift and reduced_form.
-    upper    Inclusive upper bound for the modulus of roots
+              by numericShift and reducedForm.
+    upper     Inclusive upper bound for the modulus of roots
               allowed in the reduced form.
  
   Output arguments:
@@ -24,12 +24,12 @@ eigenvectors associated with the big roots.
     rts       Roots returned by eig.
     ia        Dimension of companion matrix (number of non-trivial
               elements in rts).
-    nexact    Number of exact shiftrights.
-    nnumeric  Number of numeric shiftrights.
+    nexact    Number of exact shiftRights.
+    nnumeric  Number of numeric shiftRights.
     lgroots   Number of roots greater in modulus than upper.
-    AMAcode     Return code: see function AMAerr.
+    AMAcode   Return code: see function AMAerr.
 """
-function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi::Float64,upper::Float64) 
+function AMAalg(hh::Array{Float64,2}, neq::Int64, nlag::Int64, nlead::Int64, anEpsi::Float64, upper::Float64) 
 
     if(nlag < 1 || nlead < 1) 
         error("AMA_eig: model must have at least one lag and one lead.")
@@ -40,45 +40,45 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
     nnumeric = 0
     lgroots  = 0
     iq       = 0
-    AMAcode    = 0
-    bb=0
-    qrows = neq * nlead
-    qcols = neq * (nlag + nlead)
-    bcols = neq * nlag
-    qq        = zeros(qrows, qcols)
+    AMAcode  = 0
+    bb       = 0
+    qrows    = neq * nlead
+    qcols    = neq * (nlag + nlead)
+    bcols    = neq * nlag
+    qq       = zeros(qrows, qcols)
     rts      = zeros(qcols, 1)
 
     # Compute the auxiliary initial conditions and store them in q.
 
-    (hh,qq,iq,nexact) = exactShift!(hh,qq,iq,qrows,qcols,neq)
+    (hh, qq, iq, nexact) = exactShift!(hh, qq, iq, qrows, qcols, neq)
     if (iq > qrows) 
         AMAcode = 61
-        return
+        return bb, rts, ia, nexact, nnumeric, lgroots, AMAcode
     end
 
-    (hh,qq,iq,nnumeric) = numericShift!(hh,qq,iq,qrows,qcols,neq,anEpsi)
+    (hh, qq, iq, nnumeric) = numericShift!(hh, qq, iq, qrows, qcols, neq, anEpsi)
     if (iq > qrows) 
         AMAcode = 62
-        return
+        return bb, rts, ia, nexact, nnumeric, lgroots, AMAcode
     end
 
     #  Build the companion matrix.  Compute the stability conditions, and
     #  combine them with the auxiliary initial conditions in q.  
 
-    (aa,ia,js) = buildA!(hh,qcols,neq)
+    (aa, ia, js) = buildA!(hh, qcols, neq)
 
     if (ia != 0)
         for element in aa
             if isnan(element) || isinf(element)
                 display("A is NAN or INF")
                 AMAcode = 63
-                return
+                return bb, rts, ia, nexact, nnumeric, lgroots, AMAcode
             end
         end
-        (ww,rts,lgroots)=eigenSys!(aa,upper,min(size(js, 1),qrows - iq + 1))
+        (ww, rts, lgroots) = eigenSys!(aa, upper, min(size(js, 1), qrows - iq + 1))
 
 
-        qq = augmentQ!(qq,ww,js,iq,qrows)
+        qq = augmentQ!(qq, ww, js, iq, qrows)
     end
 
     test = nexact + nnumeric + lgroots
@@ -90,8 +90,8 @@ function AMAalg(hh::Array{Float64,2},neq::Int64,nlag::Int64,nlead::Int64,anEpsi:
 
     # If the right-hand block of q is invertible, compute the reduced form.
 
-    if(AMAcode==0)
-        (nonsing,bb) = reducedForm(qq,qrows,qcols,bcols,neq,anEpsi)
+    if(AMAcode == 0)
+        (nonsing,bb) = reducedForm(qq, qrows, qcols, bcols, neq, anEpsi)
         if ( nonsing && AMAcode==0)
             AMAcode =  1
         elseif (!nonsing && AMAcode==0)

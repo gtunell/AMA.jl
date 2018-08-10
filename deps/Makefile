@@ -1,6 +1,6 @@
 default: all shared
 
-all:
+all: 
 	$(MAKE) -C bin
 
 LIB     = bin/libSPARSEAMA
@@ -9,7 +9,7 @@ OSX     = dylib
 WINDOWS = dll
 
 ifeq ($(shell uname), Linux)
-shared: clean
+shared: 
 	cp $(LIB).$(LINUX) .
 else ifeq ($(shell uname), Darwin)
 shared: clean

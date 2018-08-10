@@ -8,11 +8,10 @@ Solve for x_{t+nlead} in terms of x_{t+nlag},...,x_{t+nlead-1}.
 function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64) 
 
     left  = 1:qcols
-    
     right = (qcols + 1):(qcols + neq)
 
-    hhTemp = hh
-    hhTemp[:, left] = \(-hhTemp[:, right], hhTemp[:, left])
+    tmp = similar(hh)
+    tmp[:, left] =  \(-hh[:, right], hh[:, left])
 
     #  Build the big transition matrix.
 
@@ -24,7 +23,7 @@ function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64)
         aa[eyerows, eyecols] = eye(qcols - neq)
     end
     hrows      = (qcols - neq + 1):qcols
-    aa[hrows, :] = hhTemp[:, left]
+    aa[hrows, :] =  tmp[:, left]
 
     #  Delete inessential lags and build index array js.  js indexes the
     #  columns in the big transition matrix that correspond to the
@@ -40,7 +39,7 @@ function buildA!(hh::Array{Float64,2}, qcols::Int64, neq::Int64)
     zerocols = find(col->(col == 0), zerocols)
 
 
-    while length(zerocols) != 0
+     while length(zerocols) != 0
         # aa = filter!(x->(x !in zerocols), aa)
         
         aa = deleteCols(aa, zerocols)        

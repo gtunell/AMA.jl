@@ -22,7 +22,6 @@ ma50ad.o second.o
 
 allObjs= $(allCObjs) $(allFortObjs)
 
-
 ifeq ($(shell uname), Linux)
 shared: clean $(allObjs)
 	$(FC) -shared $(allObjs) -llapack -lblas  \

@@ -5,7 +5,7 @@ module AMA
 
 # Set-up for callSparseAim
 const lib = Libdl.dlopen(normpath(joinpath(dirname(@__FILE__), "..", "deps", "libSPARSEAMA")))
-sym = Libdl.dlsym(lib, :callSparseAim)
+const sym = Libdl.dlsym(lib, :callSparseAim)
 
 # Include all files    
 for (_, _, files) in walkdir(joinpath(dirname(@__FILE__), "AMA"))

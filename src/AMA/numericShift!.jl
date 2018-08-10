@@ -14,12 +14,12 @@ function numericShift!(hh::Array{Float64,2}, qq::Array{Float64,2}, iq::Int64, qR
 
     # preform QR factorization on right side of hh
     F = qrfact(hh[:, right], Val{true})
-    
+
     # filter R only keeping rows that are zero
     zerorows = abs.(diag(F[:R]))
     zerorows = find(x->(float(x) <= condn), zerorows)
 
-    while (length(zerorows) != 0) && (iq <= qRows)
+    @inbounds while (length(zerorows) != 0) && (iq <= qRows)
         # update hh with matrix multiplication of Q and hh
         hh = *(F[:Q]', hh)
 
