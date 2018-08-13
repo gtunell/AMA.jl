@@ -97,4 +97,4 @@ To execute the algorithm with C/Fortran:
 
 For more information and an indepth analysis of the algorithm, please read the [full paper](https://www.federalreserve.gov/pubs/feds/2010/201013/201013pap.pdf) written by [Gary S. Anderson](https://github.com/es335mathwiz).
 
-Author: Gregory Tunell(https://github.com/gtunell) available at <gregtunell@gmail.com>.
+Author: [Gregory Tunell](https://github.com/gtunell) available at <gregtunell@gmail.com>.
