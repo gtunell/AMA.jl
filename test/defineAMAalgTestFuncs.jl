@@ -662,7 +662,9 @@ AMAalg(hh,neq,nlag,nlead,anEpsi,1+anEpsi)
 #print(norm(bbJulia-bb))
 #print("\n")
 
-print("Habitmod True ");checkAMA(neq, nlag, nlead, checkH, bbJulia)
+print("Habitmod True ");
+
+(q, err) = checkAMA(neq, nlag, nlead, checkH, bbJulia)
     
 #isapprox(bbJulia,bb,rtol=0.1e-7::Float64,atol=0.0::Float64)&&
 #isapprox(rtsJulia[1:lgrts],rts[1:lgrts],rtol=0.1e-10::Float64,atol=0.0::Float64)&&

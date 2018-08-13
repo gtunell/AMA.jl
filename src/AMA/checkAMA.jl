@@ -59,4 +59,6 @@ rows = 1:(neq * nlead);
 cols = 1:(neq * (nlag + nlead))
 q = q[rows,cols];
 
+    return q, err
+
 end
